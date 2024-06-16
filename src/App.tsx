@@ -15,11 +15,11 @@ export function App() {
     <>
       <Header />
       {/* <Main /> */}
-      {/* <Products /> */}
+      <Products />
       {/* <SingleProduct /> */}
       {/* <LoginForm /> */}
       {/* <RegistrationForm /> */}
-      <CustomerPage />
+      {/* <CustomerPage /> */}
 
       {/* <Routes>
         <Route path="/" element={<Main />} />

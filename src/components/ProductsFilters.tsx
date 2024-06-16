@@ -11,11 +11,12 @@ export function ProductsFilters() {
       <Container>
         <input className={search} placeholder="Поиск по названию товара" />
         <select>
-          <option value="all">Все товары</option>
+          <option value="">Все товары</option>
           <option value="appliances">Бытовая техника</option>
           <option value="houseplants">Комнатные растения</option>
           <option value="cloth">Одежда</option>
           <option value="shoes">Обувь</option>
+          <option value="cosmetics">Косметика</option>
         </select>
       </Container>
     </aside>
