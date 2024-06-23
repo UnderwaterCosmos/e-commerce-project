@@ -12,12 +12,12 @@ import { useInfiniteScroll } from '../hooks/useInfiniteScroll';
 const list = cn('grid', 'gap-4', 'grid-cols-4', 'mb-4');
 
 export function CardList() {
-  const { productsList, isLoading, totalPages, hasMore } = useAppSelector(
+  const { productsList, isLoading, totalPages } = useAppSelector(
     (state) => state.productsList
   );
   const { select, search } = useAppSelector((state) => state.filtersData);
   const dispatch = useAppDispatch();
-  // const debouncedSearch = useDebounce(search.trim(), 1000);
+  const debouncedSearch = useDebounce(search.trim(), 1000);
   const [currentPage, setCurrentPage] = React.useState(1);
   const triggerRef = React.useRef() as React.MutableRefObject<HTMLDivElement>;
 
@@ -29,6 +29,7 @@ export function CardList() {
         replace: true,
       })
     );
+
     window.onbeforeunload = () => {
       window.scrollTo(0, 0);
     };
@@ -40,7 +41,7 @@ export function CardList() {
   }, [dispatch, select]);
 
   const onLoadNextProducts = React.useCallback(() => {
-    if (hasMore && !isLoading && currentPage < totalPages) {
+    if (!isLoading && currentPage < totalPages) {
       setCurrentPage((prev) => prev + 1);
       dispatch(
         fetchProducts({
@@ -50,7 +51,7 @@ export function CardList() {
         })
       );
     }
-  }, [dispatch, isLoading, hasMore, currentPage]);
+  }, [dispatch, isLoading, currentPage]);
 
   useInfiniteScroll({
     triggerRef,
@@ -58,7 +59,7 @@ export function CardList() {
   });
 
   const filteredProductsList = productsList.filter((product) =>
-    product.title.toUpperCase().includes(search.trim().toUpperCase())
+    product.title.toUpperCase().includes(debouncedSearch.trim().toUpperCase())
   );
 
   return (
@@ -70,7 +71,7 @@ export function CardList() {
             <Card product={product} key={product.id} />
           ))}
         </ul>
-        <div className="h-2.5 bg-red-500" ref={triggerRef} />
+        <div className="h-2.5" ref={triggerRef} />
       </Container>
     </section>
   );

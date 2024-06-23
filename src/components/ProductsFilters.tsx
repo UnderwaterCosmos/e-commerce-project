@@ -51,7 +51,7 @@ export function ProductsFilters() {
           onChange={(event) => filtersHandler(event, 'select')}
         >
           {categoriesList.map((categoryObj) => (
-            <option value={categoryObj.name} key={categoryObj.name}>
+            <option value={categoryObj.name} key={categoryObj.id}>
               {categoryObj.displayName}
             </option>
           ))}

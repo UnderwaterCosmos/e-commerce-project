@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
 import { CartBtn } from './CartBtn';
@@ -13,22 +14,24 @@ interface IProduct {
 
 export function Card({ product }: IProduct) {
   return (
-    <li className={singleCard}>
-      <div>
-        <img
-          className={image}
-          src={product.images[0]}
-          alt={`${product.title}'s photo`}
-          width={250}
-          loading="lazy"
-        />
-      </div>
-      <h3 className="text-center">{product.title}</h3>
-      <h4 className="text-sm text-left">{product.category}</h4>
-      <div className="flex justify-between">
-        <p>{product.price}р</p>
-        <CartBtn />
-      </div>
-    </li>
+    <Link to={`/products/${product.id}`}>
+      <li className={singleCard}>
+        <div>
+          <img
+            className={image}
+            src={product.images[0]}
+            alt={`${product.title}'s photo`}
+            width={250}
+            loading="lazy"
+          />
+        </div>
+        <h3 className="text-center">{product.title}</h3>
+        <h4 className="text-sm text-left">{product.category}</h4>
+        <div className="flex justify-between">
+          <p>{product.price}р</p>
+          <CartBtn />
+        </div>
+      </li>
+    </Link>
   );
 }

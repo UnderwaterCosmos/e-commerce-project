@@ -1,4 +1,3 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import { Header } from './components/Header';
@@ -15,16 +14,17 @@ export function App() {
     <>
       <Header />
       {/* <Main /> */}
-      <Products />
+      {/* <Products /> */}
       {/* <SingleProduct /> */}
       {/* <LoginForm /> */}
       {/* <RegistrationForm /> */}
       {/* <CustomerPage /> */}
 
-      {/* <Routes>
+      <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/goods" element={<Products />} />
-      </Routes> */}
+        <Route path="/products" element={<Products />} />
+        <Route path="/products/:id" element={<SingleProduct />} />
+      </Routes>
       <Footer />
     </>
   );

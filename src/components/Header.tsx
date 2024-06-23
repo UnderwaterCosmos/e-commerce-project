@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { FaRegSun } from 'react-icons/fa6';
 import { BsCart4 } from 'react-icons/bs';
@@ -15,11 +16,15 @@ export function Header() {
     <header className="bg-slate-800 mb-4">
       <Container>
         <div className={headerWrapper}>
-          <a href="#">WB 2.0</a>
+          <Link to={'/products'}>WB 2.0</Link>
           <nav>
             <ul className={navList}>
-              <li>Главная</li>
-              <li>Товары</li>
+              <Link to={'/'}>
+                <li>Главная</li>
+              </Link>
+              <Link to={'/products'}>
+                <li>Товары</li>
+              </Link>
             </ul>
           </nav>
           <ul className={controls}>

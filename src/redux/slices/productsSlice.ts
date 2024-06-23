@@ -3,7 +3,6 @@ import { ISingleProduct, IGetProductsConfig } from '../../types/products';
 
 interface IProductsState {
   isLoading: boolean;
-  hasMore: boolean;
   productsList: ISingleProduct[];
   totalPages: number;
 }
@@ -40,7 +39,6 @@ const initialState: IProductsState = {
   isLoading: false,
   productsList: [],
   totalPages: 0,
-  hasMore: false,
 };
 
 const productSlice = createSlice({
@@ -64,7 +62,6 @@ const productSlice = createSlice({
         } else {
           state.productsList = state.productsList.concat(action.payload.data);
         }
-        state.hasMore = action.payload.data.length > 0;
         state.totalPages = action.payload.totalPages;
         state.isLoading = false;
       });
