@@ -16,6 +16,9 @@ export function CardList() {
     (state) => state.productsList
   );
   const { select, search } = useAppSelector((state) => state.filtersData);
+  // const { isBackBtnPressed } = useAppSelector(
+  //   (state) => state.singleProductData
+  // );
   const dispatch = useAppDispatch();
   const debouncedSearch = useDebounce(search.trim(), 1000);
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -25,11 +28,12 @@ export function CardList() {
     const productsPromise = dispatch(
       fetchProducts({
         _page: 1,
-        category: select,
+        category_like: select,
+        title_like: debouncedSearch,
         replace: true,
+        // preventRequest: isBackBtnPressed,
       })
     );
-
     window.onbeforeunload = () => {
       window.scrollTo(0, 0);
     };
@@ -38,7 +42,7 @@ export function CardList() {
     return () => {
       productsPromise.abort();
     };
-  }, [dispatch, select]);
+  }, [dispatch, select, debouncedSearch]);
 
   const onLoadNextProducts = React.useCallback(() => {
     if (!isLoading && currentPage < totalPages) {
@@ -46,8 +50,10 @@ export function CardList() {
       dispatch(
         fetchProducts({
           _page: currentPage + 1,
-          category: select,
+          category_like: select,
+          title_like: debouncedSearch,
           replace: false,
+          // preventRequest: isBackBtnPressed,
         })
       );
     }
@@ -58,16 +64,12 @@ export function CardList() {
     callback: onLoadNextProducts,
   });
 
-  const filteredProductsList = productsList.filter((product) =>
-    product.title.toUpperCase().includes(debouncedSearch.trim().toUpperCase())
-  );
-
   return (
     <section className="mb-4 text-center">
       <Container>
         {isLoading && <Loader />}
         <ul className={list}>
-          {filteredProductsList.map((product) => (
+          {productsList.map((product) => (
             <Card product={product} key={product.id} />
           ))}
         </ul>

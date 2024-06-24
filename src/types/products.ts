@@ -9,6 +9,8 @@ export interface ISingleProduct {
 
 export interface IGetProductsConfig {
   _page: number;
-  category: string;
+  category_like: string;
+  title_like: string;
   replace: boolean;
+	// preventRequest: boolean;
 }

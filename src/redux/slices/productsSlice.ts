@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { ISingleProduct, IGetProductsConfig } from '../../types/products';
+import { AxiosHeaders } from 'axios';
 
 interface IProductsState {
   isLoading: boolean;
@@ -8,12 +9,7 @@ interface IProductsState {
 }
 interface IFetchResponse {
   data: ISingleProduct[];
-  first: number;
-  items: number;
-  last: number;
-  next: number | null;
-  pages: number;
-  prev: number | null;
+  headers: AxiosHeaders;
 }
 
 export const fetchProducts = createAsyncThunk.withTypes<{
@@ -24,15 +20,22 @@ export const fetchProducts = createAsyncThunk.withTypes<{
   'products/fetchProducts',
   async (config: IGetProductsConfig, { rejectWithValue, extra: api }) => {
     try {
-      const data = await api.getProducts(config);
+      const { data, headers } = await api.getProducts(config);
       return {
-        data: data.data,
-        totalPages: data.pages,
+        data: data,
+        totalPages: Math.ceil(headers['x-total-count'] / 10),
       };
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
+  // {
+  //   condition: (config) => {
+  //     if (config.preventRequest) {
+  //       return false;
+  //     }
+  //   },
+  // }
 );
 
 const initialState: IProductsState = {

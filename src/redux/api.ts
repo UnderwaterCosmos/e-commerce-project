@@ -4,8 +4,7 @@ import { IGetProductsConfig } from '../types/products';
 const BASE_URL = 'http://localhost:3000';
 
 export const getProducts = async (config: IGetProductsConfig) => {
-  const { data } = await axios.get(`${BASE_URL}/products`, { params: config });
-  return data;
+  return await axios.get(`${BASE_URL}/products`, { params: config });
 };
 
 export const getCategories = async () => {
