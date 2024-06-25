@@ -2,13 +2,15 @@ import { configureStore } from '@reduxjs/toolkit';
 import { productsReducer } from './slices/productsSlice';
 import { filtersReducer } from './slices/filtersSlice';
 import { singleProductReducer } from './slices/singleProductSlice';
+import { usersReducer } from './slices/usersSlice';
 import * as api from './api';
 
 export const store = configureStore({
   reducer: {
-    productsList: productsReducer,
+    productsData: productsReducer,
     filtersData: filtersReducer,
     singleProductData: singleProductReducer,
+    usersData: usersReducer,
   },
   devTools: true,
   middleware: (getDefaultMiddleware) =>

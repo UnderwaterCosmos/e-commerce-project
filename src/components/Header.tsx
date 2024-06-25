@@ -37,9 +37,11 @@ export function Header() {
             <li>
               <img src="#" alt="Your's avatar" />
             </li>
-            <li>
-              <RiLogoutBoxRLine size={20} />
-            </li>
+            <Link to={'/registration'}>
+              <li>
+                <RiLogoutBoxRLine size={20} />
+              </li>
+            </Link>
             <li>
               <select className="text-black">
                 <option value="ru">RU</option>

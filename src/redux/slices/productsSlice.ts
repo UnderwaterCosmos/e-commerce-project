@@ -1,16 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { ISingleProduct, IGetProductsConfig } from '../../types/products';
-import { AxiosHeaders } from 'axios';
-
-interface IProductsState {
-  isLoading: boolean;
-  productsList: ISingleProduct[];
-  totalPages: number;
-}
-interface IFetchResponse {
-  data: ISingleProduct[];
-  headers: AxiosHeaders;
-}
+import {
+  IGetProductsConfig,
+  IProductsState,
+  IFetchResponse,
+} from '../../types/products';
 
 export const fetchProducts = createAsyncThunk.withTypes<{
   extra: {
@@ -28,7 +21,7 @@ export const fetchProducts = createAsyncThunk.withTypes<{
     } catch (error) {
       return rejectWithValue(error);
     }
-  },
+  }
   // {
   //   condition: (config) => {
   //     if (config.preventRequest) {

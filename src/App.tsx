@@ -24,6 +24,7 @@ export function App() {
         <Route path="/" element={<Main />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<SingleProduct />} />
+        <Route path="/registration" element={<RegistrationForm />} />
       </Routes>
       <Footer />
     </>
