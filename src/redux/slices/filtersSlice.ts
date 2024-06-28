@@ -11,12 +11,19 @@ export const fetchCategories = createAsyncThunk.withTypes<{
   };
 }>()(
   'filters/fetchCategories',
-  async (_: undefined, { rejectWithValue, extra: api }) => {
+  async (isBackBtnPressed: boolean, { rejectWithValue, extra: api }) => {
     try {
       return await api.getCategories();
     } catch (error) {
       return rejectWithValue(error);
     }
+  },
+  {
+    condition: (isBackBtnPressed) => {
+      if (isBackBtnPressed) {
+        return false;
+      }
+    },
   }
 );
 

@@ -6,10 +6,10 @@ import { FaArrowLeftLong } from 'react-icons/fa6';
 import { Container } from '../components/Container';
 import { CartBtn } from '../components/CartBtn';
 import { Loader } from '../components/Loader';
-import { useAppDispatch, useAppSelector } from '../redux/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../redux/store';
 import {
   fetchSingleProduct,
-  // setBackBtnStatus,
+  setBackBtnStatus,
 } from '../redux/slices/singleProductSlice';
 
 const backBtn = cn('h-8', 'p-2', 'bg-slate-300', 'rounded-full');
@@ -28,15 +28,15 @@ export function SingleProduct() {
     const singleProductPromise = dispatch(fetchSingleProduct(id!));
 
     return () => {
-      // dispatch(setBackBtnStatus(false));
+      dispatch(setBackBtnStatus(false));
       singleProductPromise.abort();
     };
   }, [dispatch, id]);
 
-  // const backBtnHandler = () => {
-  //   dispatch(setBackBtnStatus(true));
-  //   ;
-  // };
+  const backBtnHandler = () => {
+    dispatch(setBackBtnStatus(true));
+    navigate(-1);
+  };
 
   return (
     <main className="grow">
@@ -45,11 +45,7 @@ export function SingleProduct() {
           <Loader />
         ) : (
           <div className="flex gap-3">
-            <button
-              type="button"
-              className={backBtn}
-              onClick={() => navigate(-1)}
-            >
+            <button type="button" className={backBtn} onClick={backBtnHandler}>
               <FaArrowLeftLong />
             </button>
             <article className="flex items-center gap-x-4">

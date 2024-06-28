@@ -1,8 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { v4 as uuidv4 } from 'uuid';
 
 import {
   REGISTRATION_INPUT_FIELDS,
@@ -12,8 +12,12 @@ import { Container } from '../components/Container';
 import { Loader } from '../components/Loader';
 import { FormInputField } from '../components/FormInputField';
 import { registrationSchema } from '../validation/registrationSchema';
-import { useAppDispatch, useAppSelector } from '../redux/reduxHooks';
-import { addNewUser, setUserBasis } from '../redux/slices/usersSlice';
+import { useAppDispatch, useAppSelector } from '../redux/store';
+import {
+  addNewUser,
+  setRegistrationBasis,
+  // setFormBasis,
+} from '../redux/slices/usersSlice';
 import { RegistrationFieldsNames } from '../types/forms';
 
 const regForm = cn(
@@ -28,7 +32,9 @@ const regForm = cn(
 const inputField = cn('bg-slate-200', 'rounded-full', 'mb-2', 'p-1.5');
 
 export function RegistrationForm() {
-  const { isLoading, userBasis } = useAppSelector((state) => state.usersData);
+  const { isLoading, registrationBasis } = useAppSelector(
+    (state) => state.usersData
+  );
   const dispatch = useAppDispatch();
 
   const {
@@ -44,14 +50,41 @@ export function RegistrationForm() {
       | React.ChangeEvent<HTMLSelectElement>,
     key: RegistrationFieldsNames
   ) => {
-    dispatch(setUserBasis({ ...userBasis, [key]: event.target.value }));
+    dispatch(
+      setRegistrationBasis({ ...registrationBasis, [key]: event.target.value })
+    );
   };
 
   const submitHandler = () => {
-    dispatch(addNewUser({ ...userBasis, id: uuidv4(), basket: [] }));
-    dispatch(setUserBasis(REGISTRATION_INITIAL_USER_DATA));
+    dispatch(addNewUser({ ...registrationBasis, basket: [] }));
+    dispatch(setRegistrationBasis(REGISTRATION_INITIAL_USER_DATA));
     reset();
   };
+
+  // const fieldsHandler = (
+  //   event:
+  //     | React.ChangeEvent<HTMLInputElement>
+  //     | React.ChangeEvent<HTMLSelectElement>,
+  //   key: RegistrationFieldsNames
+  // ) => {
+  //   dispatch(
+  //     setFormBasis({
+  //       key: 'registrationBasis',
+  //       value: { ...registrationBasis, [key]: event.target.value },
+  //     })
+  //   );
+  // };
+
+  // const submitHandler = () => {
+  //   dispatch(addNewUser({ ...registrationBasis, basket: [] }));
+  //   dispatch(
+  //     setFormBasis({
+  //       key: '',
+  //       value: REGISTRATION_INITIAL_USER_DATA,
+  //     })
+  //   );
+  //   reset();
+  // };
 
   return (
     <main className="grow">
@@ -64,7 +97,7 @@ export function RegistrationForm() {
             <form className={regForm} onSubmit={handleSubmit(submitHandler)}>
               {REGISTRATION_INPUT_FIELDS.map((fieldObj) => (
                 <FormInputField
-                  state={userBasis}
+                  state={registrationBasis}
                   register={register}
                   errors={errors}
                   fieldObj={fieldObj}
@@ -76,7 +109,7 @@ export function RegistrationForm() {
               <select
                 className={inputField}
                 id="userType"
-                value={userBasis.type}
+                value={registrationBasis.type}
                 onChange={(event) => fieldsHandler(event, 'type')}
               >
                 <option value="customer">Покупатель</option>
@@ -91,9 +124,9 @@ export function RegistrationForm() {
             </form>
             <p>
               Если Вы уже зарегистрированы -{' '}
-              <a className="text-blue-600" href="#">
+              <Link to={'/login'} className="text-blue-600">
                 войдите
-              </a>
+              </Link>
             </p>
           </div>
         )}

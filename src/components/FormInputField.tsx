@@ -1,25 +1,32 @@
 import cn from 'classnames';
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
 
-import { IUserBasis } from '../types/users';
 import {
+  RegistrationBasis,
+  LoginBasis,
   IRegistrationInputField,
   RegistrationFieldsNames,
+  LoginFieldsNames,
+  ILoginInputField,
 } from '../types/forms';
 
 const inputField = cn('bg-slate-200', 'rounded-full', 'mb-2', 'p-1.5');
 const errMessage = cn('mb-0.5', 'text-red-600', 'font-semibold');
 
 interface IProps {
-  state: IUserBasis;
-  register: UseFormRegister<Omit<IUserBasis, 'type'>>;
-  errors: FieldErrors<Omit<IUserBasis, 'type'>>;
-  fieldObj: IRegistrationInputField;
+  state: RegistrationBasis | LoginBasis;
+  register: UseFormRegister<any>;
+  // register:
+  // | UseFormRegister<Omit<RegistrationBasis, 'type'>>
+  // | UseFormRegister<LoginBasis>;
+  errors:
+    | FieldErrors<Omit<RegistrationBasis, 'type'>>
+    | FieldErrors<LoginBasis>;
+  fieldObj: IRegistrationInputField | ILoginInputField;
   fieldsHandler: (
-    event:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLSelectElement>,
-    key: RegistrationFieldsNames
+    event: React.ChangeEvent<HTMLInputElement>,
+    key: any
+    // key: LoginFieldsNames | RegistrationFieldsNames
   ) => void;
 }
 
@@ -36,13 +43,16 @@ export function FormInputField({
       <input
         {...register(fieldObj.name)}
         className={inputField}
+        type={fieldObj.type}
         id={fieldObj.name}
         placeholder={fieldObj.placeholder}
-        value={state[fieldObj.name]}
+        value={state[fieldObj.name as keyof typeof state]}
         onChange={(event) => fieldsHandler(event, fieldObj.name)}
       />
-      {errors[fieldObj.name] && (
-        <p className={errMessage}>{errors[fieldObj.name]?.message}</p>
+      {errors[fieldObj.name as keyof typeof errors] && (
+        <p className={errMessage}>
+          {errors[fieldObj.name as keyof typeof errors]?.message}
+        </p>
       )}
     </>
   );

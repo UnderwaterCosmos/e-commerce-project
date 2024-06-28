@@ -1,7 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
 
-import { useAppSelector, useAppDispatch } from '../redux/reduxHooks';
+import { useAppSelector, useAppDispatch } from '../redux/store';
 import { setFiltersValue, fetchCategories } from '../redux/slices/filtersSlice';
 import { Container } from './Container';
 
@@ -12,10 +12,13 @@ export function ProductsFilters() {
   const { select, search, categoriesList } = useAppSelector(
     (state) => state.filtersData
   );
+  const { isBackBtnPressed } = useAppSelector(
+    (state) => state.singleProductData
+  );
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    const categoriesPromise = dispatch(fetchCategories());
+    const categoriesPromise = dispatch(fetchCategories(isBackBtnPressed));
 
     return () => {
       categoriesPromise.abort();

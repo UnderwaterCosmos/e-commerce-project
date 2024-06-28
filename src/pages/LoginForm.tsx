@@ -1,7 +1,20 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
+import { LOGIN_INPUT_FIELDS, LOGIN_INITIAL_USER_DATA } from '../formsData';
 import { Container } from '../components/Container';
+import { Loader } from '../components/Loader';
+import { FormInputField } from '../components/FormInputField';
+import {
+  addAuthorizedUser,
+  setLoginBasis,
+  // setFormBasis,
+} from '../redux/slices/usersSlice';
+import { useAppSelector, useAppDispatch } from '../redux/store';
+import { loginSchema } from '../validation/loginSchema';
+import { LoginFieldsNames } from '../types/forms';
 
 const loginForm = cn(
   'flex',
@@ -12,16 +25,72 @@ const loginForm = cn(
   'p-5',
   'border-2'
 );
-const inputField = cn('bg-slate-200', 'rounded-full', 'mb-2', 'p-1.5');
 
 export function LoginForm() {
+  const { isLoading, loginBasis } = useAppSelector((state) => state.usersData);
+  const dispatch = useAppDispatch();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(loginSchema) });
+
+  const fieldsHandler = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    key: LoginFieldsNames
+  ) => {
+    dispatch(setLoginBasis({ ...loginBasis, [key]: event.target.value }));
+  };
+
+  const submitHandler = () => {
+    dispatch(addAuthorizedUser(loginBasis));
+    dispatch(setLoginBasis(LOGIN_INITIAL_USER_DATA));
+    reset();
+  };
+
+  // const fieldsHandler = (
+  //   event: React.ChangeEvent<HTMLInputElement>,
+  //   key: LoginFieldsNames
+  // ) => {
+  //   dispatch(
+  // setFormBasis({
+  //   key: 'loginBasis',
+  //   value: { ...loginBasis, [key]: event.target.value },
+  // })
+  //   );
+  // };
+
+  // const submitHandler = () => {
+
+  //   dispatch(setFormBasis(({
+  // 		key: '',
+  // 		value: LOGIN_INITIAL_USER_DATA,
+  // 	}));
+  //   reset();
+  // };
+
   return (
     <main className="grow">
       <Container>
-        <div className="text-center">
-          <h1 className="mb-3">ВXОД</h1>
-          <form className={loginForm}>
-            <label htmlFor="login">Login:</label>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div className="text-center">
+            <h1 className="mb-3">ВXОД</h1>
+            <form className={loginForm} onSubmit={handleSubmit(submitHandler)}>
+              {LOGIN_INPUT_FIELDS.map((fieldObj) => (
+                <FormInputField
+                  state={loginBasis}
+                  register={register}
+                  errors={errors}
+                  fieldObj={fieldObj}
+                  fieldsHandler={fieldsHandler}
+                  key={fieldObj.id}
+                />
+              ))}
+              {/* <label htmlFor="login">Login:</label>
             <input
               className={inputField}
               id="login"
@@ -34,16 +103,19 @@ export function LoginForm() {
               id="password"
               placeholder="Введите пароль"
               required
-            />
-            <button className="bg-emerald-200 rounded-full mt-3">ВОЙТИ</button>
-          </form>
-          <p>
-            Если Вы еще не зарегистрированы -{' '}
-            <a className="text-blue-600" href="#">
-              зарегистрируйтесь
-            </a>
-          </p>
-        </div>
+            /> */}
+              <button className="bg-emerald-200 rounded-full mt-3">
+                ВОЙТИ
+              </button>
+            </form>
+            <p>
+              Если Вы еще не зарегистрированы -{' '}
+              <Link to={'/registration'} className="text-blue-600">
+                зарегистрируйтесь
+              </Link>
+            </p>
+          </div>
+        )}
       </Container>
     </main>
   );

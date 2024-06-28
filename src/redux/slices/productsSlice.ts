@@ -1,13 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { AxiosResponse } from 'axios';
 import {
   IGetProductsConfig,
   IProductsState,
-  IFetchResponse,
 } from '../../types/products';
 
 export const fetchProducts = createAsyncThunk.withTypes<{
   extra: {
-    getProducts: (config: IGetProductsConfig) => Promise<IFetchResponse>;
+    getProducts: (config: IGetProductsConfig) => Promise<AxiosResponse>;
   };
 }>()(
   'products/fetchProducts',
@@ -21,14 +21,14 @@ export const fetchProducts = createAsyncThunk.withTypes<{
     } catch (error) {
       return rejectWithValue(error);
     }
+  },
+  {
+    condition: (config) => {
+      if (config.preventRequest) {
+        return false;
+      }
+    },
   }
-  // {
-  //   condition: (config) => {
-  //     if (config.preventRequest) {
-  //       return false;
-  //     }
-  //   },
-  // }
 );
 
 const initialState: IProductsState = {

@@ -1,17 +1,30 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { FaRegSun } from 'react-icons/fa6';
 import { BsCart4 } from 'react-icons/bs';
-import { RiLogoutBoxRLine } from 'react-icons/ri';
+import { RiLogoutBoxRLine, RiLogoutBoxLine } from 'react-icons/ri';
 
 import { Container } from './Container';
+import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useAppDispatch, useAppSelector } from '../redux/store';
+import { removeAuthorizedUser } from '../redux/slices/usersSlice';
 
 const headerWrapper = cn('flex', 'justify-between', 'py-4', 'text-white');
 const navList = cn('flex', 'gap-x-2');
 const controls = cn('flex', 'gap-x-4', 'items-center');
 
 export function Header() {
+  const { removeItem } = useLocalStorage('token');
+  const { authUser } = useAppSelector((state) => state.usersData);
+  const dispatch = useAppDispatch();
+
+  const authUserHandler = () => {
+    if (authUser && authUser.id) {
+      dispatch(removeAuthorizedUser(authUser.id));
+      removeItem();
+    }
+  };
+
   return (
     <header className="bg-slate-800 mb-4">
       <Container>
@@ -37,11 +50,19 @@ export function Header() {
             <li>
               <img src="#" alt="Your's avatar" />
             </li>
-            <Link to={'/registration'}>
-              <li>
-                <RiLogoutBoxRLine size={20} />
-              </li>
-            </Link>
+            {authUser ? (
+              <Link to={'/'}>
+                <li onClick={authUserHandler}>
+                  <RiLogoutBoxLine size={20} />
+                </li>
+              </Link>
+            ) : (
+              <Link to={'/login'}>
+                <li>
+                  <RiLogoutBoxRLine size={20} />
+                </li>
+              </Link>
+            )}
             <li>
               <select className="text-black">
                 <option value="ru">RU</option>

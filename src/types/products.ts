@@ -1,4 +1,3 @@
-import { AxiosHeaders } from 'axios';
 export interface ISingleProduct {
   id: number;
   title: string;
@@ -12,14 +11,10 @@ export interface IGetProductsConfig {
   category_like: string;
   title_like: string;
   replace: boolean;
-  // preventRequest: boolean;
+  preventRequest: boolean;
 }
 export interface IProductsState {
   isLoading: boolean;
   productsList: ISingleProduct[];
   totalPages: number;
-}
-export interface IFetchResponse {
-  data: ISingleProduct[];
-  headers: AxiosHeaders;
 }

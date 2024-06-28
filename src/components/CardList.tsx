@@ -1,10 +1,11 @@
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import cn from 'classnames';
 
 import { Container } from './Container';
 import { Card } from './Card';
 import { Loader } from './Loader';
-import { useAppDispatch, useAppSelector } from '../redux/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../redux/store';
 import { fetchProducts } from '../redux/slices/productsSlice';
 import { useDebounce } from '../hooks/useDebounce';
 import { useInfiniteScroll } from '../hooks/useInfiniteScroll';
@@ -15,13 +16,16 @@ export function CardList() {
   const { productsList, isLoading, totalPages } = useAppSelector(
     (state) => state.productsData
   );
+  const { isBackBtnPressed } = useAppSelector(
+    (state) => state.singleProductData
+  );
   const { select, search } = useAppSelector((state) => state.filtersData);
-  // const { isBackBtnPressed } = useAppSelector(
-  //   (state) => state.singleProductData
-  // );
   const dispatch = useAppDispatch();
   const debouncedSearch = useDebounce(search.trim(), 1000);
-  const [currentPage, setCurrentPage] = React.useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = React.useState(
+    Number(searchParams.get('page')) || 1
+  );
   const triggerRef = React.useRef() as React.MutableRefObject<HTMLDivElement>;
 
   React.useEffect(() => {
@@ -31,13 +35,16 @@ export function CardList() {
         category_like: select,
         title_like: debouncedSearch,
         replace: true,
-        // preventRequest: isBackBtnPressed,
+        preventRequest: isBackBtnPressed,
       })
     );
     window.onbeforeunload = () => {
       window.scrollTo(0, 0);
     };
-    setCurrentPage(1);
+    if (!isBackBtnPressed) {
+      setCurrentPage(1);
+      setSearchParams({ page: '1' });
+    }
 
     return () => {
       productsPromise.abort();
@@ -46,18 +53,21 @@ export function CardList() {
 
   const onLoadNextProducts = React.useCallback(() => {
     if (!isLoading && currentPage < totalPages) {
-      setCurrentPage((prev) => prev + 1);
+      if (!isBackBtnPressed) {
+        setCurrentPage((prev) => prev + 1);
+      }
       dispatch(
         fetchProducts({
           _page: currentPage + 1,
           category_like: select,
           title_like: debouncedSearch,
           replace: false,
-          // preventRequest: isBackBtnPressed,
+          preventRequest: isBackBtnPressed,
         })
       );
+      setSearchParams({ page: String(currentPage + 1) });
     }
-  }, [dispatch, isLoading, currentPage]);
+  }, [dispatch, isLoading, currentPage, isBackBtnPressed]);
 
   useInfiniteScroll({
     triggerRef,
