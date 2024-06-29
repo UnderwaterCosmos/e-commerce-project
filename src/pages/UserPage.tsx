@@ -2,12 +2,12 @@ import React from 'react';
 import cn from 'classnames';
 
 import { Container } from '../components/Container';
-import { CustomerInfo } from '../components/CustomerInfo';
+import { UserInfo } from '../components/UserInfo';
 import { OrdersHistory } from '../components/OrdersHistory';
 
 const btn = cn('p-1', 'bg-black', 'rounded-lg', 'text-white');
 
-export function CustomerPage() {
+export function UserPage() {
   return (
     <main className="grow text-center">
       <Container>
@@ -24,7 +24,7 @@ export function CustomerPage() {
             </button>
           </li>
         </ul>
-        {/* <CustomerInfo /> */}
+        {/* <UserInfo /> */}
         <OrdersHistory />
       </Container>
     </main>

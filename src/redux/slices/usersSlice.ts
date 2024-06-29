@@ -36,7 +36,10 @@ export const addNewUser = createAsyncThunk.withTypes<{
 
 export const addAuthorizedUser = createAsyncThunk.withTypes<{
   extra: {
-    authorizeUser: (config: LoginBasis) => Promise<LoginBasis>;
+    authorizeUser: (config: LoginBasis) => Promise<{
+      loginData: LoginBasis;
+      fullUserData: IUser | null;
+    }>;
   };
 }>()(
   'users/addAuthorizedUser',
@@ -66,8 +69,8 @@ export const removeAuthorizedUser = createAsyncThunk.withTypes<{
 
 const initialState: IUserState = {
   isLoading: false,
-  usersList: [],
-  authUser: null,
+  fullUserInfo: null,
+  authUserInfo: null,
   registrationBasis: REGISTRATION_INITIAL_USER_DATA,
   loginBasis: LOGIN_INITIAL_USER_DATA,
 };
@@ -88,17 +91,15 @@ const usersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(addNewUser.fulfilled, (state, action) => {
-        state.usersList.push(action.payload);
-        state.isLoading = false;
-      })
       .addCase(addAuthorizedUser.fulfilled, (state, action) => {
-        state.authUser = action.payload;
+        state.authUserInfo = action.payload.loginData;
         setItem(Math.ceil(Math.random() * 100000000));
+        state.fullUserInfo = action.payload.fullUserData;
         state.isLoading = false;
       })
       .addCase(removeAuthorizedUser.fulfilled, (state) => {
-        state.authUser = null;
+        state.authUserInfo = null;
+        state.fullUserInfo = null;
         state.isLoading = false;
       })
       .addMatcher(
@@ -113,9 +114,10 @@ const usersSlice = createSlice({
       )
       .addMatcher(
         isAnyOf(
-          addNewUser.rejected,
           addAuthorizedUser.rejected,
-          removeAuthorizedUser.rejected
+          removeAuthorizedUser.rejected,
+          addNewUser.rejected,
+          addNewUser.fulfilled
         ),
         (state) => {
           state.isLoading = false;

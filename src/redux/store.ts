@@ -27,7 +27,7 @@ const rootPersistConfig = {
 const usersDataPersistConfig = {
   key: 'usersData',
   storage,
-  whitelist: ['usersList', 'authUser'],
+  whitelist: ['fullUserInfo', 'authUserInfo'],
 };
 const rootReducer = combineReducers({
   productsData: productsReducer,

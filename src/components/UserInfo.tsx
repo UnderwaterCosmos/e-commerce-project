@@ -1,9 +1,15 @@
 import React from 'react';
 import cn from 'classnames';
 
-const allInfo = cn('max-w-xl', 'mx-auto', 'flex', 'justify-between', 'items-center');
+const allInfo = cn(
+  'max-w-xl',
+  'mx-auto',
+  'flex',
+  'justify-between',
+  'items-center'
+);
 
-export function CustomerInfo() {
+export function UserInfo() {
   return (
     <section className={allInfo}>
       <dl className="text-left">

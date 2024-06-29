@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -27,8 +28,11 @@ const loginForm = cn(
 );
 
 export function LoginForm() {
-  const { isLoading, loginBasis } = useAppSelector((state) => state.usersData);
+  const { isLoading, loginBasis, authUserInfo } = useAppSelector(
+    (state) => state.usersData
+  );
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -36,6 +40,12 @@ export function LoginForm() {
     reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(loginSchema) });
+
+  React.useEffect(() => {
+    if (authUserInfo) {
+      navigate('/user');
+    }
+  }, [authUserInfo]);
 
   const fieldsHandler = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -63,7 +73,6 @@ export function LoginForm() {
   // };
 
   // const submitHandler = () => {
-
   //   dispatch(setFormBasis(({
   // 		key: '',
   // 		value: LOGIN_INITIAL_USER_DATA,

@@ -35,8 +35,20 @@ export const createUser = async (registrationData: IUser) => {
 };
 
 export const authorizeUser = async (config: LoginBasis) => {
-  const { data } = await axios.post(`${BASE_URL}/login`, config);
-  return data;
+  const loginResponse = await axios.post(`${BASE_URL}/login`, config);
+  if (loginResponse.status === 201) {
+    const { data } = await authRequest.get('/users', {
+      params: { login_like: loginResponse.data.login },
+    });
+    return {
+      loginData: loginResponse.data,
+      fullUserData: data,
+    };
+  }
+  return {
+    loginData: loginResponse.data,
+    fullUserData: null,
+  };
 };
 
 export const removeUser = async (id: number) => {

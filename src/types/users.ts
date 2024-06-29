@@ -13,8 +13,8 @@ export interface IUser {
 
 export interface IUserState {
   isLoading: boolean;
-  usersList: IUser[];
-  authUser: Pick<IUser, 'login' | 'password' | 'id'> | null;
+  fullUserInfo: IUser | null;
+  authUserInfo: Pick<IUser, 'login' | 'password' | 'id'> | null;
   registrationBasis: RegistrationBasis;
   loginBasis: LoginBasis;
 }

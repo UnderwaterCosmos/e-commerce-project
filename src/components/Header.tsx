@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 import { FaRegSun } from 'react-icons/fa6';
 import { BsCart4 } from 'react-icons/bs';
@@ -15,12 +16,19 @@ const controls = cn('flex', 'gap-x-4', 'items-center');
 
 export function Header() {
   const { removeItem } = useLocalStorage('token');
-  const { authUser } = useAppSelector((state) => state.usersData);
+  const { authUserInfo } = useAppSelector((state) => state.usersData);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (!authUserInfo) {
+      navigate('/');
+    }
+  }, [authUserInfo]);
 
   const authUserHandler = () => {
-    if (authUser && authUser.id) {
-      dispatch(removeAuthorizedUser(authUser.id));
+    if (authUserInfo && authUserInfo.id) {
+      dispatch(removeAuthorizedUser(authUserInfo.id));
       removeItem();
     }
   };
@@ -50,12 +58,10 @@ export function Header() {
             <li>
               <img src="#" alt="Your's avatar" />
             </li>
-            {authUser ? (
-              <Link to={'/'}>
-                <li onClick={authUserHandler}>
-                  <RiLogoutBoxLine size={20} />
-                </li>
-              </Link>
+            {authUserInfo ? (
+              <li onClick={authUserHandler}>
+                <RiLogoutBoxLine size={20} />
+              </li>
             ) : (
               <Link to={'/login'}>
                 <li>
