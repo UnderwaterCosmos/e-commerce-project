@@ -11,13 +11,12 @@ import {
   LoginBasis,
   // IFormBasis
 } from '../../types/forms';
+import { ISingleProduct } from '../../types/products';
+import { RootState } from '../store';
 import {
   LOGIN_INITIAL_USER_DATA,
   REGISTRATION_INITIAL_USER_DATA,
 } from '../../formsData';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
-
-const { setItem } = useLocalStorage('token');
 
 export const addNewUser = createAsyncThunk.withTypes<{
   extra: {
@@ -67,6 +66,31 @@ export const removeAuthorizedUser = createAsyncThunk.withTypes<{
   }
 );
 
+export const addProductToCart = createAsyncThunk.withTypes<{
+  state: RootState;
+  extra: {
+    addToCart: (
+      userId: number | undefined,
+      value: { cart: ISingleProduct[] }
+    ) => Promise<IUser>;
+  };
+}>()(
+  'users/addProductToCart',
+  async (
+    product: ISingleProduct,
+    { getState, rejectWithValue, extra: api }
+  ) => {
+    try {
+      const actualUser = getState().usersData.fullUserInfo;
+      return api.addToCart(actualUser?.id, {
+        cart: [...(actualUser?.cart as ISingleProduct[]), product],
+      });
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const initialState: IUserState = {
   isLoading: false,
   fullUserInfo: null,
@@ -93,20 +117,21 @@ const usersSlice = createSlice({
     builder
       .addCase(addAuthorizedUser.fulfilled, (state, action) => {
         state.authUserInfo = action.payload.loginData;
-        setItem(Math.ceil(Math.random() * 100000000));
         state.fullUserInfo = action.payload.fullUserData;
-        state.isLoading = false;
       })
       .addCase(removeAuthorizedUser.fulfilled, (state) => {
         state.authUserInfo = null;
         state.fullUserInfo = null;
-        state.isLoading = false;
+      })
+      .addCase(addProductToCart.fulfilled, (state, action) => {
+        state.fullUserInfo = action.payload;
       })
       .addMatcher(
         isAnyOf(
           addNewUser.pending,
           addAuthorizedUser.pending,
-          removeAuthorizedUser.pending
+          removeAuthorizedUser.pending,
+          addProductToCart.pending
         ),
         (state) => {
           state.isLoading = true;
@@ -115,7 +140,11 @@ const usersSlice = createSlice({
       .addMatcher(
         isAnyOf(
           addAuthorizedUser.rejected,
+          addAuthorizedUser.fulfilled,
           removeAuthorizedUser.rejected,
+          removeAuthorizedUser.fulfilled,
+          addProductToCart.rejected,
+          addProductToCart.fulfilled,
           addNewUser.rejected,
           addNewUser.fulfilled
         ),

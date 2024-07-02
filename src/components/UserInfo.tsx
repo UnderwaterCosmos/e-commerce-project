@@ -1,6 +1,8 @@
 import React from 'react';
 import cn from 'classnames';
 
+import { useAppSelector, selectUsersData } from '../redux/store';
+
 const allInfo = cn(
   'max-w-xl',
   'mx-auto',
@@ -10,23 +12,27 @@ const allInfo = cn(
 );
 
 export function UserInfo() {
+  const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
+
   return (
     <section className={allInfo}>
       <dl className="text-left">
         <dt className="inline">Почта: </dt>
-        <dd className="inline">example@sample.com</dd>
+        <dd className="inline">{fullUserInfo?.email}</dd>
         <br />
-        <dt className="inline">Имя: </dt>
-        <dd className="inline">Человеческое имя</dd>
+        <dt className="inline">Логин: </dt>
+        <dd className="inline">{fullUserInfo?.login}</dd>
         <br />
-        <dt className="inline">Пароль: </dt>
-        <dd className="inline">Квантовый пароль</dd>
-        <br />
-        <dt className="inline">Тип: </dt>
-        <dd className="inline">Customer</dd>
+        <dt className="inline">Тип аккаунта: </dt>
+        <dd className="inline">{fullUserInfo?.type}</dd>
       </dl>
       <div>
-        <img src="/images/square.png" alt="КвАдРаТ !?!" />
+        <img
+          src={fullUserInfo?.avatarUrl}
+          width={300}
+          height={300}
+          alt={`${fullUserInfo?.login}'s portrait`}
+        />
       </div>
     </section>
   );

@@ -6,8 +6,8 @@ import { IUser } from './users';
 // }
 
 // REGISTRATION
-export type RegistrationFieldsNames = Exclude<keyof IUser, 'basket' | 'id'>;
-export type RegistrationBasis = Omit<IUser, 'basket' | 'id'>;
+export type RegistrationFieldsNames = Exclude<keyof IUser, 'cart' | 'id'>;
+export type RegistrationBasis = Omit<IUser, 'cart' | 'id'>;
 export interface IRegistrationInputField {
   id: number;
   name: Exclude<RegistrationFieldsNames, 'type'>;
@@ -19,7 +19,7 @@ export interface IRegistrationInputField {
 // LOGIN
 export type LoginFieldsNames = Exclude<
   keyof IUser,
-  'basket' | 'id' | 'email' | 'avatarUrl' | 'type'
+  'cart' | 'id' | 'email' | 'avatarUrl' | 'type'
 >;
 export type LoginBasis = Pick<IUser, 'password' | 'login' | 'id'>;
 export interface ILoginInputField {

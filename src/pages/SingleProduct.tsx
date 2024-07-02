@@ -1,24 +1,28 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
-import { FaArrowLeftLong } from 'react-icons/fa6';
 
 import { Container } from '../components/Container';
 import { CartBtn } from '../components/CartBtn';
 import { Loader } from '../components/Loader';
-import { useAppDispatch, useAppSelector } from '../redux/store';
+import { BackBtn } from '../components/BackBtn';
+import {
+  useAppDispatch,
+  useAppSelector,
+  selectSingleProductsData,
+} from '../redux/store';
 import {
   fetchSingleProduct,
   setBackBtnStatus,
 } from '../redux/slices/singleProductSlice';
+import { addProductToCart } from '../redux/slices/usersSlice';
+import { ISingleProduct } from '../types/products';
 
-const backBtn = cn('h-8', 'p-2', 'bg-slate-300', 'rounded-full');
 const description = cn('flex', 'flex-col', 'justify-center');
 
 export function SingleProduct() {
-  const { singleProduct, isLoading } = useAppSelector(
-    (state) => state.singleProductData
-  );
+  const isLoading = useAppSelector(selectSingleProductsData).isLoading;
+  const singleProduct = useAppSelector(selectSingleProductsData).singleProduct;
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -45,9 +49,7 @@ export function SingleProduct() {
           <Loader />
         ) : (
           <div className="flex gap-3">
-            <button type="button" className={backBtn} onClick={backBtnHandler}>
-              <FaArrowLeftLong />
-            </button>
+            <BackBtn onClick={backBtnHandler} />
             <article className="flex items-center gap-x-4">
               <div>
                 {singleProduct?.images.map((url, index) => (
@@ -73,7 +75,12 @@ export function SingleProduct() {
               <h1>{singleProduct?.title}</h1>
               <h2>{singleProduct?.description}</h2>
               <p>{singleProduct?.price} Р</p>
-              <CartBtn />
+              <CartBtn
+                productId={singleProduct?.id}
+                onClick={() =>
+                  dispatch(addProductToCart(singleProduct as ISingleProduct))
+                }
+              />
             </article>
           </div>
         )}

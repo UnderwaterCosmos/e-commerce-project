@@ -8,7 +8,7 @@ export interface IUser {
   login: string;
   avatarUrl: string;
   type: string;
-  basket: ISingleProduct[];
+  cart: ISingleProduct[];
 }
 
 export interface IUserState {

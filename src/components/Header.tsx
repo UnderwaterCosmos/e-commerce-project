@@ -7,7 +7,11 @@ import { RiLogoutBoxRLine, RiLogoutBoxLine } from 'react-icons/ri';
 
 import { Container } from './Container';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import { useAppDispatch, useAppSelector } from '../redux/store';
+import {
+  useAppDispatch,
+  useAppSelector,
+  selectUsersData,
+} from '../redux/store';
 import { removeAuthorizedUser } from '../redux/slices/usersSlice';
 
 const headerWrapper = cn('flex', 'justify-between', 'py-4', 'text-white');
@@ -16,7 +20,8 @@ const controls = cn('flex', 'gap-x-4', 'items-center');
 
 export function Header() {
   const { removeItem } = useLocalStorage('token');
-  const { authUserInfo } = useAppSelector((state) => state.usersData);
+  const authUserInfo = useAppSelector(selectUsersData).authUserInfo;
+  const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -52,22 +57,43 @@ export function Header() {
             <li>
               <FaRegSun size={20} />
             </li>
-            <li>
-              <BsCart4 size={20} />
-            </li>
-            <li>
-              <img src="#" alt="Your's avatar" />
-            </li>
-            {authUserInfo ? (
-              <li onClick={authUserHandler}>
-                <RiLogoutBoxLine size={20} />
+            <Link to={'/cart'}>
+              <li>
+                <BsCart4 size={20} />
               </li>
-            ) : (
-              <Link to={'/login'}>
-                <li>
-                  <RiLogoutBoxRLine size={20} />
+            </Link>
+            {authUserInfo ? (
+              <>
+                <Link to={'/user'}>
+                  <li>
+                    <img
+                      src={fullUserInfo?.avatarUrl}
+                      width={60}
+                      height={60}
+                      alt="Your's avatar"
+                    />
+                  </li>
+                </Link>
+                <li className="cursor-pointer" onClick={authUserHandler}>
+                  <RiLogoutBoxLine size={20} />
                 </li>
-              </Link>
+              </>
+            ) : (
+              <>
+                <li>
+                  <img
+                    src="images/avatar-placeholder.png"
+                    width={60}
+                    height={60}
+                    alt="Your's avatar"
+                  />
+                </li>
+                <Link to={'/login'}>
+                  <li>
+                    <RiLogoutBoxRLine size={20} />
+                  </li>
+                </Link>
+              </>
             )}
             <li>
               <select className="text-black">

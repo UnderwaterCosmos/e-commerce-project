@@ -12,7 +12,11 @@ import { Container } from '../components/Container';
 import { Loader } from '../components/Loader';
 import { FormInputField } from '../components/FormInputField';
 import { registrationSchema } from '../validation/registrationSchema';
-import { useAppDispatch, useAppSelector } from '../redux/store';
+import {
+  useAppDispatch,
+  useAppSelector,
+  selectUsersData,
+} from '../redux/store';
 import {
   addNewUser,
   setRegistrationBasis,
@@ -32,9 +36,8 @@ const regForm = cn(
 const inputField = cn('bg-slate-200', 'rounded-full', 'mb-2', 'p-1.5');
 
 export function RegistrationForm() {
-  const { isLoading, registrationBasis } = useAppSelector(
-    (state) => state.usersData
-  );
+  const isLoading = useAppSelector(selectUsersData).isLoading;
+  const registrationBasis = useAppSelector(selectUsersData).registrationBasis;
   const dispatch = useAppDispatch();
 
   const {
@@ -56,7 +59,7 @@ export function RegistrationForm() {
   };
 
   const submitHandler = () => {
-    dispatch(addNewUser({ ...registrationBasis, basket: [] }));
+    dispatch(addNewUser({ ...registrationBasis, cart: [] }));
     dispatch(setRegistrationBasis(REGISTRATION_INITIAL_USER_DATA));
     reset();
   };
@@ -76,7 +79,7 @@ export function RegistrationForm() {
   // };
 
   // const submitHandler = () => {
-  //   dispatch(addNewUser({ ...registrationBasis, basket: [] }));
+  //   dispatch(addNewUser({ ...registrationBasis, cart: [] }));
   //   dispatch(
   //     setFormBasis({
   //       key: '',

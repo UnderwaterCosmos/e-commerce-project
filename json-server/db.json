@@ -2438,27 +2438,27 @@
       "email": "bogdanivliev@mail.ru",
       "password": "asdsa",
       "login": "UnderwaterCosmos",
-      "avatarUrl": "https://www.youtube.com/watch?v=FDbAlwE13t0&t=56s",
+      "avatarUrl": "https://uznayvse.ru/person/winnie-harlow/Winnie_Harlow01.jpg",
       "type": "admin",
-      "basket": [],
+      "cart": [],
       "id": 1
     },
     {
       "email": "rossia112@rambler.ru",
       "password": "qwaaaaa",
       "login": "Mnu_lapkami",
-      "avatarUrl": "https://www.npmjs.com/package/json-server/v/0.17.4#operators",
+      "avatarUrl": "https://img0.liveinternet.ru/images/attach/b/3/30/172/30172285_ipvpp.jpg",
       "type": "customer",
-      "basket": [],
+      "cart": [],
       "id": 2
     },
     {
       "email": "shamilkus1197@gmail.com",
       "password": "123123",
       "login": "dsaasdsad",
-      "avatarUrl": "https://gitlab.com/SkaterPunisher/react_e_market/-/blob/main/server/db.json?ref_type=heads",
+      "avatarUrl": "https://cdn.fifi.ru/person/240x253/anne-hathaway.jpg",
       "type": "customer",
-      "basket": [],
+      "cart": [],
       "id": 3
     }
   ],

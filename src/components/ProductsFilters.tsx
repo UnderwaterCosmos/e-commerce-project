@@ -1,7 +1,12 @@
 import React from 'react';
 import cn from 'classnames';
 
-import { useAppSelector, useAppDispatch } from '../redux/store';
+import {
+  useAppSelector,
+  useAppDispatch,
+  selectFiltersData,
+  selectSingleProductsData,
+} from '../redux/store';
 import { setFiltersValue, fetchCategories } from '../redux/slices/filtersSlice';
 import { Container } from './Container';
 
@@ -9,12 +14,10 @@ const filtersBlock = cn('my-3');
 const searchFiled = cn('w-full', 'p-3', 'bg-slate-200', 'rounded-full', 'mb-2');
 
 export function ProductsFilters() {
-  const { select, search, categoriesList } = useAppSelector(
-    (state) => state.filtersData
-  );
-  const { isBackBtnPressed } = useAppSelector(
-    (state) => state.singleProductData
-  );
+  const { select, search, categoriesList } = useAppSelector(selectFiltersData);
+  const isBackBtnPressed = useAppSelector(
+    selectSingleProductsData
+  ).isBackBtnPressed;
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {

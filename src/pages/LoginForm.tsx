@@ -13,7 +13,11 @@ import {
   setLoginBasis,
   // setFormBasis,
 } from '../redux/slices/usersSlice';
-import { useAppSelector, useAppDispatch } from '../redux/store';
+import {
+  useAppSelector,
+  useAppDispatch,
+  selectUsersData,
+} from '../redux/store';
 import { loginSchema } from '../validation/loginSchema';
 import { LoginFieldsNames } from '../types/forms';
 
@@ -28,9 +32,9 @@ const loginForm = cn(
 );
 
 export function LoginForm() {
-  const { isLoading, loginBasis, authUserInfo } = useAppSelector(
-    (state) => state.usersData
-  );
+  const isLoading = useAppSelector(selectUsersData).isLoading;
+  const loginBasis = useAppSelector(selectUsersData).loginBasis;
+  const authUserInfo = useAppSelector(selectUsersData).authUserInfo;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

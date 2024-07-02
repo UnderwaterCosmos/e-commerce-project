@@ -1,17 +1,17 @@
 import axios from 'axios';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import { IGetProductsConfig } from '../types/products';
+import { IGetProductsConfig, ISingleProduct } from '../types/products';
 import { IUser } from '../types/users';
 import { LoginBasis } from '../types/forms';
 
 const BASE_URL = 'http://localhost:3000';
 
-const { getItem } = useLocalStorage('token');
+const { getItem, setItem } = useLocalStorage('token');
 
 const authRequest = axios.create({
   baseURL: BASE_URL,
   headers: {
-    Authorization: getItem() || '',
+    authorization: getItem() || '',
   },
 });
 
@@ -37,16 +37,17 @@ export const createUser = async (registrationData: IUser) => {
 export const authorizeUser = async (config: LoginBasis) => {
   const loginResponse = await axios.post(`${BASE_URL}/login`, config);
   if (loginResponse.status === 201) {
+    setItem(Math.ceil(Math.random() * 100000000));
     const { data } = await authRequest.get('/users', {
-      params: { login_like: loginResponse.data.login },
+      params: { login: loginResponse.data.login },
     });
     return {
       loginData: loginResponse.data,
-      fullUserData: data,
+      fullUserData: data[0],
     };
   }
   return {
-    loginData: loginResponse.data,
+    loginData: null,
     fullUserData: null,
   };
 };
@@ -54,4 +55,12 @@ export const authorizeUser = async (config: LoginBasis) => {
 export const removeUser = async (id: number) => {
   await authRequest.delete(`/login/${id}`);
   return id;
+};
+
+export const addToCart = async (
+  userId: number | undefined,
+  value: { cart: ISingleProduct[] | undefined }
+) => {
+  const { data } = await authRequest.patch(`/users/${userId}`, value);
+  return data;
 };

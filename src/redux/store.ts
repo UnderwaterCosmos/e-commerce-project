@@ -51,10 +51,16 @@ export const store = configureStore({
     }),
 });
 
+export const selectProductsData = (state: RootState) => state.productsData;
+export const selectFiltersData = (state: RootState) => state.filtersData;
+export const selectSingleProductsData = (state: RootState) =>
+  state.singleProductData;
+export const selectUsersData = (state: RootState) => state.usersData;
+
 export const persistor = persistStore(store);
 
-type RootState = ReturnType<typeof store.getState>;
-type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 export const useAppSelector = useSelector.withTypes<RootState>();

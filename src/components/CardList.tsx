@@ -5,7 +5,14 @@ import cn from 'classnames';
 import { Container } from './Container';
 import { Card } from './Card';
 import { Loader } from './Loader';
-import { useAppDispatch, useAppSelector } from '../redux/store';
+import {
+  useAppDispatch,
+  useAppSelector,
+  selectProductsData,
+  selectSingleProductsData,
+  selectFiltersData,
+  // selectUsersData,
+} from '../redux/store';
 import { fetchProducts } from '../redux/slices/productsSlice';
 import { useDebounce } from '../hooks/useDebounce';
 import { useInfiniteScroll } from '../hooks/useInfiniteScroll';
@@ -13,13 +20,14 @@ import { useInfiniteScroll } from '../hooks/useInfiniteScroll';
 const list = cn('grid', 'gap-4', 'grid-cols-4', 'mb-4');
 
 export function CardList() {
-  const { productsList, isLoading, totalPages } = useAppSelector(
-    (state) => state.productsData
-  );
-  const { isBackBtnPressed } = useAppSelector(
-    (state) => state.singleProductData
-  );
-  const { select, search } = useAppSelector((state) => state.filtersData);
+  // const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
+  const { productsList, isLoading, totalPages } =
+    useAppSelector(selectProductsData);
+  const isBackBtnPressed = useAppSelector(
+    selectSingleProductsData
+  ).isBackBtnPressed;
+  const select = useAppSelector(selectFiltersData).select;
+  const search = useAppSelector(selectFiltersData).search;
   const dispatch = useAppDispatch();
   const debouncedSearch = useDebounce(search.trim(), 1000);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -73,6 +81,8 @@ export function CardList() {
     triggerRef,
     callback: onLoadNextProducts,
   });
+
+  // console.log(fullUserInfo);
 
   return (
     <section className="mb-4 text-center">

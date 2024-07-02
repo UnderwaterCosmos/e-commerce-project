@@ -3,6 +3,8 @@ import cn from 'classnames';
 
 import { CartBtn } from './CartBtn';
 import { ISingleProduct } from '../types/products';
+import { useAppDispatch } from '../redux/store';
+import { addProductToCart } from '../redux/slices/usersSlice';
 
 const singleCard = cn('border-2', 'border-black', 'p-1.5');
 const image = cn('max-w-full', 'h-auto', 'object-cover');
@@ -12,9 +14,11 @@ interface IProduct {
 }
 
 export function Card({ product }: IProduct) {
+  const dispatch = useAppDispatch();
+
   return (
-    <Link to={`/products/${product.id}`}>
-      <li className={singleCard}>
+    <li className={singleCard}>
+      <Link to={`/products/${product.id}`}>
         <div>
           <img
             className={image}
@@ -26,11 +30,14 @@ export function Card({ product }: IProduct) {
         </div>
         <h3 className="text-center">{product.title}</h3>
         <h4 className="text-sm text-left">{product.category}</h4>
-        <div className="flex justify-between">
-          <p>{product.price}р</p>
-          <CartBtn />
-        </div>
-      </li>
-    </Link>
+      </Link>
+      <div className="flex justify-between z-50">
+        <p>{product.price}р</p>
+        <CartBtn
+          productId={product.id}
+          onClick={() => dispatch(addProductToCart(product))}
+        />
+      </div>
+    </li>
   );
 }
