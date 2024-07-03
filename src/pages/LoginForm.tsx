@@ -9,7 +9,7 @@ import { Container } from '../components/Container';
 import { Loader } from '../components/Loader';
 import { FormInputField } from '../components/FormInputField';
 import {
-  addAuthorizedUser,
+  logInUser,
   setLoginBasis,
   // setFormBasis,
 } from '../redux/slices/usersSlice';
@@ -34,7 +34,7 @@ const loginForm = cn(
 export function LoginForm() {
   const isLoading = useAppSelector(selectUsersData).isLoading;
   const loginBasis = useAppSelector(selectUsersData).loginBasis;
-  const authUserInfo = useAppSelector(selectUsersData).authUserInfo;
+  const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -46,10 +46,10 @@ export function LoginForm() {
   } = useForm({ resolver: yupResolver(loginSchema) });
 
   React.useEffect(() => {
-    if (authUserInfo) {
+    if (fullUserInfo) {
       navigate('/user');
     }
-  }, [authUserInfo]);
+  }, [fullUserInfo]);
 
   const fieldsHandler = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -59,7 +59,7 @@ export function LoginForm() {
   };
 
   const submitHandler = () => {
-    dispatch(addAuthorizedUser(loginBasis));
+    dispatch(logInUser(loginBasis));
     dispatch(setLoginBasis(LOGIN_INITIAL_USER_DATA));
     reset();
   };

@@ -8,34 +8,33 @@ import { RiLogoutBoxRLine, RiLogoutBoxLine } from 'react-icons/ri';
 import { Container } from './Container';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import {
-  useAppDispatch,
   useAppSelector,
   selectUsersData,
+  useAppDispatch,
 } from '../redux/store';
-import { removeAuthorizedUser } from '../redux/slices/usersSlice';
+import { resetFullUserInfo } from '../redux/slices/usersSlice';
 
 const headerWrapper = cn('flex', 'justify-between', 'py-4', 'text-white');
 const navList = cn('flex', 'gap-x-2');
 const controls = cn('flex', 'gap-x-4', 'items-center');
 
 export function Header() {
-  const { removeItem } = useLocalStorage('token');
-  const authUserInfo = useAppSelector(selectUsersData).authUserInfo;
+  const token = useLocalStorage('token');
+  const fullUserInfoStorage = useLocalStorage('persist:usersData');
   const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    if (!authUserInfo) {
+    if (!fullUserInfo) {
       navigate('/');
     }
-  }, [authUserInfo]);
+  }, [fullUserInfo]);
 
-  const authUserHandler = () => {
-    if (authUserInfo && authUserInfo.id) {
-      dispatch(removeAuthorizedUser(authUserInfo.id));
-      removeItem();
-    }
+  const logOutHandler = () => {
+    dispatch(resetFullUserInfo());
+    fullUserInfoStorage.removeItem();
+    token.removeItem();
   };
 
   return (
@@ -62,7 +61,7 @@ export function Header() {
                 <BsCart4 size={20} />
               </li>
             </Link>
-            {authUserInfo ? (
+            {fullUserInfo ? (
               <>
                 <Link to={'/user'}>
                   <li>
@@ -74,7 +73,7 @@ export function Header() {
                     />
                   </li>
                 </Link>
-                <li className="cursor-pointer" onClick={authUserHandler}>
+                <li className="cursor-pointer" onClick={logOutHandler}>
                   <RiLogoutBoxLine size={20} />
                 </li>
               </>

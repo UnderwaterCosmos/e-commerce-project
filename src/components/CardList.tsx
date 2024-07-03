@@ -11,7 +11,6 @@ import {
   selectProductsData,
   selectSingleProductsData,
   selectFiltersData,
-  // selectUsersData,
 } from '../redux/store';
 import { fetchProducts } from '../redux/slices/productsSlice';
 import { useDebounce } from '../hooks/useDebounce';
@@ -20,7 +19,6 @@ import { useInfiniteScroll } from '../hooks/useInfiniteScroll';
 const list = cn('grid', 'gap-4', 'grid-cols-4', 'mb-4');
 
 export function CardList() {
-  // const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
   const { productsList, isLoading, totalPages } =
     useAppSelector(selectProductsData);
   const isBackBtnPressed = useAppSelector(
@@ -82,8 +80,6 @@ export function CardList() {
     callback: onLoadNextProducts,
   });
 
-  // console.log(fullUserInfo);
-
   return (
     <section className="mb-4 text-center">
       <Container>
@@ -93,7 +89,7 @@ export function CardList() {
             <Card product={product} key={product.id} />
           ))}
         </ul>
-        <div className="h-2.5" ref={triggerRef} />
+        <div className="h-3" ref={triggerRef} />
       </Container>
     </section>
   );

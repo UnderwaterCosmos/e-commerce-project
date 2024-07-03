@@ -17,6 +17,9 @@ import {
   LOGIN_INITIAL_USER_DATA,
   REGISTRATION_INITIAL_USER_DATA,
 } from '../../formsData';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+
+const token = useLocalStorage('token');
 
 export const addNewUser = createAsyncThunk.withTypes<{
   extra: {
@@ -33,33 +36,15 @@ export const addNewUser = createAsyncThunk.withTypes<{
   }
 );
 
-export const addAuthorizedUser = createAsyncThunk.withTypes<{
+export const logInUser = createAsyncThunk.withTypes<{
   extra: {
-    authorizeUser: (config: LoginBasis) => Promise<{
-      loginData: LoginBasis;
-      fullUserData: IUser | null;
-    }>;
+    authorizeUser: (config: LoginBasis) => Promise<IUser>;
   };
 }>()(
-  'users/addAuthorizedUser',
+  'users/logInUser',
   async (config: LoginBasis, { rejectWithValue, extra: api }) => {
     try {
       return api.authorizeUser(config);
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
-
-export const removeAuthorizedUser = createAsyncThunk.withTypes<{
-  extra: {
-    removeUser: (id: number) => Promise<number>;
-  };
-}>()(
-  'users/removeAuthorizedUser',
-  async (id: number, { rejectWithValue, extra: api }) => {
-    try {
-      return api.removeUser(id);
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -70,8 +55,8 @@ export const addProductToCart = createAsyncThunk.withTypes<{
   state: RootState;
   extra: {
     addToCart: (
-      userId: number | undefined,
-      value: { cart: ISingleProduct[] }
+      userId?: number,
+      value?: { cart: ISingleProduct[] }
     ) => Promise<IUser>;
   };
 }>()(
@@ -94,7 +79,6 @@ export const addProductToCart = createAsyncThunk.withTypes<{
 const initialState: IUserState = {
   isLoading: false,
   fullUserInfo: null,
-  authUserInfo: null,
   registrationBasis: REGISTRATION_INITIAL_USER_DATA,
   loginBasis: LOGIN_INITIAL_USER_DATA,
 };
@@ -112,16 +96,15 @@ const usersSlice = createSlice({
     setLoginBasis: (state, action: PayloadAction<LoginBasis>) => {
       state.loginBasis = action.payload;
     },
+    resetFullUserInfo: (state) => {
+      state.fullUserInfo = null;
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(addAuthorizedUser.fulfilled, (state, action) => {
-        state.authUserInfo = action.payload.loginData;
-        state.fullUserInfo = action.payload.fullUserData;
-      })
-      .addCase(removeAuthorizedUser.fulfilled, (state) => {
-        state.authUserInfo = null;
-        state.fullUserInfo = null;
+      .addCase(logInUser.fulfilled, (state, action) => {
+        token.setItem(Math.ceil(Math.random() * 100000000));
+        state.fullUserInfo = action.payload;
       })
       .addCase(addProductToCart.fulfilled, (state, action) => {
         state.fullUserInfo = action.payload;
@@ -129,8 +112,7 @@ const usersSlice = createSlice({
       .addMatcher(
         isAnyOf(
           addNewUser.pending,
-          addAuthorizedUser.pending,
-          removeAuthorizedUser.pending,
+          logInUser.pending,
           addProductToCart.pending
         ),
         (state) => {
@@ -139,10 +121,8 @@ const usersSlice = createSlice({
       )
       .addMatcher(
         isAnyOf(
-          addAuthorizedUser.rejected,
-          addAuthorizedUser.fulfilled,
-          removeAuthorizedUser.rejected,
-          removeAuthorizedUser.fulfilled,
+          logInUser.rejected,
+          logInUser.fulfilled,
           addProductToCart.rejected,
           addProductToCart.fulfilled,
           addNewUser.rejected,
@@ -170,6 +150,7 @@ const usersSlice = createSlice({
 export const {
   setRegistrationBasis,
   setLoginBasis,
+  resetFullUserInfo,
   // setFormBasis
 } = usersSlice.actions;
 export const usersReducer = usersSlice.reducer;

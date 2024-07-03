@@ -11,7 +11,6 @@ export function CartBtn({
   productId,
   ...props
 }: IProductId & React.HTMLProps<HTMLButtonElement>) {
-  const authUserInfo = useAppSelector(selectUsersData).authUserInfo;
   const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
 
   const isProductInCart = React.useMemo(
@@ -20,13 +19,13 @@ export function CartBtn({
   );
 
   const cartBtn = cn('bg-emerald-300', 'rounded-xl', 'p-1', {
-    'bg-red-300': isProductInCart || !Boolean(authUserInfo),
+    'bg-red-300': isProductInCart || !Boolean(fullUserInfo),
   });
 
   return (
     <button
       {...props}
-      disabled={isProductInCart || !Boolean(authUserInfo)}
+      disabled={isProductInCart || !Boolean(fullUserInfo)}
       className={cartBtn}
       type="button"
     >

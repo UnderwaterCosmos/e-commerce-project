@@ -21,7 +21,7 @@ export type LoginFieldsNames = Exclude<
   keyof IUser,
   'cart' | 'id' | 'email' | 'avatarUrl' | 'type'
 >;
-export type LoginBasis = Pick<IUser, 'password' | 'login' | 'id'>;
+export type LoginBasis = Pick<IUser, 'password' | 'login'>;
 export interface ILoginInputField {
   id: number;
   name: LoginFieldsNames;

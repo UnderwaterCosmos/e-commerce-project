@@ -14,7 +14,6 @@ export interface IUser {
 export interface IUserState {
   isLoading: boolean;
   fullUserInfo: IUser | null;
-  authUserInfo: Pick<IUser, 'login' | 'password' | 'id'> | null;
   registrationBasis: RegistrationBasis;
   loginBasis: LoginBasis;
 }
