@@ -7,13 +7,13 @@ import {
 
 export const fetchProducts = createAsyncThunk.withTypes<{
   extra: {
-    getProducts: (config: IGetProductsConfig) => Promise<AxiosResponse>;
+    api: {getProducts: (config: IGetProductsConfig) => Promise<AxiosResponse>};
   };
 }>()(
   'products/fetchProducts',
-  async (config: IGetProductsConfig, { rejectWithValue, extra: api }) => {
+  async (config: IGetProductsConfig, { rejectWithValue, extra }) => {
     try {
-      const { data, headers } = await api.getProducts(config);
+      const { data, headers } = await extra.api.getProducts(config);
       return {
         data: data,
         totalPages: Math.ceil(headers['x-total-count'] / 10),

@@ -7,13 +7,13 @@ import {
 
 export const fetchCategories = createAsyncThunk.withTypes<{
   extra: {
-    getCategories: () => Promise<ICategoriesElem[]>;
+    api: { getCategories: () => Promise<ICategoriesElem[]> };
   };
 }>()(
   'filters/fetchCategories',
-  async (isBackBtnPressed: boolean, { rejectWithValue, extra: api }) => {
+  async (isBackBtnPressed: boolean, { rejectWithValue, extra }) => {
     try {
-      return await api.getCategories();
+      return await extra.api.getCategories();
     } catch (error) {
       return rejectWithValue(error);
     }

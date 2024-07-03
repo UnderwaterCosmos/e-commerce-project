@@ -18,3 +18,8 @@ export interface IProductsState {
   productsList: ISingleProduct[];
   totalPages: number;
 }
+export interface ISingleProductState {
+  singleProduct: ISingleProduct | null;
+  isLoading: boolean;
+  isBackBtnPressed: boolean;
+}

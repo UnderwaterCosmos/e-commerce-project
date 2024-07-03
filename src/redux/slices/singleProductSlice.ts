@@ -1,21 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ISingleProduct } from '../../types/products';
-
-interface ISingleProductState {
-  singleProduct: ISingleProduct | null;
-  isLoading: boolean;
-  isBackBtnPressed: boolean;
-}
+import { ISingleProduct, ISingleProductState } from '../../types/products';
 
 export const fetchSingleProduct = createAsyncThunk.withTypes<{
   extra: {
-    getSingleProduct: (id: string) => Promise<ISingleProduct>;
+    api: { getSingleProduct: (id: string) => Promise<ISingleProduct> };
   };
 }>()(
   'singleProduct/fetchSingleProduct',
-  async (id: string, { rejectWithValue, extra: api }) => {
+  async (id: string, { rejectWithValue, extra }) => {
     try {
-      return await api.getSingleProduct(id);
+      return extra.api.getSingleProduct(id);
     } catch (error) {
       return rejectWithValue(error);
     }

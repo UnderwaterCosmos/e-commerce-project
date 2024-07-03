@@ -4,6 +4,7 @@ import {
   createSlice,
   isAnyOf,
 } from '@reduxjs/toolkit';
+import type { Router } from '@remix-run/router';
 
 import { IUser, IUserState } from '../../types/users';
 import {
@@ -23,13 +24,13 @@ const token = useLocalStorage('token');
 
 export const addNewUser = createAsyncThunk.withTypes<{
   extra: {
-    createUser: (registrationData: IUser) => Promise<IUser>;
+    api: { createUser: (registrationData: IUser) => Promise<IUser> };
   };
 }>()(
   'users/addNewUser',
-  async (registrationData: IUser, { rejectWithValue, extra: api }) => {
+  async (registrationData: IUser, { rejectWithValue, extra }) => {
     try {
-      return api.createUser(registrationData);
+      return extra.api.createUser(registrationData);
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -38,13 +39,16 @@ export const addNewUser = createAsyncThunk.withTypes<{
 
 export const logInUser = createAsyncThunk.withTypes<{
   extra: {
-    authorizeUser: (config: LoginBasis) => Promise<IUser>;
+    api: { authorizeUser: (config: LoginBasis) => Promise<IUser> };
+    router: Router;
   };
 }>()(
   'users/logInUser',
-  async (config: LoginBasis, { rejectWithValue, extra: api }) => {
+  async (config: LoginBasis, { rejectWithValue, extra }) => {
     try {
-      return api.authorizeUser(config);
+      const userObj = await extra.api.authorizeUser(config);
+      extra.router.navigate('/user');
+      return userObj;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -54,20 +58,22 @@ export const logInUser = createAsyncThunk.withTypes<{
 export const addProductToCart = createAsyncThunk.withTypes<{
   state: RootState;
   extra: {
-    addToCart: (
-      userId?: number,
-      value?: { cart: ISingleProduct[] }
-    ) => Promise<IUser>;
+    api: {
+      addToCart: (
+        userId?: number,
+        value?: { cart: ISingleProduct[] }
+      ) => Promise<IUser>;
+    };
   };
 }>()(
   'users/addProductToCart',
   async (
     product: ISingleProduct,
-    { getState, rejectWithValue, extra: api }
+    { getState, rejectWithValue, extra }
   ) => {
     try {
       const actualUser = getState().usersData.fullUserInfo;
-      return api.addToCart(actualUser?.id, {
+      return extra.api.addToCart(actualUser?.id, {
         cart: [...(actualUser?.cart as ISingleProduct[]), product],
       });
     } catch (error) {

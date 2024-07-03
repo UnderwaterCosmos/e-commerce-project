@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 import { FaRegSun } from 'react-icons/fa6';
@@ -25,16 +24,11 @@ export function Header() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  React.useEffect(() => {
-    if (!fullUserInfo) {
-      navigate('/');
-    }
-  }, [fullUserInfo]);
-
   const logOutHandler = () => {
     dispatch(resetFullUserInfo());
     fullUserInfoStorage.removeItem();
     token.removeItem();
+    navigate('/main');
   };
 
   return (

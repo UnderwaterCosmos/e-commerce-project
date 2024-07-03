@@ -17,6 +17,7 @@ import { productsReducer } from './slices/productsSlice';
 import { filtersReducer } from './slices/filtersSlice';
 import { singleProductReducer } from './slices/singleProductSlice';
 import { usersReducer } from './slices/usersSlice';
+import { router } from '../router';
 import * as api from './api';
 
 const rootPersistConfig = {
@@ -46,7 +47,10 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
       thunk: {
-        extraArgument: api,
+        extraArgument: {
+          api,
+          router,
+        },
       },
     }),
 });

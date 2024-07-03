@@ -34,9 +34,9 @@ const loginForm = cn(
 export function LoginForm() {
   const isLoading = useAppSelector(selectUsersData).isLoading;
   const loginBasis = useAppSelector(selectUsersData).loginBasis;
-  const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
+  // const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const {
     register,
@@ -45,11 +45,11 @@ export function LoginForm() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(loginSchema) });
 
-  React.useEffect(() => {
-    if (fullUserInfo) {
-      navigate('/user');
-    }
-  }, [fullUserInfo]);
+  // React.useEffect(() => {
+  //   if (fullUserInfo) {
+  //     navigate('/user');
+  //   }
+  // }, [fullUserInfo]);
 
   const fieldsHandler = (
     event: React.ChangeEvent<HTMLInputElement>,
