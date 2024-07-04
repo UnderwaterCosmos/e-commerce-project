@@ -1,7 +1,6 @@
-import React from 'react';
 import cn from 'classnames';
 
-import { addProductToCart } from '../redux/slices/usersSlice';
+import { manageProductInCart } from '../redux/slices/usersSlice';
 import {
   selectUsersData,
   useAppDispatch,
@@ -21,11 +20,21 @@ const controlBtn = cn('px-2', 'py-0.5', 'bg-orange-300', 'rounded-full');
 
 interface ICartItem {
   cartItem: ISingleProduct;
+  index: number;
 }
 
-export function CartItem({ cartItem }: ICartItem) {
-  // const [quantity, setQuantity] = React.useState(cartItem.quantity);
+export function CartItem({ cartItem, index }: ICartItem) {
+  const quantity =
+    useAppSelector(selectUsersData).fullUserInfo!.cart[index].quantity;
   const dispatch = useAppDispatch();
+
+  const quantityHandler = (name: string) => {
+    if (name === 'increment') {
+      dispatch(manageProductInCart({ index, quantity: quantity + 1 }));
+    } else {
+      dispatch(manageProductInCart({ index, quantity: quantity - 1 }));
+    }
+  };
 
   return (
     <li className={listItem}>
@@ -43,17 +52,23 @@ export function CartItem({ cartItem }: ICartItem) {
         <button
           type="button"
           className={controlBtn}
+          onClick={() => quantityHandler('increment')}
         >
           +
         </button>
-        <span>Каунтер</span>
+        <span>{cartItem.quantity}</span>
         <button
           type="button"
           className={controlBtn}
+          onClick={() => quantityHandler('decrement')}
         >
           -
         </button>
-        <button type="button" className={controlBtn}>
+        <button
+          type="button"
+          className={controlBtn}
+          onClick={() => dispatch(manageProductInCart({ index, quantity: 0 }))}
+        >
           X
         </button>
       </div>

@@ -15,7 +15,7 @@ import {
   fetchSingleProduct,
   setBackBtnStatus,
 } from '../redux/slices/singleProductSlice';
-import { addProductToCart } from '../redux/slices/usersSlice';
+import { manageProductInCart } from '../redux/slices/usersSlice';
 import { ISingleProduct } from '../types/products';
 
 const description = cn('flex', 'flex-col', 'justify-center');
@@ -78,7 +78,7 @@ export function SingleProduct() {
               <CartBtn
                 productId={singleProduct?.id}
                 onClick={() =>
-                  dispatch(addProductToCart(singleProduct as ISingleProduct))
+                  dispatch(manageProductInCart(singleProduct as ISingleProduct))
                 }
               />
             </article>

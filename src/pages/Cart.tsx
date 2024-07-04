@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Container } from '../components/Container';
 import { CartItem } from '../components/CartItem';
 import { selectUsersData, useAppSelector } from '../redux/store';
@@ -17,10 +15,11 @@ export function Cart() {
       <Container>
         <h2>Товаров в корзине на сумму: {totalSum}₽</h2>
         <ul>
-          {usersCart.map((cartItem) => (
-            <CartItem cartItem={cartItem} key={cartItem.id} />
+          {usersCart.map((cartItem, index) => (
+            <CartItem cartItem={cartItem} index={index} key={cartItem.id} />
           ))}
         </ul>
+        <button type="button">Оформить заказ</button>
       </Container>
     </main>
   );

@@ -24,3 +24,7 @@ export interface ISingleProductState {
   isLoading: boolean;
   isBackBtnPressed: boolean;
 }
+
+export const isSingleProduct = (
+  arg: ISingleProduct | { index: number; quantity: number }
+): arg is ISingleProduct => (arg as ISingleProduct).title !== undefined;

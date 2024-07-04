@@ -2659,34 +2659,7 @@
       "id": 3,
       "avatarUrl": "https://cdn.fifi.ru/person/240x253/anne-hathaway.jpg",
       "type": "customer",
-      "cart": [
-        {
-          "id": 3,
-          "title": "Bronzer fantastic 30",
-          "price": 22895,
-          "description": "Bronzer that gives your skin a sun-kissed glow.",
-          "quantity": 1,
-          "category": "cosmetics",
-          "images": [
-            "https://pcdn.goldapple.ru/p/p/69961300004/web/696d674d61696e8dc83b326d13b6ffullhd.jpg",
-            "https://pcdn.goldapple.ru/p/p/69961300004/web/696d67416464318dc83b326c5e91cfullhd.jpg",
-            "https://pcdn.goldapple.ru/p/p/69961300004/web/696d67416464328dc83b326e97d03fullhd.jpg"
-          ]
-        },
-        {
-          "id": 4,
-          "title": "Peace Lily jubilant iconic gorgeous 30",
-          "price": 21549,
-          "description": "Beautiful peace lily that blooms throughout the year.",
-          "quantity": 1,
-          "category": "houseplants",
-          "images": [
-            "https://artplants.ru/upload/resize_cache/iblock/39c/900_900_13ec13241385e77c69a7d33fc4b4311ea/39cbd6f359c631b6f0eb67436c397143.jpg",
-            "https://artplants.ru/upload/resize_cache/iblock/699/800_800_13ec13241385e77c69a7d33fc4b4311ea/6994b2ee5a2c89972e3c98bf47f1bf11.jpg",
-            "https://artplants.ru/upload/resize_cache/iblock/3ab/800_800_13ec13241385e77c69a7d33fc4b4311ea/3ab231d451f41cf43287262971b04526.jpg"
-          ]
-        }
-      ]
+      "cart": []
     }
   ]
 }

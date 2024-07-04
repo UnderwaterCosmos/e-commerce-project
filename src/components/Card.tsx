@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { CartBtn } from './CartBtn';
 import { ISingleProduct } from '../types/products';
 import { useAppDispatch } from '../redux/store';
-import { addProductToCart } from '../redux/slices/usersSlice';
+import { manageProductInCart } from '../redux/slices/usersSlice';
 
 const singleCard = cn('border-2', 'border-black', 'p-1.5');
 const image = cn('max-w-full', 'h-auto', 'object-cover');
@@ -35,7 +35,7 @@ export function Card({ product }: IProduct) {
         <p>{product.price}р</p>
         <CartBtn
           productId={product.id}
-          onClick={() => dispatch(addProductToCart(product))}
+          onClick={() => dispatch(manageProductInCart(product))}
         />
       </div>
     </li>

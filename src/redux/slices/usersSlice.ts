@@ -12,7 +12,7 @@ import {
   LoginBasis,
   // IFormBasis
 } from '../../types/forms';
-import { ISingleProduct } from '../../types/products';
+import { ISingleProduct, isSingleProduct } from '../../types/products';
 import { RootState } from '../store';
 import {
   LOGIN_INITIAL_USER_DATA,
@@ -55,7 +55,7 @@ export const logInUser = createAsyncThunk.withTypes<{
   }
 );
 
-export const addProductToCart = createAsyncThunk.withTypes<{
+export const manageProductInCart = createAsyncThunk.withTypes<{
   state: RootState;
   extra: {
     api: {
@@ -66,19 +66,46 @@ export const addProductToCart = createAsyncThunk.withTypes<{
     };
   };
 }>()(
-  'users/addProductToCart',
+  'users/manageProductInCart',
   async (
-    product: ISingleProduct,
+    productOrQuantity: ISingleProduct | { index: number; quantity: number },
     { getState, rejectWithValue, extra }
   ) => {
     try {
-      const actualUser = getState().usersData.fullUserInfo;
+      const actualUser = getState().usersData.fullUserInfo!;
+
+      if (isSingleProduct(productOrQuantity)) {
+        return extra.api.addToCart(actualUser?.id, {
+          cart: [...actualUser.cart, productOrQuantity],
+        });
+      }
+
+      if (productOrQuantity.quantity < 1) {
+        const modifiedCart = actualUser.cart.filter(
+          (_, index) => index !== productOrQuantity.index
+        );
+        return extra.api.addToCart(actualUser?.id, {
+          cart: modifiedCart,
+        });
+      }
+
+      const modifiedCart = actualUser.cart.map((cartItem, index) =>
+        index === productOrQuantity.index
+          ? { ...cartItem, quantity: productOrQuantity.quantity }
+          : cartItem
+      );
       return extra.api.addToCart(actualUser?.id, {
-        cart: [...(actualUser?.cart as ISingleProduct[]), product],
+        cart: modifiedCart,
       });
     } catch (error) {
       return rejectWithValue(error);
     }
+  },
+  {
+    condition: (productOrQuantity, { getState }) => {
+      const isLoading = getState().usersData.isLoading;
+      if (isLoading) return false;
+    },
   }
 );
 
@@ -112,14 +139,14 @@ const usersSlice = createSlice({
         token.setItem(Math.ceil(Math.random() * 100000000));
         state.fullUserInfo = action.payload;
       })
-      .addCase(addProductToCart.fulfilled, (state, action) => {
+      .addCase(manageProductInCart.fulfilled, (state, action) => {
         state.fullUserInfo = action.payload;
       })
       .addMatcher(
         isAnyOf(
           addNewUser.pending,
           logInUser.pending,
-          addProductToCart.pending
+          manageProductInCart.pending
         ),
         (state) => {
           state.isLoading = true;
@@ -129,8 +156,8 @@ const usersSlice = createSlice({
         isAnyOf(
           logInUser.rejected,
           logInUser.fulfilled,
-          addProductToCart.rejected,
-          addProductToCart.fulfilled,
+          manageProductInCart.rejected,
+          manageProductInCart.fulfilled,
           addNewUser.rejected,
           addNewUser.fulfilled
         ),
