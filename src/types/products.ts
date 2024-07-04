@@ -2,6 +2,7 @@ export interface ISingleProduct {
   id: number;
   title: string;
   price: number;
+  quantity: number;
   description: string;
   category: string;
   images: string[];

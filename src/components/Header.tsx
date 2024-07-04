@@ -50,13 +50,13 @@ export function Header() {
             <li>
               <FaRegSun size={20} />
             </li>
-            <Link to={'/cart'}>
-              <li>
-                <BsCart4 size={20} />
-              </li>
-            </Link>
             {fullUserInfo ? (
               <>
+                <Link to={'/cart'}>
+                  <li>
+                    <BsCart4 size={20} />
+                  </li>
+                </Link>
                 <Link to={'/user'}>
                   <li>
                     <img

@@ -7,7 +7,7 @@ import { SingleProduct } from './pages/SingleProduct';
 import { LoginForm } from './pages/LoginForm';
 import { RegistrationForm } from './pages/RegistrationForm';
 import { UserPage } from './pages/UserPage';
-import { Cart } from './components/Cart';
+import { Cart } from './pages/Cart';
 import { Footer } from './components/Footer';
 
 export const router = createBrowserRouter([
