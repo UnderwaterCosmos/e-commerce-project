@@ -2636,30 +2636,33 @@
   "users": [
     {
       "email": "bogdanivliev@mail.ru",
-      "password": "asdsa",
+      "password": "123123",
       "login": "UnderwaterCosmos",
-      "id": 1,
       "avatarUrl": "https://uznayvse.ru/person/winnie-harlow/Winnie_Harlow01.jpg",
       "type": "admin",
-      "cart": []
+      "cart": [],
+      "ordersHistory": {},
+      "id": 1
     },
     {
       "email": "rossia112@rambler.ru",
-      "password": "qwaaaaa",
+      "password": "asdsa",
       "login": "Mnu_lapkami",
-      "id": 2,
       "avatarUrl": "https://img0.liveinternet.ru/images/attach/b/3/30/172/30172285_ipvpp.jpg",
       "type": "customer",
-      "cart": []
+      "cart": [],
+      "ordersHistory": {},
+      "id": 2
     },
     {
       "email": "shamilkus1197@gmail.com",
-      "password": "123123",
+      "password": "qwaaaa",
       "login": "dsaasdsad",
-      "id": 3,
       "avatarUrl": "https://cdn.fifi.ru/person/240x253/anne-hathaway.jpg",
       "type": "customer",
-      "cart": []
+      "cart": [],
+      "ordersHistory": {},
+      "id": 3
     }
   ]
 }

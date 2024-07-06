@@ -7,11 +7,7 @@ import {
 import type { Router } from '@remix-run/router';
 
 import { IUser, IUserState } from '../../types/users';
-import {
-  RegistrationBasis,
-  LoginBasis,
-  // IFormBasis
-} from '../../types/forms';
+import { RegistrationBasis, LoginBasis } from '../../types/forms';
 import { ISingleProduct, isSingleProduct } from '../../types/products';
 import { RootState } from '../store';
 import {
@@ -47,7 +43,7 @@ export const logInUser = createAsyncThunk.withTypes<{
   async (config: LoginBasis, { rejectWithValue, extra }) => {
     try {
       const userObj = await extra.api.authorizeUser(config);
-      extra.router.navigate('/user');
+      extra.router.navigate('/user/info');
       return userObj;
     } catch (error) {
       return rejectWithValue(error);
@@ -59,7 +55,7 @@ export const manageProductInCart = createAsyncThunk.withTypes<{
   state: RootState;
   extra: {
     api: {
-      addToCart: (
+      manageProduct: (
         userId?: number,
         value?: { cart: ISingleProduct[] }
       ) => Promise<IUser>;
@@ -75,7 +71,7 @@ export const manageProductInCart = createAsyncThunk.withTypes<{
       const actualUser = getState().usersData.fullUserInfo!;
 
       if (isSingleProduct(productOrQuantity)) {
-        return extra.api.addToCart(actualUser?.id, {
+        return extra.api.manageProduct(actualUser.id, {
           cart: [...actualUser.cart, productOrQuantity],
         });
       }
@@ -84,7 +80,7 @@ export const manageProductInCart = createAsyncThunk.withTypes<{
         const modifiedCart = actualUser.cart.filter(
           (_, index) => index !== productOrQuantity.index
         );
-        return extra.api.addToCart(actualUser?.id, {
+        return extra.api.manageProduct(actualUser.id, {
           cart: modifiedCart,
         });
       }
@@ -94,7 +90,7 @@ export const manageProductInCart = createAsyncThunk.withTypes<{
           ? { ...cartItem, quantity: productOrQuantity.quantity }
           : cartItem
       );
-      return extra.api.addToCart(actualUser?.id, {
+      return extra.api.manageProduct(actualUser.id, {
         cart: modifiedCart,
       });
     } catch (error) {
@@ -120,9 +116,6 @@ const usersSlice = createSlice({
   name: '@users',
   initialState,
   reducers: {
-    // setFormBasis: (state, action: PayloadAction<IFormBasis>) => {
-    //   state[action.payload.key] = action.payload.value;
-    // },
     setRegistrationBasis: (state, action: PayloadAction<RegistrationBasis>) => {
       state.registrationBasis = action.payload;
     },
@@ -165,25 +158,9 @@ const usersSlice = createSlice({
           state.isLoading = false;
         }
       );
-    // .addMatcher(
-    //   (action) => action.type.endsWith('/pending'),
-    //   (state) => {
-    //     state.isLoading = true;
-    //   }
-    // )
-    // .addMatcher(
-    //   (action) => action.type.endsWith('/rejected'),
-    //   (state) => {
-    //     state.isLoading = false;
-    //   }
-    // );
   },
 });
 
-export const {
-  setRegistrationBasis,
-  setLoginBasis,
-  resetFullUserInfo,
-  // setFormBasis
-} = usersSlice.actions;
+export const { setRegistrationBasis, setLoginBasis, resetFullUserInfo } =
+  usersSlice.actions;
 export const usersReducer = usersSlice.reducer;

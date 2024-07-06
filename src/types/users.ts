@@ -9,6 +9,9 @@ export interface IUser {
   avatarUrl: string;
   type: string;
   cart: ISingleProduct[];
+  ordersHistory: {
+    [key: string]: ISingleProduct[];
+  };
 }
 
 export interface IUserState {

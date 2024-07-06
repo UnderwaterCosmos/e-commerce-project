@@ -17,11 +17,7 @@ import {
   useAppSelector,
   selectUsersData,
 } from '../redux/store';
-import {
-  addNewUser,
-  setRegistrationBasis,
-  // setFormBasis,
-} from '../redux/slices/usersSlice';
+import { addNewUser, setRegistrationBasis } from '../redux/slices/usersSlice';
 import { RegistrationFieldsNames } from '../types/forms';
 
 const regForm = cn(
@@ -45,7 +41,9 @@ export function RegistrationForm() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(registrationSchema) });
+  } = useForm({
+    resolver: yupResolver(registrationSchema),
+  });
 
   const fieldsHandler = (
     event:
@@ -59,35 +57,10 @@ export function RegistrationForm() {
   };
 
   const submitHandler = () => {
-    dispatch(addNewUser({ ...registrationBasis, cart: [] }));
+    dispatch(addNewUser({ ...registrationBasis, cart: [], ordersHistory: {} }));
     dispatch(setRegistrationBasis(REGISTRATION_INITIAL_USER_DATA));
     reset();
   };
-
-  // const fieldsHandler = (
-  //   event:
-  //     | React.ChangeEvent<HTMLInputElement>
-  //     | React.ChangeEvent<HTMLSelectElement>,
-  //   key: RegistrationFieldsNames
-  // ) => {
-  //   dispatch(
-  //     setFormBasis({
-  //       key: 'registrationBasis',
-  //       value: { ...registrationBasis, [key]: event.target.value },
-  //     })
-  //   );
-  // };
-
-  // const submitHandler = () => {
-  //   dispatch(addNewUser({ ...registrationBasis, cart: [] }));
-  //   dispatch(
-  //     setFormBasis({
-  //       key: '',
-  //       value: REGISTRATION_INITIAL_USER_DATA,
-  //     })
-  //   );
-  //   reset();
-  // };
 
   return (
     <main className="grow">
@@ -121,9 +94,9 @@ export function RegistrationForm() {
               <button className="bg-emerald-200 rounded-full mt-2">
                 ЗАРЕГИСТРИРОВАТЬСЯ
               </button>
-              {/* <button type="reset" className="bg-emerald-200 rounded-full mt-2">
+              <button type="reset" className="bg-emerald-200 rounded-full mt-2">
                 ОЧИСТИТЬ ФОРМУ
-              </button> */}
+              </button>
             </form>
             <p>
               Если Вы уже зарегистрированы -{' '}

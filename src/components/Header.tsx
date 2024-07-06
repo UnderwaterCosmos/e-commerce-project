@@ -57,7 +57,7 @@ export function Header() {
                     <BsCart4 size={20} />
                   </li>
                 </Link>
-                <Link to={'/user'}>
+                <Link to={'/user/info'}>
                   <li>
                     <img
                       src={fullUserInfo?.avatarUrl}

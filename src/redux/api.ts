@@ -42,7 +42,7 @@ export const authorizeUser = async (config: LoginBasis) => {
   return data;
 };
 
-export const addToCart = async (
+export const manageProduct = async (
   userId?: number,
   value?: { cart: ISingleProduct[] }
 ) => {

@@ -15,7 +15,7 @@ export function UserInfo() {
   const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
 
   return (
-    <section className={allInfo}>
+    <main className={allInfo}>
       <dl className="text-left">
         <dt className="inline">Почта: </dt>
         <dd className="inline">{fullUserInfo?.email}</dd>
@@ -34,6 +34,6 @@ export function UserInfo() {
           alt={`${fullUserInfo?.login}'s portrait`}
         />
       </div>
-    </section>
+    </main>
   );
 }

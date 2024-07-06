@@ -1,16 +1,11 @@
 import { IUser } from './users';
 
-// export interface IFormBasis {
-//   key: string;
-//   value: RegistrationBasis | LoginBasis;
-// }
-
 // REGISTRATION
 export type RegistrationFieldsNames = Exclude<keyof IUser, 'cart' | 'id'>;
-export type RegistrationBasis = Omit<IUser, 'cart' | 'id'>;
+export type RegistrationBasis = Omit<IUser, 'cart' | 'id' | 'ordersHistory'>;
 export interface IRegistrationInputField {
   id: number;
-  name: Exclude<RegistrationFieldsNames, 'type'>;
+  name: Exclude<RegistrationFieldsNames, 'type' | 'ordersHistory'>;
   placeholder: string;
   label: 'Почта:' | 'Пароль:' | 'Логин:' | 'Аватар:';
   type: string;
@@ -19,7 +14,7 @@ export interface IRegistrationInputField {
 // LOGIN
 export type LoginFieldsNames = Exclude<
   keyof IUser,
-  'cart' | 'id' | 'email' | 'avatarUrl' | 'type'
+  'cart' | 'id' | 'email' | 'avatarUrl' | 'type' | 'ordersHistory'
 >;
 export type LoginBasis = Pick<IUser, 'password' | 'login'>;
 export interface ILoginInputField {

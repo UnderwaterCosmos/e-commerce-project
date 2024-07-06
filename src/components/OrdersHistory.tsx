@@ -16,7 +16,7 @@ export function OrdersHistory() {
   const today = new Date();
 
   return (
-    <section>
+    <main>
       <ul className="text-left">
         <li className={order}>
           <VscTriangleRight />
@@ -43,6 +43,6 @@ export function OrdersHistory() {
           {today.toString()}
         </li>
       </ul>
-    </section>
+    </main>
   );
 }

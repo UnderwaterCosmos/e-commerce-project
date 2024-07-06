@@ -8,6 +8,8 @@ import { LoginForm } from './pages/LoginForm';
 import { RegistrationForm } from './pages/RegistrationForm';
 import { UserPage } from './pages/UserPage';
 import { Cart } from './pages/Cart';
+import { UserInfo } from './components/UserInfo';
+import { OrdersHistory } from './components/OrdersHistory';
 import { Footer } from './components/Footer';
 
 export const router = createBrowserRouter([
@@ -26,31 +28,46 @@ export const router = createBrowserRouter([
         loader: () => redirect('/main'),
       },
       {
-        path: '/main',
+        path: 'main',
         element: <Main />,
       },
       {
-        path: '/products',
+        path: 'products',
         element: <Products />,
       },
       {
-        path: '/products/:id',
+        path: 'products/:id',
         element: <SingleProduct />,
       },
       {
-        path: '/registration',
+        path: 'registration',
         element: <RegistrationForm />,
       },
       {
-        path: '/login',
+        path: 'login',
         element: <LoginForm />,
       },
       {
-        path: '/user',
-        element: <UserPage />,
+        path: 'user',
+        element: (
+          <div className="grow text-center">
+            <UserPage />
+            <Outlet />
+          </div>
+        ),
+        children: [
+          {
+            path: 'info',
+            element: <UserInfo />,
+          },
+          {
+            path: 'history',
+            element: <OrdersHistory />,
+          },
+        ],
       },
       {
-        path: '/cart',
+        path: 'cart',
         element: <Cart />,
       },
     ],
