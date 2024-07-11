@@ -44,6 +44,11 @@ export function Header() {
               <Link to={'/products'}>
                 <li>Товары</li>
               </Link>
+              {fullUserInfo?.type === 'admin' && (
+                <Link to={'/admin'}>
+                  <li>Администрирование</li>
+                </Link>
+              )}
             </ul>
           </nav>
           <ul className={controls}>

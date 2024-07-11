@@ -56,10 +56,18 @@ export function RegistrationForm() {
     );
   };
 
-  const submitHandler = () => {
-    dispatch(addNewUser({ ...registrationBasis, cart: [], ordersHistory: {} }));
+  const clearFieldsHandler = () => {
     dispatch(setRegistrationBasis(REGISTRATION_INITIAL_USER_DATA));
     reset();
+  };
+
+  const enterKeyHandler = (event: React.KeyboardEvent<HTMLFormElement>) => {
+    if (event.key === 'Enter') event.preventDefault();
+  };
+
+  const submitHandler = () => {
+    dispatch(addNewUser({ ...registrationBasis, cart: [], ordersHistory: {} }));
+    clearFieldsHandler();
   };
 
   return (
@@ -70,7 +78,11 @@ export function RegistrationForm() {
         ) : (
           <div className="text-center">
             <h1 className="mb-3">РЕГИСТРАЦИЯ</h1>
-            <form className={regForm} onSubmit={handleSubmit(submitHandler)}>
+            <form
+              className={regForm}
+              onSubmit={handleSubmit(submitHandler)}
+              onKeyDown={enterKeyHandler}
+            >
               {REGISTRATION_INPUT_FIELDS.map((fieldObj) => (
                 <FormInputField
                   state={registrationBasis}
@@ -94,7 +106,11 @@ export function RegistrationForm() {
               <button className="bg-emerald-200 rounded-full mt-2">
                 ЗАРЕГИСТРИРОВАТЬСЯ
               </button>
-              <button type="reset" className="bg-emerald-200 rounded-full mt-2">
+              <button
+                type="button"
+                className="bg-emerald-200 rounded-full mt-2"
+                onClick={clearFieldsHandler}
+              >
                 ОЧИСТИТЬ ФОРМУ
               </button>
             </form>

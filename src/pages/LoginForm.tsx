@@ -50,6 +50,10 @@ export function LoginForm() {
     dispatch(setLoginBasis({ ...loginBasis, [key]: event.target.value }));
   };
 
+  const enterKeyHandler = (event: React.KeyboardEvent<HTMLFormElement>) => {
+    if (event.key === 'Enter') event.preventDefault();
+  };
+
   const submitHandler = () => {
     dispatch(logInUser(loginBasis));
     dispatch(setLoginBasis(LOGIN_INITIAL_USER_DATA));
@@ -64,7 +68,11 @@ export function LoginForm() {
         ) : (
           <div className="text-center">
             <h1 className="mb-3">ВXОД</h1>
-            <form className={loginForm} onSubmit={handleSubmit(submitHandler)}>
+            <form
+              className={loginForm}
+              onSubmit={handleSubmit(submitHandler)}
+              onKeyDown={enterKeyHandler}
+            >
               {LOGIN_INPUT_FIELDS.map((fieldObj) => {
                 const passwordInputType = isPasswordVisible
                   ? 'text'

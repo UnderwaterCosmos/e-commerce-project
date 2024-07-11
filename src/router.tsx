@@ -1,4 +1,9 @@
-import { createBrowserRouter, Outlet, redirect } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  Outlet,
+  redirect,
+  Navigate,
+} from 'react-router-dom';
 
 import { Header } from './components/Header';
 import { Main } from './pages/Main';
@@ -6,10 +11,13 @@ import { Products } from './pages/Products';
 import { SingleProduct } from './pages/SingleProduct';
 import { LoginForm } from './pages/LoginForm';
 import { RegistrationForm } from './pages/RegistrationForm';
-import { UserPage } from './pages/UserPage';
-import { Cart } from './pages/Cart';
+import { User } from './pages/User';
 import { UserInfo } from './components/UserInfo';
 import { OrdersHistory } from './components/OrdersHistory';
+import { Admin } from './pages/Admin';
+import { AdminNewProduct } from './components/AdminNewProduct';
+import { AdminNewCategory } from './components/AdminNewCategory';
+import { Cart } from './pages/Cart';
 import { Footer } from './components/Footer';
 
 export const router = createBrowserRouter([
@@ -40,6 +48,29 @@ export const router = createBrowserRouter([
         element: <SingleProduct />,
       },
       {
+        path: 'admin',
+        element: (
+          <div className="grow text-center">
+            <Admin />
+            <Outlet />
+          </div>
+        ),
+        children: [
+          {
+            index: true,
+            element: <Navigate to="addProduct" />,
+          },
+          {
+            path: 'addProduct',
+            element: <AdminNewProduct />,
+          },
+          {
+            path: 'addCategory',
+            element: <AdminNewCategory />,
+          },
+        ],
+      },
+      {
         path: 'registration',
         element: <RegistrationForm />,
       },
@@ -51,7 +82,7 @@ export const router = createBrowserRouter([
         path: 'user',
         element: (
           <div className="grow text-center">
-            <UserPage />
+            <User />
             <Outlet />
           </div>
         ),
