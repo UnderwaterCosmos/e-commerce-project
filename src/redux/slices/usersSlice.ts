@@ -8,7 +8,11 @@ import type { Router } from '@remix-run/router';
 
 import { IUser, IUserState } from '../../types/users';
 import { RegistrationBasis, LoginBasis } from '../../types/forms';
-import { ISingleProduct, isSingleProduct } from '../../types/products';
+import {
+  ISingleProduct,
+  isSingleProduct,
+  isSingleProductArray,
+} from '../../types/products';
 import { RootState } from '../store';
 import {
   LOGIN_INITIAL_USER_DATA,
@@ -35,8 +39,8 @@ export const addNewUser = createAsyncThunk.withTypes<{
 
 export const logInUser = createAsyncThunk.withTypes<{
   extra: {
-    api: { authorizeUser: (config: LoginBasis) => Promise<IUser> };
     router: Router;
+    api: { authorizeUser: (config: LoginBasis) => Promise<IUser> };
   };
 }>()(
   'users/logInUser',
@@ -54,21 +58,43 @@ export const logInUser = createAsyncThunk.withTypes<{
 export const manageProductInCart = createAsyncThunk.withTypes<{
   state: RootState;
   extra: {
+    router: Router;
     api: {
       manageProduct: (
         userId?: number,
-        value?: { cart: ISingleProduct[] }
+        value?:
+          | { cart: ISingleProduct[] }
+          | { ordersHistory: { [key: string]: ISingleProduct[] }; cart: [] }
       ) => Promise<IUser>;
     };
   };
 }>()(
   'users/manageProductInCart',
   async (
-    productOrQuantity: ISingleProduct | { index: number; quantity: number },
+    productOrQuantity:
+      | ISingleProduct
+      | { index: number; quantity: number }
+      | ISingleProduct[],
     { getState, rejectWithValue, extra }
   ) => {
     try {
       const actualUser = getState().usersData.fullUserInfo!;
+
+      if (isSingleProductArray(productOrQuantity)) {
+        const orderDate = String(new Date());
+        const modifiedOrdersHistory = await extra.api.manageProduct(
+          actualUser.id,
+          {
+            ordersHistory: {
+              ...actualUser.ordersHistory,
+              [orderDate]: productOrQuantity,
+            },
+            cart: [],
+          }
+        );
+        await extra.router.navigate('/products');
+        return modifiedOrdersHistory;
+      }
 
       if (isSingleProduct(productOrQuantity)) {
         return extra.api.manageProduct(actualUser.id, {

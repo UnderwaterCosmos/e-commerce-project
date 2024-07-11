@@ -5,6 +5,7 @@ import cn from 'classnames';
 import { Container } from './Container';
 import { Card } from './Card';
 import { Loader } from './Loader';
+import { UpBtn } from './UpBtn';
 import {
   useAppDispatch,
   useAppSelector,
@@ -89,6 +90,7 @@ export function CardList() {
             <Card product={product} key={product.id} />
           ))}
         </ul>
+        <UpBtn />
         <div className="h-3" ref={triggerRef} />
       </Container>
     </section>

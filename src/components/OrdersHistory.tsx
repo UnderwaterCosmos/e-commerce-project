@@ -1,48 +1,25 @@
-import React from 'react';
-import cn from 'classnames';
-import { VscTriangleRight } from 'react-icons/vsc';
-
-const order = cn(
-  'bg-slate-300',
-  'border-[1px]',
-  'mb-2',
-  'px-2',
-  'flex',
-  'items-center',
-  'gap-x-1.5'
-);
+import { Container } from './Container';
+import { OrdersHistoryInnerItem } from './OrdersHistoryInnerItem';
+import { selectUsersData, useAppSelector } from '../redux/store';
 
 export function OrdersHistory() {
-  const today = new Date();
+  const ordersHistory =
+    useAppSelector(selectUsersData).fullUserInfo!.ordersHistory;
+  const ordersHistoryKeys = Object.keys(ordersHistory);
 
   return (
     <main>
-      <ul className="text-left">
-        <li className={order}>
-          <VscTriangleRight />
-          {today.toString()}
-        </li>
-        <li className={order}>
-          <VscTriangleRight />
-          {today.toString()}
-        </li>
-        <li className={order}>
-          <VscTriangleRight />
-          {today.toString()}
-        </li>
-        <li className={order}>
-          <VscTriangleRight />
-          {today.toString()}
-        </li>
-        <li className={order}>
-          <VscTriangleRight />
-          {today.toString()}
-        </li>
-        <li className={order}>
-          <VscTriangleRight />
-          {today.toString()}
-        </li>
-      </ul>
+      <Container>
+        {ordersHistoryKeys.length === 0 ? (
+          <h1>У Вас еще нет ни одного заказа!</h1>
+        ) : (
+          <ul className="text-left">
+            {ordersHistoryKeys.map((orderName) => (
+              <OrdersHistoryInnerItem orderName={orderName} key={orderName} />
+            ))}
+          </ul>
+        )}
+      </Container>
     </main>
   );
 }

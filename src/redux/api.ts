@@ -44,7 +44,9 @@ export const authorizeUser = async (config: LoginBasis) => {
 
 export const manageProduct = async (
   userId?: number,
-  value?: { cart: ISingleProduct[] }
+  value?:
+    | { cart: ISingleProduct[] }
+    | { ordersHistory: { [key: string]: ISingleProduct[] }; cart: [] }
 ) => {
   const { data } = await authRequest.patch(`/users/${userId}`, value);
   return data;

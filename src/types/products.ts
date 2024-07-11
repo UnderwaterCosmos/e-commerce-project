@@ -26,5 +26,9 @@ export interface ISingleProductState {
 }
 
 export const isSingleProduct = (
-  arg: ISingleProduct | { index: number; quantity: number }
+  arg: ISingleProduct | { index: number; quantity: number } | ISingleProduct[]
 ): arg is ISingleProduct => (arg as ISingleProduct).title !== undefined;
+
+export const isSingleProductArray = (
+  arg: ISingleProduct | { index: number; quantity: number } | ISingleProduct[]
+): arg is ISingleProduct[] => (arg as ISingleProduct[]).length !== undefined;
