@@ -24,13 +24,16 @@ const token = useLocalStorage('token');
 
 export const addNewUser = createAsyncThunk.withTypes<{
   extra: {
+    router: Router;
     api: { createUser: (registrationData: IUser) => Promise<IUser> };
   };
 }>()(
   'users/addNewUser',
   async (registrationData: IUser, { rejectWithValue, extra }) => {
     try {
-      return extra.api.createUser(registrationData);
+      const newUserObj = await extra.api.createUser(registrationData);
+      extra.router.navigate('/login');
+      return newUserObj;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -61,10 +64,10 @@ export const manageProductInCart = createAsyncThunk.withTypes<{
     router: Router;
     api: {
       manageProduct: (
-        userId?: number,
-        value?:
+        value:
           | { cart: ISingleProduct[] }
-          | { ordersHistory: { [key: string]: ISingleProduct[] }; cart: [] }
+          | { ordersHistory: { [key: string]: ISingleProduct[] }; cart: [] },
+        userId?: number
       ) => Promise<IUser>;
     };
   };
@@ -83,32 +86,31 @@ export const manageProductInCart = createAsyncThunk.withTypes<{
       if (isSingleProductArray(productOrQuantity)) {
         const orderDate = String(new Date());
         const modifiedOrdersHistory = await extra.api.manageProduct(
-          actualUser.id,
           {
             ordersHistory: {
               ...actualUser.ordersHistory,
               [orderDate]: productOrQuantity,
             },
             cart: [],
-          }
+          },
+          actualUser.id
         );
         await extra.router.navigate('/products');
         return modifiedOrdersHistory;
       }
 
       if (isSingleProduct(productOrQuantity)) {
-        return extra.api.manageProduct(actualUser.id, {
-          cart: [...actualUser.cart, productOrQuantity],
-        });
+        return extra.api.manageProduct(
+          { cart: [...actualUser.cart, productOrQuantity] },
+          actualUser.id
+        );
       }
 
       if (productOrQuantity.quantity < 1) {
         const modifiedCart = actualUser.cart.filter(
           (_, index) => index !== productOrQuantity.index
         );
-        return extra.api.manageProduct(actualUser.id, {
-          cart: modifiedCart,
-        });
+        return extra.api.manageProduct({ cart: modifiedCart }, actualUser.id);
       }
 
       const modifiedCart = actualUser.cart.map((cartItem, index) =>
@@ -116,9 +118,7 @@ export const manageProductInCart = createAsyncThunk.withTypes<{
           ? { ...cartItem, quantity: productOrQuantity.quantity }
           : cartItem
       );
-      return extra.api.manageProduct(actualUser.id, {
-        cart: modifiedCart,
-      });
+      return extra.api.manageProduct({ cart: modifiedCart }, actualUser.id);
     } catch (error) {
       return rejectWithValue(error);
     }

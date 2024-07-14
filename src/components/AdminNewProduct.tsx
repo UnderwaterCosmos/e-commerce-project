@@ -14,11 +14,15 @@ import {
   useAppSelector,
 } from '../redux/store';
 import { setProductsBasis, addNewProduct } from '../redux/slices/productsSlice';
-import { fetchCategories } from '../redux/slices/filtersSlice';
+import {
+  fetchCategories,
+  setNewImagesBasis,
+} from '../redux/slices/filtersSlice';
 import {
   ADD_PRODUCT_INITIAL_DATA,
   ADD_PRODUCT_INPUT_FIELDS,
   ADD_PRODUCT_IMAGES_FIELDS,
+  ADD_PRODUCT_IMAGES_OBJ,
 } from '../formsSettings/formsData';
 import { NewProductFieldsNames } from '../types/forms';
 import { newProductSchema } from '../formsSettings/validation/newProductSchema';
@@ -33,20 +37,12 @@ const newProductForm = cn(
   'border-2'
 );
 
-const initialImagesObj = {
-  image1: '',
-  image2: '',
-  image3: '',
-};
-
 export function AdminNewProduct() {
   const isLoading = useAppSelector(selectProductsData).isLoading;
   const newProductBasis = useAppSelector(selectProductsData).newProductBasis;
   const categoriesList = useAppSelector(selectFiltersData).categoriesList;
+  const newImagesObj = useAppSelector(selectFiltersData).newImagesObj;
   const dispatch = useAppDispatch();
-  const [newImages, setNewImages] = React.useState<{ [key: string]: string }>(
-    initialImagesObj
-  );
 
   React.useEffect(() => {
     if (categoriesList.length === 0) {
@@ -78,19 +74,19 @@ export function AdminNewProduct() {
     event: React.ChangeEvent<HTMLInputElement>,
     key: string
   ) => {
-    setNewImages((prev) => ({ ...prev, [key]: event.target.value }));
+    dispatch(setNewImagesBasis({ ...newImagesObj, [key]: event.target.value }));
   };
 
   const submitHandler = () => {
     dispatch(
       addNewProduct({
         ...newProductBasis,
-        images: Object.values(newImages),
+        images: Object.values(newImagesObj),
         // price: Number(newProductBasis['price']),
       })
     );
     dispatch(setProductsBasis(ADD_PRODUCT_INITIAL_DATA));
-    setNewImages(initialImagesObj);
+    dispatch(setNewImagesBasis(ADD_PRODUCT_IMAGES_OBJ));
     reset();
   };
 
@@ -129,7 +125,7 @@ export function AdminNewProduct() {
             </select>
             {ADD_PRODUCT_IMAGES_FIELDS.map((imageObj) => (
               <FormInputField
-                state={newImages}
+                state={newImagesObj}
                 register={register}
                 errors={errors}
                 fieldObj={imageObj}

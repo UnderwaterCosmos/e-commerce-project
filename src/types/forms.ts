@@ -54,3 +54,21 @@ export type IAddNewProductsImageInputField = Omit<
   label?: string;
   name: string;
 };
+export interface IAddNewProductImagesBasis {
+  [key: string]: string;
+}
+
+// EDIT PRODUCT
+export interface IProductEditedValueBasis {
+  title?: string;
+  price?: string;
+  description?: string;
+}
+export type EditProductFieldsNames = Exclude<NewProductFieldsNames, 'category'>;
+export interface IEditProductInputField {
+  id: number;
+  name: EditProductFieldsNames;
+  placeholder?: string;
+  label: string;
+  type: string;
+}

@@ -11,6 +11,9 @@ import {
   IAddNewCategoryInputField,
   IAddNewProductInputField,
   IAddNewProductsImageInputField,
+  IAddNewProductImagesBasis,
+  IProductEditedValueBasis,
+  IEditProductInputField,
 } from '../types/forms';
 import { ICategoriesElem } from '../types/filters';
 import { ISingleProduct } from '../types/products';
@@ -24,7 +27,8 @@ interface IProps {
     | LoginBasis
     | ICategoriesElem
     | ISingleProduct
-    | { [key: string]: string };
+    | IAddNewProductImagesBasis
+    | IProductEditedValueBasis;
   register: UseFormRegister<any>;
   // register:
   // | UseFormRegister<Omit<RegistrationBasis, 'type'>>
@@ -34,13 +38,15 @@ interface IProps {
     | FieldErrors<LoginBasis>
     | FieldErrors<ICategoriesElem>
     | FieldErrors<ISingleProduct>
-    | FieldErrors<{ [key: string]: string }>;
+    | FieldErrors<IAddNewProductImagesBasis>
+		| FieldErrors<IProductEditedValueBasis>;
   fieldObj:
     | IRegistrationInputField
     | ILoginInputField
     | IAddNewCategoryInputField
     | IAddNewProductInputField
-    | IAddNewProductsImageInputField;
+    | IAddNewProductsImageInputField
+    | IEditProductInputField;
   fieldsHandler: (
     event: React.ChangeEvent<HTMLInputElement>,
     key: any

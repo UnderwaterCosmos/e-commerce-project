@@ -20,8 +20,9 @@ import { useInfiniteScroll } from '../hooks/useInfiniteScroll';
 const list = cn('grid', 'gap-4', 'grid-cols-4', 'mb-4');
 
 export function CardList() {
-  const { productsList, isLoading, totalPages } =
-    useAppSelector(selectProductsData);
+  const isLoading = useAppSelector(selectProductsData).isLoading;
+  const productsList = useAppSelector(selectProductsData).productsList;
+  const totalPages = useAppSelector(selectProductsData).totalPages;
   const isBackBtnPressed = useAppSelector(
     selectSingleProductsData
   ).isBackBtnPressed;

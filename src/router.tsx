@@ -17,6 +17,7 @@ import { OrdersHistory } from './components/OrdersHistory';
 import { Admin } from './pages/Admin';
 import { AdminNewProduct } from './components/AdminNewProduct';
 import { AdminNewCategory } from './components/AdminNewCategory';
+import { AdminEditProduct } from './components/AdminEditProduct';
 import { Cart } from './pages/Cart';
 import { Footer } from './components/Footer';
 
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
       {
         path: 'products/:id',
         element: <SingleProduct />,
+      },
+      {
+        path: 'products/:id/edit',
+        element: <AdminEditProduct />,
       },
       {
         path: 'admin',

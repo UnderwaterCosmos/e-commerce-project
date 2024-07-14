@@ -1,3 +1,5 @@
+import { IProductEditedValueBasis } from './forms';
+
 export interface ISingleProduct {
   id?: number;
   title: string;
@@ -24,6 +26,7 @@ export interface ISingleProductState {
   singleProduct: ISingleProduct | null;
   isLoading: boolean;
   isBackBtnPressed: boolean;
+  editProductBasis: IProductEditedValueBasis;
 }
 
 export const isSingleProduct = (

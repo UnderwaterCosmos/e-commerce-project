@@ -6,10 +6,14 @@ import {
   IAddNewCategoryInputField,
   IAddNewProductInputField,
   IAddNewProductsImageInputField,
+  IAddNewProductImagesBasis,
+  IProductEditedValueBasis,
+  IEditProductInputField,
 } from '../types/forms';
 import { ICategoriesElem } from '../types/filters';
 import { ISingleProduct } from '../types/products';
 
+// REGISTRATION
 export const REGISTRATION_INITIAL_USER_DATA: RegistrationBasis = {
   email: '',
   password: '',
@@ -18,7 +22,6 @@ export const REGISTRATION_INITIAL_USER_DATA: RegistrationBasis = {
   avatarUrl: '',
   type: 'customer',
 };
-
 export const REGISTRATION_INPUT_FIELDS: IRegistrationInputField[] = [
   {
     id: 1,
@@ -57,11 +60,11 @@ export const REGISTRATION_INPUT_FIELDS: IRegistrationInputField[] = [
   },
 ];
 
+// LOGIN
 export const LOGIN_INITIAL_USER_DATA: LoginBasis = {
   login: '',
   password: '',
 };
-
 export const LOGIN_INPUT_FIELDS: ILoginInputField[] = [
   {
     id: 1,
@@ -79,11 +82,11 @@ export const LOGIN_INPUT_FIELDS: ILoginInputField[] = [
   },
 ];
 
+// ADD CATEGORY
 export const ADD_CATEGORY_INITIAL_DATA: ICategoriesElem = {
   name: '',
   displayName: '',
 };
-
 export const ADD_CATEGORY_INPUT_FIELDS: IAddNewCategoryInputField[] = [
   {
     id: 1,
@@ -101,6 +104,7 @@ export const ADD_CATEGORY_INPUT_FIELDS: IAddNewCategoryInputField[] = [
   },
 ];
 
+//ADD PRODUCT
 export const ADD_PRODUCT_INITIAL_DATA: ISingleProduct = {
   title: '',
   price: -Infinity,
@@ -109,7 +113,6 @@ export const ADD_PRODUCT_INITIAL_DATA: ISingleProduct = {
   category: 'houseplants',
   images: [],
 };
-
 export const ADD_PRODUCT_INPUT_FIELDS: IAddNewProductInputField[] = [
   {
     id: 1,
@@ -133,7 +136,11 @@ export const ADD_PRODUCT_INPUT_FIELDS: IAddNewProductInputField[] = [
     type: 'text',
   },
 ];
-
+export const ADD_PRODUCT_IMAGES_OBJ: IAddNewProductImagesBasis = {
+  image1: '',
+  image2: '',
+  image3: '',
+};
 export const ADD_PRODUCT_IMAGES_FIELDS: IAddNewProductsImageInputField[] = [
   {
     id: 1,
@@ -152,6 +159,33 @@ export const ADD_PRODUCT_IMAGES_FIELDS: IAddNewProductsImageInputField[] = [
     id: 3,
     name: 'image3',
     placeholder: 'URL изображения',
+    type: 'text',
+  },
+];
+
+// EDIT PRODUCT
+export const EDIT_PRODUCT_INITIAL_DATA: IProductEditedValueBasis = {
+  title: '',
+  price: '',
+  description: '',
+};
+export const EDIT_PRODUCT_INPUT_FIELDS: IEditProductInputField[] = [
+  {
+    id: 1,
+    name: 'title',
+    label: 'TITLE',
+    type: 'text',
+  },
+  {
+    id: 2,
+    name: 'price',
+    label: 'PRICE',
+    type: 'text',
+  },
+  {
+    id: 3,
+    name: 'description',
+    label: 'DESCRIPTION',
     type: 'text',
   },
 ];

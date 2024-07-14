@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import cn from 'classnames';
 
 import { Container } from '../components/Container';
@@ -10,6 +10,7 @@ import {
   useAppDispatch,
   useAppSelector,
   selectSingleProductsData,
+  selectUsersData,
 } from '../redux/store';
 import {
   fetchSingleProduct,
@@ -23,6 +24,7 @@ const description = cn('flex', 'flex-col', 'justify-center');
 export function SingleProduct() {
   const isLoading = useAppSelector(selectSingleProductsData).isLoading;
   const singleProduct = useAppSelector(selectSingleProductsData).singleProduct;
+  const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -81,6 +83,9 @@ export function SingleProduct() {
                   dispatch(manageProductInCart(singleProduct as ISingleProduct))
                 }
               />
+              {fullUserInfo?.type === 'admin' && (
+                <Link to={`/products/${id}/edit`}>РЕДАКТИРОВАТЬ ТОВАР</Link>
+              )}
             </article>
           </div>
         )}

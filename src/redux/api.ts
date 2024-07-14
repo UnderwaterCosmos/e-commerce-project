@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { IGetProductsConfig, ISingleProduct } from '../types/products';
 import { IUser } from '../types/users';
-import { LoginBasis } from '../types/forms';
+import { LoginBasis, IProductEditedValueBasis } from '../types/forms';
 import { ICategoriesElem } from '../types/filters';
 
 const BASE_URL = 'http://localhost:3000';
@@ -44,10 +44,10 @@ export const authorizeUser = async (loginData: LoginBasis) => {
 };
 
 export const manageProduct = async (
-  userId?: number,
-  value?:
+  value:
     | { cart: ISingleProduct[] }
-    | { ordersHistory: { [key: string]: ISingleProduct[] }; cart: [] }
+    | { ordersHistory: { [key: string]: ISingleProduct[] }; cart: [] },
+  userId?: number
 ) => {
   const { data } = await authRequest.patch(`/users/${userId}`, value);
   return data;
@@ -60,5 +60,13 @@ export const createCategory = async (categoryData: ICategoriesElem) => {
 
 export const createProduct = async (productData: ISingleProduct) => {
   const { data } = await authRequest.post('/products', productData);
+  return data;
+};
+
+export const editProduct = async (
+  value: IProductEditedValueBasis,
+  productId?: number
+) => {
+  const { data } = await authRequest.patch(`/products/${productId}`, value);
   return data;
 };

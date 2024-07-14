@@ -5,7 +5,11 @@ import {
   IFiltersData,
   ICategoriesElem,
 } from '../../types/filters';
-import { ADD_CATEGORY_INITIAL_DATA } from '../../formsSettings/formsData';
+import {
+  ADD_CATEGORY_INITIAL_DATA,
+  ADD_PRODUCT_IMAGES_OBJ,
+} from '../../formsSettings/formsData';
+import { IAddNewProductImagesBasis } from '../../types/forms';
 
 export const fetchCategories = createAsyncThunk.withTypes<{
   extra: {
@@ -49,6 +53,7 @@ export const addNewCategory = createAsyncThunk.withTypes<{
 const initialState: IFiltersState = {
   isLoading: false,
   newCategoryBasis: ADD_CATEGORY_INITIAL_DATA,
+  newImagesObj: ADD_PRODUCT_IMAGES_OBJ,
   categoriesList: [],
   select: '',
   search: '',
@@ -63,6 +68,12 @@ const filtersSlice = createSlice({
     },
     setCategoryBasis: (state, action: PayloadAction<ICategoriesElem>) => {
       state.newCategoryBasis = action.payload;
+    },
+    setNewImagesBasis: (
+      state,
+      action: PayloadAction<IAddNewProductImagesBasis>
+    ) => {
+      state.newImagesObj = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -83,5 +94,6 @@ const filtersSlice = createSlice({
   },
 });
 
-export const { setFiltersValue, setCategoryBasis } = filtersSlice.actions;
+export const { setFiltersValue, setCategoryBasis, setNewImagesBasis } =
+  filtersSlice.actions;
 export const filtersReducer = filtersSlice.reducer;
