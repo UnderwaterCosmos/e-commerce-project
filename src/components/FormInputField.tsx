@@ -9,14 +9,22 @@ import {
   LoginFieldsNames,
   ILoginInputField,
   IAddNewCategoryInputField,
+  IAddNewProductInputField,
+  IAddNewProductsImageInputField,
 } from '../types/forms';
 import { ICategoriesElem } from '../types/filters';
+import { ISingleProduct } from '../types/products';
 
 const inputField = cn('bg-slate-200', 'rounded-full', 'mb-2', 'p-1.5');
 const errMessage = cn('mb-0.5', 'text-red-600', 'font-semibold');
 
 interface IProps {
-  state: RegistrationBasis | LoginBasis | ICategoriesElem;
+  state:
+    | RegistrationBasis
+    | LoginBasis
+    | ICategoriesElem
+    | ISingleProduct
+    | { [key: string]: string };
   register: UseFormRegister<any>;
   // register:
   // | UseFormRegister<Omit<RegistrationBasis, 'type'>>
@@ -24,11 +32,15 @@ interface IProps {
   errors:
     | FieldErrors<Omit<RegistrationBasis, 'type'>>
     | FieldErrors<LoginBasis>
-    | FieldErrors<ICategoriesElem>;
+    | FieldErrors<ICategoriesElem>
+    | FieldErrors<ISingleProduct>
+    | FieldErrors<{ [key: string]: string }>;
   fieldObj:
     | IRegistrationInputField
     | ILoginInputField
-    | IAddNewCategoryInputField;
+    | IAddNewCategoryInputField
+    | IAddNewProductInputField
+    | IAddNewProductsImageInputField;
   fieldsHandler: (
     event: React.ChangeEvent<HTMLInputElement>,
     key: any

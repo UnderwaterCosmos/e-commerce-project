@@ -1,5 +1,5 @@
 export interface ISingleProduct {
-  id: number;
+  id?: number;
   title: string;
   price: number;
   quantity: number;
@@ -17,6 +17,7 @@ export interface IGetProductsConfig {
 export interface IProductsState {
   isLoading: boolean;
   productsList: ISingleProduct[];
+  newProductBasis: ISingleProduct;
   totalPages: number;
 }
 export interface ISingleProductState {

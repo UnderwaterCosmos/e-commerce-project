@@ -1,6 +1,17 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  createAsyncThunk,
+  PayloadAction,
+  isAnyOf,
+} from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
-import { IGetProductsConfig, IProductsState } from '../../types/products';
+
+import {
+  IGetProductsConfig,
+  IProductsState,
+  ISingleProduct,
+} from '../../types/products';
+import { ADD_PRODUCT_INITIAL_DATA } from '../../formsSettings/formsData';
 
 export const fetchProducts = createAsyncThunk.withTypes<{
   extra: {
@@ -28,8 +39,26 @@ export const fetchProducts = createAsyncThunk.withTypes<{
   }
 );
 
+export const addNewProduct = createAsyncThunk.withTypes<{
+  extra: {
+    api: {
+      createProduct: (productData: ISingleProduct) => Promise<ISingleProduct>;
+    };
+  };
+}>()(
+  'products/addNewProduct',
+  async (productData: ISingleProduct, { rejectWithValue, extra }) => {
+    try {
+      return extra.api.createProduct(productData);
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const initialState: IProductsState = {
   isLoading: false,
+  newProductBasis: ADD_PRODUCT_INITIAL_DATA,
   productsList: [],
   totalPages: 0,
 };
@@ -37,7 +66,11 @@ const initialState: IProductsState = {
 const productSlice = createSlice({
   name: '@products',
   initialState,
-  reducers: {},
+  reducers: {
+    setProductsBasis: (state, action: PayloadAction<ISingleProduct>) => {
+      state.newProductBasis = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state, action) => {
@@ -45,9 +78,6 @@ const productSlice = createSlice({
         if (action.meta.arg.replace) {
           state.productsList = [];
         }
-      })
-      .addCase(fetchProducts.rejected, (state) => {
-        state.isLoading = false;
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         if (action.meta.arg.replace) {
@@ -57,8 +87,22 @@ const productSlice = createSlice({
         }
         state.totalPages = action.payload.totalPages;
         state.isLoading = false;
-      });
+      })
+      .addCase(addNewProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addNewProduct.fulfilled, (state, action) => {
+        state.productsList.push(action.payload);
+        state.isLoading = false;
+      })
+      .addMatcher(
+        isAnyOf(fetchProducts.rejected, addNewProduct.rejected),
+        (state) => {
+          state.isLoading = false;
+        }
+      );
   },
 });
 
+export const { setProductsBasis } = productSlice.actions;
 export const productsReducer = productSlice.reducer;

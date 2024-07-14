@@ -57,3 +57,8 @@ export const createCategory = async (categoryData: ICategoriesElem) => {
   const { data } = await authRequest.post('/categories', categoryData);
   return data;
 };
+
+export const createProduct = async (productData: ISingleProduct) => {
+  const { data } = await authRequest.post('/products', productData);
+  return data;
+};

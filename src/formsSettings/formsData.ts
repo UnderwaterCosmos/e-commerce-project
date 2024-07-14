@@ -4,8 +4,11 @@ import {
   RegistrationBasis,
   LoginBasis,
   IAddNewCategoryInputField,
+  IAddNewProductInputField,
+  IAddNewProductsImageInputField,
 } from '../types/forms';
 import { ICategoriesElem } from '../types/filters';
+import { ISingleProduct } from '../types/products';
 
 export const REGISTRATION_INITIAL_USER_DATA: RegistrationBasis = {
   email: '',
@@ -94,6 +97,61 @@ export const ADD_CATEGORY_INPUT_FIELDS: IAddNewCategoryInputField[] = [
     name: 'displayName',
     placeholder: 'Посуда',
     label: 'Название на русском с заглавной буквы:',
+    type: 'text',
+  },
+];
+
+export const ADD_PRODUCT_INITIAL_DATA: ISingleProduct = {
+  title: '',
+  price: -Infinity,
+  quantity: 1,
+  description: '',
+  category: 'houseplants',
+  images: [],
+};
+
+export const ADD_PRODUCT_INPUT_FIELDS: IAddNewProductInputField[] = [
+  {
+    id: 1,
+    name: 'title',
+    placeholder: 'Введите название товара',
+    label: 'Название товара',
+    type: 'text',
+  },
+  {
+    id: 2,
+    name: 'price',
+    placeholder: 'Введите стоимость товара',
+    label: 'Стоимость товара',
+    type: 'number',
+  },
+  {
+    id: 3,
+    name: 'description',
+    placeholder: 'Введите описание товара',
+    label: 'Описание товара',
+    type: 'text',
+  },
+];
+
+export const ADD_PRODUCT_IMAGES_FIELDS: IAddNewProductsImageInputField[] = [
+  {
+    id: 1,
+    name: 'image1',
+    placeholder: 'URL изображения',
+    label: 'Изображения товара',
+    type: 'text',
+  },
+  {
+    id: 2,
+    name: 'image2',
+    placeholder: 'URL изображения',
+    type: 'text',
+  },
+  {
+    id: 3,
+    name: 'image3',
+    placeholder: 'URL изображения',
     type: 'text',
   },
 ];

@@ -1,7 +1,148 @@
-import React from 'react'
+import React from 'react';
+import cn from 'classnames';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { Container } from './Container';
+import { Loader } from './Loader';
+import { FormInputField } from './FormInputField';
+import { enterKeyHandler } from '../formsSettings/utilsFunctions';
+import {
+  selectFiltersData,
+  selectProductsData,
+  useAppDispatch,
+  useAppSelector,
+} from '../redux/store';
+import { setProductsBasis, addNewProduct } from '../redux/slices/productsSlice';
+import { fetchCategories } from '../redux/slices/filtersSlice';
+import {
+  ADD_PRODUCT_INITIAL_DATA,
+  ADD_PRODUCT_INPUT_FIELDS,
+  ADD_PRODUCT_IMAGES_FIELDS,
+} from '../formsSettings/formsData';
+import { NewProductFieldsNames } from '../types/forms';
+import { newProductSchema } from '../formsSettings/validation/newProductSchema';
+
+const newProductForm = cn(
+  'flex',
+  'flex-col',
+  'max-w-lg',
+  'mx-auto',
+  'mb-3',
+  'p-5',
+  'border-2'
+);
+
+const initialImagesObj = {
+  image1: '',
+  image2: '',
+  image3: '',
+};
 
 export function AdminNewProduct() {
-	return (
-		<div>AdminNewProduct</div>
-	)
+  const isLoading = useAppSelector(selectProductsData).isLoading;
+  const newProductBasis = useAppSelector(selectProductsData).newProductBasis;
+  const categoriesList = useAppSelector(selectFiltersData).categoriesList;
+  const dispatch = useAppDispatch();
+  const [newImages, setNewImages] = React.useState<{ [key: string]: string }>(
+    initialImagesObj
+  );
+
+  React.useEffect(() => {
+    if (categoriesList.length === 0) {
+      dispatch(fetchCategories(false));
+    }
+  }, [dispatch, categoriesList]);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(newProductSchema),
+  });
+
+  const fieldsHandler = (
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>,
+    key: NewProductFieldsNames
+  ) => {
+    dispatch(
+      setProductsBasis({ ...newProductBasis, [key]: event.target.value })
+    );
+  };
+
+  const imageFieldsHandler = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    key: string
+  ) => {
+    setNewImages((prev) => ({ ...prev, [key]: event.target.value }));
+  };
+
+  const submitHandler = () => {
+    dispatch(
+      addNewProduct({
+        ...newProductBasis,
+        images: Object.values(newImages),
+        // price: Number(newProductBasis['price']),
+      })
+    );
+    dispatch(setProductsBasis(ADD_PRODUCT_INITIAL_DATA));
+    setNewImages(initialImagesObj);
+    reset();
+  };
+
+  return (
+    <main>
+      <Container>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <form
+            className={newProductForm}
+            onSubmit={handleSubmit(submitHandler)}
+            onKeyDown={enterKeyHandler}
+          >
+            {ADD_PRODUCT_INPUT_FIELDS.map((fieldObj) => (
+              <FormInputField
+                state={newProductBasis}
+                register={register}
+                errors={errors}
+                fieldObj={fieldObj}
+                fieldsHandler={fieldsHandler}
+                key={fieldObj.id}
+              />
+            ))}
+            <label htmlFor="selectCategory">Категория товара</label>
+            <select
+              id="selectCategory"
+              value={newProductBasis.category}
+              onChange={(event) => fieldsHandler(event, 'category')}
+            >
+              {categoriesList.slice(1).map((category) => (
+                <option value={category.name} key={category.id}>
+                  {category.displayName}
+                </option>
+              ))}
+            </select>
+            {ADD_PRODUCT_IMAGES_FIELDS.map((imageObj) => (
+              <FormInputField
+                state={newImages}
+                register={register}
+                errors={errors}
+                fieldObj={imageObj}
+                fieldsHandler={imageFieldsHandler}
+                key={imageObj.id}
+              />
+            ))}
+            <button className="bg-emerald-200 rounded-full mt-3">
+              ДОБАВИТЬ ТОВАР
+            </button>
+          </form>
+        )}
+      </Container>
+    </main>
+  );
 }

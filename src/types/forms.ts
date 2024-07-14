@@ -1,4 +1,5 @@
 import { IUser } from './users';
+import { ISingleProduct } from './products';
 
 // REGISTRATION
 export type RegistrationFieldsNames = Exclude<
@@ -33,3 +34,23 @@ export interface IAddNewCategoryInputField {
   label: string;
   type: string;
 }
+
+// ADD PRODUCT
+export type NewProductFieldsNames = Exclude<
+  keyof ISingleProduct,
+  'id' | 'quantity' | 'images'
+>;
+export interface IAddNewProductInputField {
+  id: number;
+  name: NewProductFieldsNames;
+  placeholder: string;
+  label: string;
+  type: string;
+}
+export type IAddNewProductsImageInputField = Omit<
+  IAddNewProductInputField,
+  'label' | 'name'
+> & {
+  label?: string;
+  name: string;
+};
