@@ -3,6 +3,7 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 import { IGetProductsConfig, ISingleProduct } from '../types/products';
 import { IUser } from '../types/users';
 import { LoginBasis } from '../types/forms';
+import { ICategoriesElem } from '../types/filters';
 
 const BASE_URL = 'http://localhost:3000';
 
@@ -37,8 +38,8 @@ export const createUser = async (registrationData: IUser) => {
   return data;
 };
 
-export const authorizeUser = async (config: LoginBasis) => {
-  const { data } = await axios.post(`${BASE_URL}/login`, config);
+export const authorizeUser = async (loginData: LoginBasis) => {
+  const { data } = await axios.post(`${BASE_URL}/login`, loginData);
   return data;
 };
 
@@ -49,5 +50,10 @@ export const manageProduct = async (
     | { ordersHistory: { [key: string]: ISingleProduct[] }; cart: [] }
 ) => {
   const { data } = await authRequest.patch(`/users/${userId}`, value);
+  return data;
+};
+
+export const createCategory = async (categoryData: ICategoriesElem) => {
+  const { data } = await authRequest.post('/categories', categoryData);
   return data;
 };

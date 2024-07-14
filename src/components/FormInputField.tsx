@@ -8,21 +8,27 @@ import {
   RegistrationFieldsNames,
   LoginFieldsNames,
   ILoginInputField,
+  IAddNewCategoryInputField,
 } from '../types/forms';
+import { ICategoriesElem } from '../types/filters';
 
 const inputField = cn('bg-slate-200', 'rounded-full', 'mb-2', 'p-1.5');
 const errMessage = cn('mb-0.5', 'text-red-600', 'font-semibold');
 
 interface IProps {
-  state: RegistrationBasis | LoginBasis;
+  state: RegistrationBasis | LoginBasis | ICategoriesElem;
   register: UseFormRegister<any>;
   // register:
   // | UseFormRegister<Omit<RegistrationBasis, 'type'>>
   // | UseFormRegister<LoginBasis>;
   errors:
     | FieldErrors<Omit<RegistrationBasis, 'type'>>
-    | FieldErrors<LoginBasis>;
-  fieldObj: IRegistrationInputField | ILoginInputField;
+    | FieldErrors<LoginBasis>
+    | FieldErrors<ICategoriesElem>;
+  fieldObj:
+    | IRegistrationInputField
+    | ILoginInputField
+    | IAddNewCategoryInputField;
   fieldsHandler: (
     event: React.ChangeEvent<HTMLInputElement>,
     key: any
