@@ -17,7 +17,7 @@ import { RootState } from '../store';
 import {
   LOGIN_INITIAL_USER_DATA,
   REGISTRATION_INITIAL_USER_DATA,
-} from '../../formsData';
+} from '../../formsSettings/formsData';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const token = useLocalStorage('token');

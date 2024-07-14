@@ -15,6 +15,10 @@ export const registrationSchema = yup.object().shape({
     .string()
     .required('Обязательное поле!')
     .min(5, 'Необходимо минимум 5 символов.'),
+  confirmPassword: yup
+    .string()
+    .required('Обязательное поле!')
+    .oneOf([yup.ref('password')], 'Пароли не совпадают!'),
   login: yup
     .string()
     .trim()

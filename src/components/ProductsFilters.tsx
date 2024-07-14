@@ -14,7 +14,9 @@ const filtersBlock = cn('my-3');
 const searchFiled = cn('w-full', 'p-3', 'bg-slate-200', 'rounded-full', 'mb-2');
 
 export function ProductsFilters() {
-  const { select, search, categoriesList } = useAppSelector(selectFiltersData);
+  const select = useAppSelector(selectFiltersData).select;
+  const search = useAppSelector(selectFiltersData).search;
+  const categoriesList = useAppSelector(selectFiltersData).categoriesList;
   const isBackBtnPressed = useAppSelector(
     selectSingleProductsData
   ).isBackBtnPressed;

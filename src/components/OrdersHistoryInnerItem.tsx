@@ -24,8 +24,8 @@ export function OrdersHistoryInnerItem({ orderName }: { orderName: string }) {
   };
 
   return (
-    <li className="mb-2" key={orderName} onClick={toggleIsOrderOpened}>
-      <div className={ordersListItem}>
+    <li className="mb-2 cursor-pointer" key={orderName}>
+      <div className={ordersListItem} onClick={toggleIsOrderOpened}>
         {isOrderOpened ? <VscTriangleDown /> : <VscTriangleRight />}
         {orderName}
       </div>

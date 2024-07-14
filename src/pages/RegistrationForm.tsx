@@ -7,17 +7,19 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import {
   REGISTRATION_INPUT_FIELDS,
   REGISTRATION_INITIAL_USER_DATA,
-} from '../formsData';
+} from '../formsSettings/formsData';
 import { Container } from '../components/Container';
 import { Loader } from '../components/Loader';
 import { FormInputField } from '../components/FormInputField';
-import { registrationSchema } from '../validation/registrationSchema';
+import { FormPasswordField } from '../components/FormPasswordField';
+import { registrationSchema } from '../formsSettings/validation/registrationSchema';
 import {
   useAppDispatch,
   useAppSelector,
   selectUsersData,
 } from '../redux/store';
 import { addNewUser, setRegistrationBasis } from '../redux/slices/usersSlice';
+import { enterKeyHandler } from '../formsSettings/utilsFunctions';
 import { RegistrationFieldsNames } from '../types/forms';
 
 const regForm = cn(
@@ -61,12 +63,9 @@ export function RegistrationForm() {
     reset();
   };
 
-  const enterKeyHandler = (event: React.KeyboardEvent<HTMLFormElement>) => {
-    if (event.key === 'Enter') event.preventDefault();
-  };
-
   const submitHandler = () => {
-    dispatch(addNewUser({ ...registrationBasis, cart: [], ordersHistory: {} }));
+    const { confirmPassword, ...regData } = registrationBasis;
+    dispatch(addNewUser({ ...regData, cart: [], ordersHistory: {} }));
     clearFieldsHandler();
   };
 
@@ -83,16 +82,27 @@ export function RegistrationForm() {
               onSubmit={handleSubmit(submitHandler)}
               onKeyDown={enterKeyHandler}
             >
-              {REGISTRATION_INPUT_FIELDS.map((fieldObj) => (
-                <FormInputField
-                  state={registrationBasis}
-                  register={register}
-                  errors={errors}
-                  fieldObj={fieldObj}
-                  fieldsHandler={fieldsHandler}
-                  key={fieldObj.id}
-                />
-              ))}
+              {REGISTRATION_INPUT_FIELDS.map((fieldObj) =>
+                fieldObj.type === 'password' ? (
+                  <FormPasswordField
+                    state={registrationBasis}
+                    register={register}
+                    errors={errors}
+                    fieldObj={fieldObj}
+                    fieldsHandler={fieldsHandler}
+                    key={fieldObj.id}
+                  />
+                ) : (
+                  <FormInputField
+                    state={registrationBasis}
+                    register={register}
+                    errors={errors}
+                    fieldObj={fieldObj}
+                    fieldsHandler={fieldsHandler}
+                    key={fieldObj.id}
+                  />
+                )
+              )}
               <label htmlFor="userType">Тип пользователя:</label>
               <select
                 className={inputField}

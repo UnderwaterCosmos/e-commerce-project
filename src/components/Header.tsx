@@ -17,12 +17,33 @@ const headerWrapper = cn('flex', 'justify-between', 'py-4', 'text-white');
 const navList = cn('flex', 'gap-x-2');
 const controls = cn('flex', 'gap-x-4', 'items-center');
 
+const customerLinks = [
+  {
+    name: 'Главная',
+    path: '/',
+  },
+  {
+    name: 'Товары',
+    path: '/products',
+  },
+];
+
+const adminLinks = [
+  ...customerLinks,
+  {
+    name: 'Администрирования',
+    path: '/admin',
+  },
+];
+
 export function Header() {
   const token = useLocalStorage('token');
   const fullUserInfoStorage = useLocalStorage('persist:usersData');
   const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+	const links = fullUserInfo?.type === 'admin' ? adminLinks : customerLinks;
 
   const logOutHandler = () => {
     dispatch(resetFullUserInfo());
@@ -38,17 +59,11 @@ export function Header() {
           <Link to={'/products'}>WB 2.0</Link>
           <nav>
             <ul className={navList}>
-              <Link to={'/'}>
-                <li>Главная</li>
-              </Link>
-              <Link to={'/products'}>
-                <li>Товары</li>
-              </Link>
-              {fullUserInfo?.type === 'admin' && (
-                <Link to={'/admin'}>
-                  <li>Администрирование</li>
-                </Link>
-              )}
+              {links.map((link) => (
+								<li key={link.name}>
+									<Link to={link.path}>{link.name}</Link>
+								</li>
+							))}
             </ul>
           </nav>
           <ul className={controls}>

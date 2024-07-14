@@ -1,20 +1,24 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { LOGIN_INPUT_FIELDS, LOGIN_INITIAL_USER_DATA } from '../formsData';
+import {
+  LOGIN_INPUT_FIELDS,
+  LOGIN_INITIAL_USER_DATA,
+} from '../formsSettings/formsData';
 import { Container } from '../components/Container';
 import { Loader } from '../components/Loader';
 import { FormInputField } from '../components/FormInputField';
+import { FormPasswordField } from '../components/FormPasswordField';
 import { logInUser, setLoginBasis } from '../redux/slices/usersSlice';
 import {
   useAppSelector,
   useAppDispatch,
   selectUsersData,
 } from '../redux/store';
-import { loginSchema } from '../validation/loginSchema';
+import { enterKeyHandler } from '../formsSettings/utilsFunctions';
+import { loginSchema } from '../formsSettings/validation/loginSchema';
 import { LoginFieldsNames } from '../types/forms';
 
 const loginForm = cn(
@@ -24,15 +28,13 @@ const loginForm = cn(
   'mx-auto',
   'mb-3',
   'p-5',
-  'border-2',
-  'relative'
+  'border-2'
 );
 
 export function LoginForm() {
   const isLoading = useAppSelector(selectUsersData).isLoading;
   const loginBasis = useAppSelector(selectUsersData).loginBasis;
   const dispatch = useAppDispatch();
-  const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
 
   const {
     register,
@@ -48,10 +50,6 @@ export function LoginForm() {
     key: LoginFieldsNames
   ) => {
     dispatch(setLoginBasis({ ...loginBasis, [key]: event.target.value }));
-  };
-
-  const enterKeyHandler = (event: React.KeyboardEvent<HTMLFormElement>) => {
-    if (event.key === 'Enter') event.preventDefault();
   };
 
   const submitHandler = () => {
@@ -73,46 +71,27 @@ export function LoginForm() {
               onSubmit={handleSubmit(submitHandler)}
               onKeyDown={enterKeyHandler}
             >
-              {LOGIN_INPUT_FIELDS.map((fieldObj) => {
-                const passwordInputType = isPasswordVisible
-                  ? 'text'
-                  : 'password';
-                return (
+              {LOGIN_INPUT_FIELDS.map((fieldObj) =>
+                fieldObj.type === 'password' ? (
+                  <FormPasswordField
+                    state={loginBasis}
+                    register={register}
+                    errors={errors}
+                    fieldObj={fieldObj}
+                    fieldsHandler={fieldsHandler}
+                    key={fieldObj.id}
+                  />
+                ) : (
                   <FormInputField
                     state={loginBasis}
                     register={register}
                     errors={errors}
-                    fieldObj={{
-                      ...fieldObj,
-                      type:
-                        fieldObj.name === 'password'
-                          ? passwordInputType
-                          : fieldObj.type,
-                    }}
+                    fieldObj={fieldObj}
                     fieldsHandler={fieldsHandler}
                     key={fieldObj.id}
                   />
-                );
-              })}
-              <div className="absolute right-8 bottom-[65px]">
-                {isPasswordVisible ? (
-                  <button
-                    className="w-5 h-5"
-                    type="button"
-                    onClick={() => setIsPasswordVisible(false)}
-                  >
-                    <img src="/images/show.svg" alt="Show password" />
-                  </button>
-                ) : (
-                  <button
-                    className="w-5 h-5"
-                    type="button"
-                    onClick={() => setIsPasswordVisible(true)}
-                  >
-                    <img src="/images/hide.svg" alt="Hide password" />
-                  </button>
-                )}
-              </div>
+                )
+              )}
               <button className="bg-emerald-200 rounded-full mt-3">
                 ВОЙТИ
               </button>

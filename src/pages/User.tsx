@@ -19,12 +19,12 @@ export function User() {
           <>
             <h1 className="mb-5">Добро пожаловать 👋!</h1>
             <ul className="flex gap-x-3 mb-4">
-              <Link to={'/user/history'}>
-                <li className={btn}>История заказов</li>
-              </Link>
-              <Link to={'/user/info'}>
-                <li className={btn}>Информация о пользователе</li>
-              </Link>
+              <li className={btn}>
+                <Link to={'/user/history'}>История заказов</Link>
+              </li>
+              <li className={btn}>
+                <Link to={'/user/info'}>Информация о пользователе</Link>
+              </li>
             </ul>
           </>
         )}
