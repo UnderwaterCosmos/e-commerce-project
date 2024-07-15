@@ -168,6 +168,7 @@ export const EDIT_PRODUCT_INITIAL_DATA: IProductEditedValueBasis = {
   title: '',
   price: '',
   description: '',
+  images: [],
 };
 export const EDIT_PRODUCT_INPUT_FIELDS: IEditProductInputField[] = [
   {

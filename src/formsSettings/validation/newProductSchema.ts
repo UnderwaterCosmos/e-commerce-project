@@ -12,7 +12,7 @@ export const newProductSchema = yup.object().shape({
     .trim()
     .required('Обязательное поле!')
     .matches(priceReg, 'Цена должна быть целым положительным числом!'),
-  description: yup.string().required('Обязательное поле!'),
+  description: yup.string().trim().required('Обязательное поле!'),
   image1: yup
     .string()
     .trim()

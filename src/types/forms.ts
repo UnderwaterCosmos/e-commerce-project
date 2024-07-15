@@ -63,6 +63,7 @@ export interface IProductEditedValueBasis {
   title?: string;
   price?: string;
   description?: string;
+  images?: string[];
 }
 export type EditProductFieldsNames = Exclude<NewProductFieldsNames, 'category'>;
 export interface IEditProductInputField {
