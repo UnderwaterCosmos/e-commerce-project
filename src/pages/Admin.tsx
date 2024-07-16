@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 
 import { Container } from '../components/Container';
 import { Loader } from '../components/Loader';
 import { useAppSelector, selectUsersData } from '../redux/store';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const btn = cn('p-1', 'bg-black', 'rounded-lg', 'text-white');
 
@@ -20,6 +22,15 @@ const links = [
 
 export function Admin() {
   const isLoading = useAppSelector(selectUsersData).isLoading;
+  const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
+  const navigate = useNavigate();
+  const token = useLocalStorage('token');
+
+  React.useEffect(() => {
+    if (!token.getItem() || fullUserInfo?.type !== 'admin') {
+      navigate('/main');
+    }
+  }, []);
 
   return (
     <section>

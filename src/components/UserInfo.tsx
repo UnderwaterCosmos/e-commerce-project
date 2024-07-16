@@ -23,7 +23,7 @@ export function UserInfo() {
         <dt className="inline">Логин: </dt>
         <dd className="inline">{fullUserInfo?.login}</dd>
         <br />
-        <dt className="inline">Тип аккаунта: </dt>
+        <dt className="inline">Тип профиля: </dt>
         <dd className="inline">{fullUserInfo?.type}</dd>
       </dl>
       <div>

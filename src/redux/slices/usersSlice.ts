@@ -66,7 +66,7 @@ export const logInUser = createAsyncThunk.withTypes<{
       dispatch(
         setNotification({
           type: 'success',
-          message: 'Вы успешно вошли в аккаунт!',
+          message: 'Вы успешно вошли в профиль!',
         })
       );
       return userObj;
@@ -74,7 +74,7 @@ export const logInUser = createAsyncThunk.withTypes<{
       dispatch(
         setNotification({
           type: 'error',
-          message: 'Ошибка при входе в аккаунт!',
+          message: 'Ошибка при входе в профиль!',
         })
       );
       return rejectWithValue(error);

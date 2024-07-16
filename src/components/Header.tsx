@@ -54,7 +54,7 @@ export function Header() {
     dispatch(
       setNotification({
         type: 'success',
-        message: 'Вы успешно вышли из аккаунта!',
+        message: 'Вы успешно вышли из профиля!',
       })
     );
   };

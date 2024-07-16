@@ -14,6 +14,7 @@ import {
   useAppSelector,
   useAppDispatch,
   selectFiltersData,
+  selectUsersData,
 } from '../redux/store';
 import {
   setEditProductBasis,
@@ -32,6 +33,7 @@ import {
   IProductEditedValueBasis,
 } from '../types/forms';
 import { editProductSchema } from '../formsSettings/validation/editProductSchema';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const editProductForm = cn(
   'flex',
@@ -46,6 +48,7 @@ const editProductForm = cn(
 export function AdminEditProduct() {
   const isLoading = useAppSelector(selectSingleProductsData).isLoading;
   const singleProduct = useAppSelector(selectSingleProductsData).singleProduct;
+  const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
   const newImagesObj = useAppSelector(selectFiltersData).newImagesObj;
   const editProductBasis = useAppSelector(
     selectSingleProductsData
@@ -53,8 +56,12 @@ export function AdminEditProduct() {
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
+  const token = useLocalStorage('token');
 
   React.useEffect(() => {
+    if (!token.getItem() || fullUserInfo?.type !== 'admin') {
+      navigate('/main');
+    }
     if (!singleProduct) {
       dispatch(fetchSingleProduct(id!));
     }
