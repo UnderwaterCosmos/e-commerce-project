@@ -48,6 +48,7 @@ export function CardList() {
     );
     window.onbeforeunload = () => {
       window.scrollTo(0, 0);
+      setSearchParams({ page: '1' });
     };
     if (!isBackBtnPressed) {
       setCurrentPage(1);

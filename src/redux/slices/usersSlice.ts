@@ -13,52 +13,77 @@ import {
   isSingleProduct,
   isSingleProductArray,
 } from '../../types/products';
-import { RootState } from '../store';
+import { AppDispatch, RootState } from '../store';
 import {
   LOGIN_INITIAL_USER_DATA,
   REGISTRATION_INITIAL_USER_DATA,
 } from '../../formsSettings/formsData';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { setNotification } from './notificationSlice';
 
 const token = useLocalStorage('token');
 
 export const addNewUser = createAsyncThunk.withTypes<{
+  dispatch: AppDispatch;
   extra: {
     router: Router;
     api: { createUser: (registrationData: IUser) => Promise<IUser> };
   };
 }>()(
   'users/addNewUser',
-  async (registrationData: IUser, { rejectWithValue, extra }) => {
+  async (registrationData: IUser, { dispatch, rejectWithValue, extra }) => {
     try {
       const newUserObj = await extra.api.createUser(registrationData);
       extra.router.navigate('/login');
+      dispatch(
+        setNotification({
+          type: 'success',
+          message: 'Вы успешно зарегистрировались!',
+        })
+      );
       return newUserObj;
     } catch (error) {
+      dispatch(
+        setNotification({ type: 'error', message: 'Ошибка при регистрации!' })
+      );
       return rejectWithValue(error);
     }
   }
 );
 
 export const logInUser = createAsyncThunk.withTypes<{
+  dispatch: AppDispatch;
   extra: {
     router: Router;
     api: { authorizeUser: (config: LoginBasis) => Promise<IUser> };
   };
 }>()(
   'users/logInUser',
-  async (config: LoginBasis, { rejectWithValue, extra }) => {
+  async (config: LoginBasis, { dispatch, rejectWithValue, extra }) => {
     try {
       const userObj = await extra.api.authorizeUser(config);
       extra.router.navigate('/user/info');
+      dispatch(
+        setNotification({
+          type: 'success',
+          message: 'Вы успешно вошли в аккаунт!',
+        })
+      );
       return userObj;
     } catch (error) {
+      dispatch(
+        setNotification({
+          type: 'error',
+          message: 'Ошибка при входе в аккаунт!',
+        })
+      );
       return rejectWithValue(error);
     }
   }
 );
 
 export const manageProductInCart = createAsyncThunk.withTypes<{
+  dispatch: AppDispatch;
   state: RootState;
   extra: {
     router: Router;
@@ -78,7 +103,7 @@ export const manageProductInCart = createAsyncThunk.withTypes<{
       | ISingleProduct
       | { index: number; quantity: number }
       | ISingleProduct[],
-    { getState, rejectWithValue, extra }
+    { dispatch, getState, rejectWithValue, extra }
   ) => {
     try {
       const actualUser = getState().usersData.fullUserInfo!;
@@ -96,21 +121,44 @@ export const manageProductInCart = createAsyncThunk.withTypes<{
           actualUser.id
         );
         await extra.router.navigate('/products');
+        dispatch(
+          setNotification({
+            type: 'success',
+            message: 'Заказ успешно оформлен!',
+          })
+        );
         return modifiedOrdersHistory;
       }
 
       if (isSingleProduct(productOrQuantity)) {
-        return extra.api.manageProduct(
+        const modifiedCart = await extra.api.manageProduct(
           { cart: [...actualUser.cart, productOrQuantity] },
           actualUser.id
         );
+        dispatch(
+          setNotification({
+            type: 'success',
+            message: 'Товар добавлен в корзину!',
+          })
+        );
+        return modifiedCart;
       }
 
       if (productOrQuantity.quantity < 1) {
         const modifiedCart = actualUser.cart.filter(
           (_, index) => index !== productOrQuantity.index
         );
-        return extra.api.manageProduct({ cart: modifiedCart }, actualUser.id);
+        const cartWithoutProduct = await extra.api.manageProduct(
+          { cart: modifiedCart },
+          actualUser.id
+        );
+        dispatch(
+          setNotification({
+            type: 'success',
+            message: 'Товар удален из корзины!',
+          })
+        );
+        return cartWithoutProduct;
       }
 
       const modifiedCart = actualUser.cart.map((cartItem, index) =>
@@ -118,8 +166,24 @@ export const manageProductInCart = createAsyncThunk.withTypes<{
           ? { ...cartItem, quantity: productOrQuantity.quantity }
           : cartItem
       );
-      return extra.api.manageProduct({ cart: modifiedCart }, actualUser.id);
+      const cartWithProduct = await extra.api.manageProduct(
+        { cart: modifiedCart },
+        actualUser.id
+      );
+      dispatch(
+        setNotification({
+          type: 'success',
+          message: 'Товар добавлен в корзину!',
+        })
+      );
+      return cartWithProduct;
     } catch (error) {
+      dispatch(
+        setNotification({
+          type: 'error',
+          message: 'Ошибка при работе с товаром!',
+        })
+      );
       return rejectWithValue(error);
     }
   },

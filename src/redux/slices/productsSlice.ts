@@ -12,8 +12,11 @@ import {
   ISingleProduct,
 } from '../../types/products';
 import { ADD_PRODUCT_INITIAL_DATA } from '../../formsSettings/formsData';
+import { AppDispatch } from '../store';
+import { setNotification } from './notificationSlice';
 
 export const fetchProducts = createAsyncThunk.withTypes<{
+  dispatch: AppDispatch;
   extra: {
     api: {
       getProducts: (config: IGetProductsConfig) => Promise<AxiosResponse>;
@@ -21,7 +24,7 @@ export const fetchProducts = createAsyncThunk.withTypes<{
   };
 }>()(
   'products/fetchProducts',
-  async (config: IGetProductsConfig, { rejectWithValue, extra }) => {
+  async (config: IGetProductsConfig, { dispatch, rejectWithValue, extra }) => {
     try {
       const { data, headers } = await extra.api.getProducts(config);
       return {
@@ -29,6 +32,12 @@ export const fetchProducts = createAsyncThunk.withTypes<{
         totalPages: Math.ceil(headers['x-total-count'] / 10),
       };
     } catch (error) {
+      dispatch(
+        setNotification({
+          type: 'error',
+          message: 'Ошибка при загрузке товаров!',
+        })
+      );
       return rejectWithValue(error);
     }
   },
@@ -40,6 +49,7 @@ export const fetchProducts = createAsyncThunk.withTypes<{
 );
 
 export const addNewProduct = createAsyncThunk.withTypes<{
+  dispatch: AppDispatch;
   extra: {
     api: {
       createProduct: (productData: ISingleProduct) => Promise<ISingleProduct>;
@@ -47,10 +57,23 @@ export const addNewProduct = createAsyncThunk.withTypes<{
   };
 }>()(
   'products/addNewProduct',
-  async (productData: ISingleProduct, { rejectWithValue, extra }) => {
+  async (productData: ISingleProduct, { dispatch, rejectWithValue, extra }) => {
     try {
-      return extra.api.createProduct(productData);
+      const newProduct = await extra.api.createProduct(productData);
+      dispatch(
+        setNotification({
+          type: 'success',
+          message: 'Товар успешно добавлен!',
+        })
+      );
+      return newProduct;
     } catch (error) {
+      dispatch(
+        setNotification({
+          type: 'error',
+          message: 'Ошибка при добавлении нового товара!',
+        })
+      );
       return rejectWithValue(error);
     }
   }

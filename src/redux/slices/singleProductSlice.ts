@@ -1,26 +1,35 @@
 import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
 
-import { RootState } from '../store';
+import { AppDispatch, RootState } from '../store';
 import { ISingleProduct, ISingleProductState } from '../../types/products';
 import { IProductEditedValueBasis } from '../../types/forms';
 import { EDIT_PRODUCT_INITIAL_DATA } from '../../formsSettings/formsData';
+import { setNotification } from './notificationSlice';
 
 export const fetchSingleProduct = createAsyncThunk.withTypes<{
+  dispatch: AppDispatch;
   extra: {
     api: { getSingleProduct: (id: string) => Promise<ISingleProduct> };
   };
 }>()(
   'singleProduct/fetchSingleProduct',
-  async (id: string, { rejectWithValue, extra }) => {
+  async (id: string, { dispatch, rejectWithValue, extra }) => {
     try {
       return extra.api.getSingleProduct(id);
     } catch (error) {
+      dispatch(
+        setNotification({
+          type: 'error',
+          message: 'Ошибка при загрузке товара!',
+        })
+      );
       return rejectWithValue(error);
     }
   }
 );
 
 export const editSingleProduct = createAsyncThunk.withTypes<{
+  dispatch: AppDispatch;
   state: RootState;
   extra: {
     api: {
@@ -34,12 +43,25 @@ export const editSingleProduct = createAsyncThunk.withTypes<{
   'singleProduct/editSingleProduct',
   async (
     editedData: IProductEditedValueBasis,
-    { getState, rejectWithValue, extra }
+    { dispatch, getState, rejectWithValue, extra }
   ) => {
     try {
       const productId = getState().singleProductData.singleProduct?.id;
-      return extra.api.editProduct(editedData, productId);
+      const editedProduct = await extra.api.editProduct(editedData, productId);
+      dispatch(
+        setNotification({
+          type: 'success',
+          message: 'Товар успешно отредактирован!',
+        })
+      );
+      return editedProduct;
     } catch (error) {
+      dispatch(
+        setNotification({
+          type: 'error',
+          message: 'Ошибка при редактировании товара!',
+        })
+      );
       return rejectWithValue(error);
     }
   }

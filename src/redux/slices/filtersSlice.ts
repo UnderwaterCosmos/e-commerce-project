@@ -10,17 +10,26 @@ import {
   ADD_PRODUCT_IMAGES_OBJ,
 } from '../../formsSettings/formsData';
 import { IAddNewProductImagesBasis } from '../../types/forms';
+import { AppDispatch } from '../store';
+import { setNotification } from './notificationSlice';
 
 export const fetchCategories = createAsyncThunk.withTypes<{
+  dispatch: AppDispatch;
   extra: {
     api: { getCategories: () => Promise<ICategoriesElem[]> };
   };
 }>()(
   'filters/fetchCategories',
-  async (isBackBtnPressed: boolean, { rejectWithValue, extra }) => {
+  async (isBackBtnPressed: boolean, { dispatch, rejectWithValue, extra }) => {
     try {
       return extra.api.getCategories();
     } catch (error) {
+      dispatch(
+        setNotification({
+          type: 'error',
+          message: 'Ошибка при загрузке категорий!',
+        })
+      );
       return rejectWithValue(error);
     }
   },
@@ -32,6 +41,7 @@ export const fetchCategories = createAsyncThunk.withTypes<{
 );
 
 export const addNewCategory = createAsyncThunk.withTypes<{
+  dispatch: AppDispatch;
   extra: {
     api: {
       createCategory: (
@@ -41,10 +51,26 @@ export const addNewCategory = createAsyncThunk.withTypes<{
   };
 }>()(
   'filters/addNewCategory',
-  async (categoryData: ICategoriesElem, { rejectWithValue, extra }) => {
+  async (
+    categoryData: ICategoriesElem,
+    { dispatch, rejectWithValue, extra }
+  ) => {
     try {
-      return extra.api.createCategory(categoryData);
+      const newCategory = await extra.api.createCategory(categoryData);
+      dispatch(
+        setNotification({
+          type: 'success',
+          message: 'Категория успешно добавлена!',
+        })
+      );
+      return newCategory;
     } catch (error) {
+      dispatch(
+        setNotification({
+          type: 'error',
+          message: 'Ошибка при добавлении новой категории!',
+        })
+      );
       return rejectWithValue(error);
     }
   }

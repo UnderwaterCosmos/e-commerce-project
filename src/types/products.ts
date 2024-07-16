@@ -11,10 +11,10 @@ export interface ISingleProduct {
 }
 export interface IGetProductsConfig {
   _page: number;
-  category_like: string;
-  title_like: string;
-  replace: boolean;
-  preventRequest: boolean;
+  category_like?: string;
+  title_like?: string;
+  replace?: boolean;
+  preventRequest?: boolean;
 }
 export interface IProductsState {
   isLoading: boolean;

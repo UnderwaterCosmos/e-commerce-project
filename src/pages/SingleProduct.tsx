@@ -11,6 +11,7 @@ import {
   useAppSelector,
   selectSingleProductsData,
   selectUsersData,
+  selectProductsData,
 } from '../redux/store';
 import {
   fetchSingleProduct,
@@ -18,6 +19,8 @@ import {
 } from '../redux/slices/singleProductSlice';
 import { manageProductInCart } from '../redux/slices/usersSlice';
 import { ISingleProduct } from '../types/products';
+import { fetchProducts } from '../redux/slices/productsSlice';
+import { fetchCategories } from '../redux/slices/filtersSlice';
 
 const description = cn('flex', 'flex-col', 'justify-center');
 
@@ -25,6 +28,7 @@ export function SingleProduct() {
   const isLoading = useAppSelector(selectSingleProductsData).isLoading;
   const singleProduct = useAppSelector(selectSingleProductsData).singleProduct;
   const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
+  const productsList = useAppSelector(selectProductsData).productsList;
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -35,6 +39,10 @@ export function SingleProduct() {
 
     return () => {
       dispatch(setBackBtnStatus(false));
+      if (productsList.length === 0) {
+        dispatch(fetchCategories(false));
+        dispatch(fetchProducts({ _page: 1 }));
+      }
       singleProductPromise.abort();
     };
   }, [dispatch, id]);

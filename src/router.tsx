@@ -20,6 +20,7 @@ import { AdminNewCategory } from './components/AdminNewCategory';
 import { AdminEditProduct } from './components/AdminEditProduct';
 import { Cart } from './pages/Cart';
 import { Footer } from './components/Footer';
+import { Notification } from './components/Notification';
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ export const router = createBrowserRouter([
         <Header />
         <Outlet />
         <Footer />
+        <Notification />
       </>
     ),
     children: [

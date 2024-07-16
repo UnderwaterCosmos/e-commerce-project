@@ -12,6 +12,7 @@ import {
   useAppDispatch,
 } from '../redux/store';
 import { resetFullUserInfo } from '../redux/slices/usersSlice';
+import { setNotification } from '../redux/slices/notificationSlice';
 
 const headerWrapper = cn('flex', 'justify-between', 'py-4', 'text-white');
 const navList = cn('flex', 'gap-x-2');
@@ -31,7 +32,7 @@ const customerLinks = [
 const adminLinks = [
   ...customerLinks,
   {
-    name: 'Администрирования',
+    name: 'Администрирование',
     path: '/admin',
   },
 ];
@@ -43,13 +44,19 @@ export function Header() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-	const links = fullUserInfo?.type === 'admin' ? adminLinks : customerLinks;
+  const links = fullUserInfo?.type === 'admin' ? adminLinks : customerLinks;
 
   const logOutHandler = () => {
     dispatch(resetFullUserInfo());
     fullUserInfoStorage.removeItem();
     token.removeItem();
     navigate('/main');
+    dispatch(
+      setNotification({
+        type: 'success',
+        message: 'Вы успешно вышли из аккаунта!',
+      })
+    );
   };
 
   return (
@@ -60,10 +67,10 @@ export function Header() {
           <nav>
             <ul className={navList}>
               {links.map((link) => (
-								<li key={link.name}>
-									<Link to={link.path}>{link.name}</Link>
-								</li>
-							))}
+                <li key={link.name}>
+                  <Link to={link.path}>{link.name}</Link>
+                </li>
+              ))}
             </ul>
           </nav>
           <ul className={controls}>
