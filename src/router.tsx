@@ -5,7 +5,7 @@ import {
   Navigate,
 } from 'react-router-dom';
 
-import { Header } from './components/Header';
+import { Header } from './components/HeaderModule/Header';
 import { Main } from './pages/Main';
 import { Products } from './pages/Products';
 import { SingleProduct } from './pages/SingleProduct';

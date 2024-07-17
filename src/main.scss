@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  @apply h-full bg-light-background font-['InterTightRegular'];
+}
+
+#root {
+  @apply min-h-full flex flex-col overflow-hidden;
+}
+
+@layer base {
+  @font-face {
+    font-family: 'InterTightRegular';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/InterTight-Regular.ttf');
+  }
+  @font-face {
+    font-family: 'InterTightMedium';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/fonts/InterTight-Medium.ttf');
+  }
+  @font-face {
+    font-family: 'InterTightSemiBold';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/fonts/InterTight-SemiBold.ttf');
+  }
+}

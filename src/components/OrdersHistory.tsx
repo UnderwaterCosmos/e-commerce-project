@@ -14,11 +14,9 @@ export function OrdersHistory() {
           <h1>У Вас еще нет ни одного заказа!</h1>
         ) : (
           <ul className="text-left">
-            {ordersHistoryKeys
-              .map((orderName) => (
-                <OrdersHistoryInnerItem orderName={orderName} key={orderName} />
-              ))
-              .reverse()}
+            {ordersHistoryKeys.map((orderName) => (
+              <OrdersHistoryInnerItem orderName={orderName} key={orderName} />
+            ))}
           </ul>
         )}
       </Container>

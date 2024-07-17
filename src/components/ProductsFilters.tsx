@@ -1,6 +1,9 @@
 import React from 'react';
 import cn from 'classnames';
+import Select from 'react-select';
+import { SingleValue } from 'react-select';
 
+import { Container } from './Container';
 import {
   useAppSelector,
   useAppDispatch,
@@ -8,7 +11,6 @@ import {
   selectSingleProductsData,
 } from '../redux/store';
 import { setFiltersValue, fetchCategories } from '../redux/slices/filtersSlice';
-import { Container } from './Container';
 
 const filtersBlock = cn('my-3');
 const searchFiled = cn('w-full', 'p-3', 'bg-slate-200', 'rounded-full', 'mb-2');
@@ -43,6 +45,21 @@ export function ProductsFilters() {
       })
     );
   };
+  // const selectHandler = (
+  //   option: SingleValue<{ value: string; label: string }>
+  // ) => {
+  //   dispatch(
+  //     setFiltersValue({
+  //       key: 'select',
+  //       value: option?.value,
+  //     })
+  //   );
+  // };
+
+  // const categoriesOptions = categoriesList.map((elem) => ({
+  //   value: elem.name,
+  //   label: elem.displayName,
+  // }));
 
   return (
     <aside className={filtersBlock}>
@@ -54,6 +71,12 @@ export function ProductsFilters() {
           onChange={(event) => filtersHandler(event, 'search')}
           placeholder="Поиск по названию товара"
         />
+        {/* <Select
+          options={categoriesOptions}
+          defaultValue={categoriesOptions[2]}
+          // placeholder={categoriesOptions[0]?.label}
+          onChange={(option) => selectHandler(option)}
+        /> */}
         <select
           value={select}
           onChange={(event) => filtersHandler(event, 'select')}
