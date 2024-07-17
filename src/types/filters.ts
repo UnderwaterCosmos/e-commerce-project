@@ -1,20 +1,20 @@
 import { IAddNewProductImagesBasis } from './forms';
 export interface ICategoriesElem {
   id?: number;
-  name: string;
-  displayName: string;
+  value: string;
+  label: string;
+}
+
+export interface ISelect {
+  value: string;
+  label: string;
 }
 
 export interface IFiltersState {
-  select: string;
+  select: ISelect;
   search: string;
   categoriesList: ICategoriesElem[];
   isLoading: boolean;
   newCategoryBasis: ICategoriesElem;
   newImagesObj: IAddNewProductImagesBasis;
-}
-
-export interface IFiltersData {
-  key: 'select' | 'search';
-  value: string;
 }

@@ -1,10 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import {
-  IFiltersState,
-  IFiltersData,
-  ICategoriesElem,
-} from '../../types/filters';
+import { IFiltersState, ISelect, ICategoriesElem } from '../../types/filters';
 import {
   ADD_CATEGORY_INITIAL_DATA,
   ADD_PRODUCT_IMAGES_OBJ,
@@ -81,7 +77,10 @@ const initialState: IFiltersState = {
   newCategoryBasis: ADD_CATEGORY_INITIAL_DATA,
   newImagesObj: ADD_PRODUCT_IMAGES_OBJ,
   categoriesList: [],
-  select: '',
+  select: {
+    value: '',
+    label: 'Все товары',
+  },
   search: '',
 };
 
@@ -89,8 +88,11 @@ const filtersSlice = createSlice({
   name: '@filters',
   initialState,
   reducers: {
-    setFiltersValue: (state, action: PayloadAction<IFiltersData>) => {
-      state[action.payload.key] = action.payload.value;
+    setSearchValue: (state, action: PayloadAction<string>) => {
+      state.search = action.payload;
+    },
+    setSelectValue: (state, action: PayloadAction<ISelect>) => {
+      state.select = action.payload;
     },
     setCategoryBasis: (state, action: PayloadAction<ICategoriesElem>) => {
       state.newCategoryBasis = action.payload;
@@ -120,6 +122,10 @@ const filtersSlice = createSlice({
   },
 });
 
-export const { setFiltersValue, setCategoryBasis, setNewImagesBasis } =
-  filtersSlice.actions;
+export const {
+  setSearchValue,
+  setSelectValue,
+  setCategoryBasis,
+  setNewImagesBasis,
+} = filtersSlice.actions;
 export const filtersReducer = filtersSlice.reducer;

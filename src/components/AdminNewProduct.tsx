@@ -118,8 +118,8 @@ export function AdminNewProduct() {
               onChange={(event) => fieldsHandler(event, 'category')}
             >
               {categoriesList.slice(1).map((category) => (
-                <option value={category.name} key={category.id}>
-                  {category.displayName}
+                <option value={category.value} key={category.id}>
+                  {category.label}
                 </option>
               ))}
             </select>

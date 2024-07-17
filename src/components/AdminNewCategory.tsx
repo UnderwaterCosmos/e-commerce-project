@@ -45,7 +45,7 @@ export function AdminNewCategory() {
 
   const fieldsHandler = (
     event: React.ChangeEvent<HTMLInputElement>,
-    key: 'name' | 'displayName'
+    key: 'value' | 'label'
   ) => {
     dispatch(
       setCategoryBasis({ ...newCategoryBasis, [key]: event.target.value })

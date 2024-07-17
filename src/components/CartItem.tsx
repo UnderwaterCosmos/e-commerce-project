@@ -25,14 +25,26 @@ interface ICartItem {
 
 export function CartItem({ cartItem, index }: ICartItem) {
   const quantity =
-    useAppSelector(selectUsersData).fullUserInfo!.cart[index].quantity;
+    useAppSelector(selectUsersData).fullUserInfo?.cart[index].quantity ?? 0;
   const dispatch = useAppDispatch();
 
   const quantityHandler = (name: string) => {
     if (name === 'increment') {
-      dispatch(manageProductInCart({ index, quantity: quantity + 1 }));
+      dispatch(
+        manageProductInCart({
+          index,
+          quantity: quantity + 1,
+          type: 'increment',
+        })
+      );
     } else {
-      dispatch(manageProductInCart({ index, quantity: quantity - 1 }));
+      dispatch(
+        manageProductInCart({
+          index,
+          quantity: quantity - 1,
+          type: 'decrement',
+        })
+      );
     }
   };
 

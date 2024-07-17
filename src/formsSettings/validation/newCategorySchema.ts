@@ -4,7 +4,7 @@ const engName = new RegExp(/^[a-z]+$/);
 const rusName = new RegExp(/^[А-Яа-яЁё]+$/);
 
 export const newCategorySchema = yup.object().shape({
-  name: yup
+  value: yup
     .string()
     .trim()
     .required('Обязательное поле!')
@@ -16,7 +16,7 @@ export const newCategorySchema = yup.object().shape({
       }
     )
     .matches(engName, 'Название должно состоять только из букв латиницы!'),
-  displayName: yup
+  label: yup
     .string()
     .trim()
     .required('Обязательное поле!')

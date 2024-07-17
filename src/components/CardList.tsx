@@ -40,7 +40,7 @@ export function CardList() {
     const productsPromise = dispatch(
       fetchProducts({
         _page: 1,
-        category_like: select,
+        category_like: select.value,
         title_like: debouncedSearch,
         replace: true,
         preventRequest: isBackBtnPressed,
@@ -68,7 +68,7 @@ export function CardList() {
       dispatch(
         fetchProducts({
           _page: currentPage + 1,
-          category_like: select,
+          category_like: select.value,
           title_like: debouncedSearch,
           replace: false,
           preventRequest: isBackBtnPressed,

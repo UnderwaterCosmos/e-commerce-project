@@ -29,7 +29,7 @@ export interface ILoginInputField {
 // ADD CATEGORY
 export interface IAddNewCategoryInputField {
   id: number;
-  name: 'name' | 'displayName';
+  name: 'value' | 'label';
   placeholder: string;
   label: string;
   type: string;

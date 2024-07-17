@@ -7,7 +7,7 @@ import { Checkout } from '../components/Checkout';
 import { selectUsersData, useAppSelector } from '../redux/store';
 
 export function Cart() {
-  const usersCart = useAppSelector(selectUsersData).fullUserInfo!.cart;
+  const usersCart = useAppSelector(selectUsersData).fullUserInfo?.cart ?? [];
   const [modalActive, setModalActive] = React.useState(false);
 
   const totalSum = usersCart.reduce(

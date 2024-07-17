@@ -16,7 +16,7 @@ const orderItem = cn('flex', 'gap-x-5', 'items-center', 'py-2', 'px-3.5');
 
 export function OrdersHistoryInnerItem({ orderName }: { orderName: string }) {
   const ordersHistory =
-    useAppSelector(selectUsersData).fullUserInfo!.ordersHistory;
+    useAppSelector(selectUsersData).fullUserInfo?.ordersHistory ?? {};
   const [isOrderOpened, setIsOrderOpened] = React.useState(false);
 
   const toggleIsOrderOpened = () => {

@@ -84,20 +84,20 @@ export const LOGIN_INPUT_FIELDS: ILoginInputField[] = [
 
 // ADD CATEGORY
 export const ADD_CATEGORY_INITIAL_DATA: ICategoriesElem = {
-  name: '',
-  displayName: '',
+  value: '',
+  label: '',
 };
 export const ADD_CATEGORY_INPUT_FIELDS: IAddNewCategoryInputField[] = [
   {
     id: 1,
-    name: 'name',
+    name: 'value',
     placeholder: 'dishes',
     label: 'Название на английском с маленькой буквы',
     type: 'text',
   },
   {
     id: 2,
-    name: 'displayName',
+    name: 'label',
     placeholder: 'Посуда',
     label: 'Название на русском с заглавной буквы:',
     type: 'text',

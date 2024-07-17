@@ -101,7 +101,7 @@ export const manageProductInCart = createAsyncThunk.withTypes<{
   async (
     productOrQuantity:
       | ISingleProduct
-      | { index: number; quantity: number }
+      | { index: number; quantity: number; type?: string }
       | ISingleProduct[],
     { dispatch, getState, rejectWithValue, extra }
   ) => {
@@ -170,12 +170,21 @@ export const manageProductInCart = createAsyncThunk.withTypes<{
         { cart: modifiedCart },
         actualUser.id
       );
-      dispatch(
-        setNotification({
-          type: 'success',
-          message: 'Товар добавлен в корзину!',
-        })
-      );
+      if (productOrQuantity.type === 'increment') {
+        dispatch(
+          setNotification({
+            type: 'success',
+            message: '+1',
+          })
+        );
+      } else {
+        dispatch(
+          setNotification({
+            type: 'success',
+            message: '-1',
+          })
+        );
+      }
       return cartWithProduct;
     } catch (error) {
       dispatch(

@@ -1,17 +1,16 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 import Select from 'react-select';
 
-import { Container } from '../Container';
-import { NavListItem } from './NavListItem';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { Container } from './Container';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 import {
   useAppSelector,
   selectUsersData,
   useAppDispatch,
-} from '../../redux/store';
-import { resetFullUserInfo } from '../../redux/slices/usersSlice';
-import { setNotification } from '../../redux/slices/notificationSlice';
+} from '../redux/store';
+import { resetFullUserInfo } from '../redux/slices/usersSlice';
+import { setNotification } from '../redux/slices/notificationSlice';
 
 const headerWrapper = cn(
   'flex',
@@ -24,6 +23,7 @@ const logoName = cn('text-main-black', 'font-[InterTightSemiBold]', 'text-2xl');
 const navList = cn('flex', 'gap-x-2', 'bg-main-gray', 'p-1', 'rounded-[10px]');
 const controls = cn('flex', 'gap-x-4', 'items-center');
 const controlsCart = cn('px-4', 'py-2.5', 'bg-main-black rounded-[10px]');
+const navListLink = cn('text-main-black', 'px-4', 'py-2', 'rounded-lg');
 const logOutBtn = cn(
   'cursor-pointer',
   'flex',
@@ -97,7 +97,6 @@ export function Header() {
   const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const links = fullUserInfo?.type === 'admin' ? adminLinks : customerLinks;
 
@@ -125,11 +124,17 @@ export function Header() {
           <nav>
             <ul className={navList}>
               {links.map((link) => (
-                <NavListItem
-                  link={link}
-                  path={location.pathname}
-                  key={link.name}
-                />
+                <li className="py-1.5" key={link.name}>
+                  <NavLink
+                    to={link.path}
+                    className={navListLink}
+                    style={({ isActive }) => ({
+                      backgroundColor: isActive ? 'white' : '',
+                    })}
+                  >
+                    {link.name}
+                  </NavLink>
+                </li>
               ))}
             </ul>
           </nav>
@@ -166,7 +171,6 @@ export function Header() {
                   <img
                     src="images/avatar-placeholder.png"
                     width={60}
-                    height={60}
                     alt="Your's avatar"
                   />
                 </li>
@@ -183,7 +187,7 @@ export function Header() {
               </div> */}
             </li>
             <li>
-              {/* <Select
+              <Select
                 options={selectOptions}
                 defaultValue={selectOptions[0]}
                 styles={{
@@ -196,11 +200,11 @@ export function Header() {
                     color: '#1D1D1D',
                   }),
                 }}
-              /> */}
-              <select className="text-black">
+              />
+              {/* <select className="text-black">
                 <option value="ru">RU</option>
                 <option value="en">EN</option>
-              </select>
+              </select> */}
             </li>
           </ul>
         </div>

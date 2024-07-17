@@ -5,7 +5,7 @@ import {
   Navigate,
 } from 'react-router-dom';
 
-import { Header } from './components/HeaderModule/Header';
+import { Header } from './components/Header';
 import { Main } from './pages/Main';
 import { Products } from './pages/Products';
 import { SingleProduct } from './pages/SingleProduct';
@@ -21,6 +21,10 @@ import { AdminEditProduct } from './components/AdminEditProduct';
 import { Cart } from './pages/Cart';
 import { Footer } from './components/Footer';
 import { Notification } from './components/Notification';
+import { NotFound } from './pages/NotFound';
+import { useLocalStorage } from './hooks/useLocalStorage';
+
+const token = useLocalStorage('token');
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +37,7 @@ export const router = createBrowserRouter([
         <Notification />
       </>
     ),
+    errorElement: <NotFound />,
     children: [
       {
         index: true,
@@ -107,6 +112,12 @@ export const router = createBrowserRouter([
       {
         path: 'cart',
         element: <Cart />,
+        loader: () => {
+          if (!token.getItem()) {
+            return redirect('/main');
+          }
+          return null;
+        },
       },
     ],
   },

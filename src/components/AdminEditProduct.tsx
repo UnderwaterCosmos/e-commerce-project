@@ -64,6 +64,7 @@ export function AdminEditProduct() {
     }
     if (!singleProduct) {
       dispatch(fetchSingleProduct(id!));
+      // navigate(-2);
     }
   }, [dispatch, id]);
 
