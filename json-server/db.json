@@ -2604,28 +2604,28 @@
   "categories": [
     {
       "id": 1,
-      "name": "",
-      "displayName": "Все товары"
+      "value": "",
+      "label": "Все товары"
     },
     {
       "id": 2,
-      "name": "houseplants",
-      "displayName": "Комнатные растения"
+      "value": "houseplants",
+      "label": "Комнатные растения"
     },
     {
       "id": 3,
-      "name": "appliances",
-      "displayName": "Бытовая техника"
+      "value": "appliances",
+      "label": "Бытовая техника"
     },
     {
       "id": 4,
-      "name": "cosmetics",
-      "displayName": "Косметика"
+      "value": "cosmetics",
+      "label": "Косметика"
     },
     {
       "id": 5,
-      "name": "clothes",
-      "displayName": "Одежда"
+      "value": "clothes",
+      "label": "Одежда"
     }
   ],
   "users": [

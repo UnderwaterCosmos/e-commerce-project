@@ -21,6 +21,7 @@ import { manageProductInCart } from '../redux/slices/usersSlice';
 import { ISingleProduct } from '../types/products';
 import { fetchProducts } from '../redux/slices/productsSlice';
 import { fetchCategories } from '../redux/slices/filtersSlice';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const description = cn('flex', 'flex-col', 'justify-center');
 
@@ -33,6 +34,7 @@ export function SingleProduct() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [mainImageUrl, setMainImageUrl] = React.useState('');
+  const refreshedFlag = useLocalStorage('isEditProductRefreshed');
 
   React.useEffect(() => {
     const singleProductPromise = dispatch(fetchSingleProduct(id!));
@@ -49,7 +51,12 @@ export function SingleProduct() {
 
   const backBtnHandler = () => {
     dispatch(setBackBtnStatus(true));
-    navigate(-1);
+    if (refreshedFlag.getItem()) {
+      navigate('/products');
+      refreshedFlag.removeItem();
+    } else {
+      navigate(-1);
+    }
   };
 
   return (

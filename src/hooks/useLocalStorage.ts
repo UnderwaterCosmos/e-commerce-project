@@ -1,5 +1,5 @@
 export function useLocalStorage(key: string) {
-  const setItem = (value: number) => {
+  const setItem = (value: number | boolean) => {
     try {
       window.localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {

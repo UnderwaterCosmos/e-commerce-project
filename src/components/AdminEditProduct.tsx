@@ -57,6 +57,7 @@ export function AdminEditProduct() {
   const { id } = useParams();
   const navigate = useNavigate();
   const token = useLocalStorage('token');
+  const refreshedFlag = useLocalStorage('isEditProductRefreshed');
 
   React.useEffect(() => {
     if (!token.getItem() || fullUserInfo?.type !== 'admin') {
@@ -64,7 +65,7 @@ export function AdminEditProduct() {
     }
     if (!singleProduct) {
       dispatch(fetchSingleProduct(id!));
-      // navigate(-2);
+      refreshedFlag.setItem(true);
     }
   }, [dispatch, id]);
 
