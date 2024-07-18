@@ -11,6 +11,7 @@ export default {
         'light-background': 'rgba(246, 246, 246, 1)',
         'main-black': 'rgba(29, 29, 29, 1)',
         'main-gray': 'rgba(238, 238, 238, 1)',
+        'main-blue': 'rgba(1, 71, 255, 1)',
       },
     },
   },

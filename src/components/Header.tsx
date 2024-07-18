@@ -60,7 +60,7 @@ const darkSwitcher = cn(
   'items-center',
   'p-0.5',
   'rounded-full',
-  'bg-[#0147FF]'
+  'bg-main-blue'
 );
 
 const customerLinks = [
@@ -114,7 +114,7 @@ export function Header() {
   };
 
   return (
-    <header className="mb-4">
+    <header className="mb-8">
       <Container>
         <div className={headerWrapper}>
           <Link to={'/products'} className="flex items-center gap-x-3">
