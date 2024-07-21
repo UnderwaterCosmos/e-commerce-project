@@ -10,14 +10,13 @@ import { enterKeyHandler } from '../formsSettings/utilsFunctions';
 import {
   selectFiltersData,
   selectProductsData,
+  selectSingleProductsData,
   useAppDispatch,
   useAppSelector,
 } from '../redux/store';
 import { setProductsBasis, addNewProduct } from '../redux/slices/productsSlice';
-import {
-  fetchCategories,
-  setNewImagesBasis,
-} from '../redux/slices/filtersSlice';
+import { fetchCategories } from '../redux/slices/filtersSlice';
+import { setNewImagesBasis } from '../redux/slices/singleProductSlice';
 import {
   ADD_PRODUCT_INITIAL_DATA,
   ADD_PRODUCT_INPUT_FIELDS,
@@ -41,7 +40,7 @@ export function AdminNewProduct() {
   const isLoading = useAppSelector(selectProductsData).isLoading;
   const newProductBasis = useAppSelector(selectProductsData).newProductBasis;
   const categoriesList = useAppSelector(selectFiltersData).categoriesList;
-  const newImagesObj = useAppSelector(selectFiltersData).newImagesObj;
+  const newImagesObj = useAppSelector(selectSingleProductsData).newImagesObj;
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
@@ -82,7 +81,7 @@ export function AdminNewProduct() {
       addNewProduct({
         ...newProductBasis,
         images: Object.values(newImagesObj),
-        // price: Number(newProductBasis['price']),
+        price: Number(newProductBasis['price']),
       })
     );
     dispatch(setProductsBasis(ADD_PRODUCT_INITIAL_DATA));

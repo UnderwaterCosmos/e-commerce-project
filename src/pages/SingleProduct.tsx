@@ -23,7 +23,8 @@ import { fetchProducts } from '../redux/slices/productsSlice';
 import { fetchCategories } from '../redux/slices/filtersSlice';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
-const description = cn('flex', 'flex-col', 'justify-center');
+const description = cn('flex', 'flex-col', 'gap-y-8');
+const mainImage = cn('max-w-full', 'h-auto', 'object-cover', 'rounded-main');
 
 export function SingleProduct() {
   const isLoading = useAppSelector(selectSingleProductsData).isLoading;
@@ -37,15 +38,21 @@ export function SingleProduct() {
   const refreshedFlag = useLocalStorage('isEditProductRefreshed');
 
   React.useEffect(() => {
-    const singleProductPromise = dispatch(fetchSingleProduct(id!));
+    const fetchData = async () => {
+      const singleProductPromise = await dispatch(fetchSingleProduct(id!));
 
+      if (!singleProductPromise.payload) {
+        navigate('/products');
+      }
+    };
+
+    fetchData();
     return () => {
       dispatch(setBackBtnStatus(false));
       if (productsList.length === 0) {
         dispatch(fetchCategories(false));
         dispatch(fetchProducts({ _page: 1 }));
       }
-      singleProductPromise.abort();
     };
   }, [dispatch, id]);
 
@@ -65,43 +72,61 @@ export function SingleProduct() {
         {isLoading ? (
           <Loader />
         ) : (
-          <div className="flex gap-3">
+          <div className="flex gap-x-[60px]">
             <BackBtn onClick={backBtnHandler} />
             <article className="flex items-center gap-x-4">
               <div>
                 {singleProduct?.images.map((url, index) => (
                   <img
-                    className="mb-2 border-2 border-black"
+                    className="mb-2 rounded-main cursor-pointer"
                     src={url}
                     width={115}
-                    height={115}
                     alt={`Image ${index + 1}`}
                     onClick={() => setMainImageUrl(url)}
                     key={url}
                   />
                 ))}
               </div>
-              <img
-                src={mainImageUrl ? mainImageUrl : singleProduct?.images[0]}
-                width={650}
-                height={650}
-                alt={singleProduct?.description}
-              />
+              <div>
+                <img
+                  src={mainImageUrl ? mainImageUrl : singleProduct?.images[0]}
+                  className={mainImage}
+                  width={602}
+                  height={602}
+                  alt={singleProduct?.description}
+                />
+              </div>
             </article>
-            <article className={description}>
-              <h1>{singleProduct?.title}</h1>
-              <h2>{singleProduct?.description}</h2>
-              <p>{singleProduct?.price} Р</p>
-              <CartBtn
-                productId={singleProduct?.id}
-                onClick={() =>
-                  dispatch(manageProductInCart(singleProduct as ISingleProduct))
-                }
-              />
-              {fullUserInfo?.type === 'admin' && (
-                <Link to={`/products/${id}/edit`}>РЕДАКТИРОВАТЬ ТОВАР</Link>
-              )}
-            </article>
+            <div className="flex items-center">
+              <article className={description}>
+                <h1 className="text-primary-h1 font-semibold">
+                  {singleProduct?.title}
+                </h1>
+                <h2>{singleProduct?.description}</h2>
+                <p className="text-primary-h1 font-medium">
+                  {singleProduct?.price} ₽
+                </p>
+                <CartBtn
+                  productId={singleProduct?.id}
+                  onClick={() =>
+                    dispatch(
+                      manageProductInCart(singleProduct as ISingleProduct)
+                    )
+                  }
+                >
+                  Добавить в корзину
+                </CartBtn>
+                {fullUserInfo?.type === 'admin' && (
+                  <Link
+                    to={`/products/${id}/edit`}
+                    className="text-primary-blue font-medium flex gap-x-2.5"
+                  >
+                    <img src="/images/edit.svg" width={20} alt="edit" />
+                    Редактировать товар
+                  </Link>
+                )}
+              </article>
+            </div>
           </div>
         )}
       </Container>

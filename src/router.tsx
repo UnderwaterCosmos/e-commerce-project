@@ -22,6 +22,7 @@ import { Cart } from './pages/Cart';
 import { Footer } from './components/Footer';
 import { Notification } from './components/Notification';
 import { NotFound } from './pages/NotFound';
+import { CheckAccess } from './components/CheckAccess';
 import { useLocalStorage } from './hooks/useLocalStorage';
 
 const token = useLocalStorage('token');
@@ -57,14 +58,20 @@ export const router = createBrowserRouter([
       },
       {
         path: 'products/:id/edit',
-        element: <AdminEditProduct />,
+        element: (
+          <CheckAccess>
+            <AdminEditProduct />
+          </CheckAccess>
+        ),
       },
       {
         path: 'admin',
         element: (
           <div className="grow text-center">
-            <Admin />
-            <Outlet />
+            <CheckAccess>
+              <Admin />
+              <Outlet />
+            </CheckAccess>
           </div>
         ),
         children: [

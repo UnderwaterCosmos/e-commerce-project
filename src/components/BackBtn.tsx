@@ -1,13 +1,21 @@
 import React from 'react';
 import cn from 'classnames';
-import { FaArrowLeftLong } from 'react-icons/fa6';
 
-const backBtn = cn('h-8', 'p-2', 'bg-slate-300', 'rounded-full');
+const backBtn = cn(
+  'w-[42px]',
+  'h-[42px]',
+  'p-2',
+  'bg-slate-300',
+  'rounded-main',
+  'flex',
+  'items-center',
+  'justify-center',
+);
 
 export function BackBtn(props: React.HTMLProps<HTMLButtonElement>) {
   return (
     <button {...props} type="button" className={backBtn}>
-      <FaArrowLeftLong />
+      <img src="/images/back-arrow.svg" alt="back" />
     </button>
   );
 }

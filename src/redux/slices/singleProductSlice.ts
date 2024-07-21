@@ -1,9 +1,20 @@
-import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import {
+  createAsyncThunk,
+  createSlice,
+  isAnyOf,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 
 import { AppDispatch, RootState } from '../store';
 import { ISingleProduct, ISingleProductState } from '../../types/products';
-import { IProductEditedValueBasis } from '../../types/forms';
-import { EDIT_PRODUCT_INITIAL_DATA } from '../../formsSettings/formsData';
+import {
+  IProductEditedValueBasis,
+  IAddNewProductImagesBasis,
+} from '../../types/forms';
+import {
+  EDIT_PRODUCT_INITIAL_DATA,
+  ADD_PRODUCT_IMAGES_OBJ,
+} from '../../formsSettings/formsData';
 import { setNotification } from './notificationSlice';
 
 export const fetchSingleProduct = createAsyncThunk.withTypes<{
@@ -71,6 +82,7 @@ const initialState: ISingleProductState = {
   isLoading: false,
   singleProduct: null,
   editProductBasis: EDIT_PRODUCT_INITIAL_DATA,
+  newImagesObj: ADD_PRODUCT_IMAGES_OBJ,
   isBackBtnPressed: false,
 };
 
@@ -78,11 +90,20 @@ const singleProductSlice = createSlice({
   name: '@singleProduct',
   initialState,
   reducers: {
-    setBackBtnStatus: (state, action) => {
+    setBackBtnStatus: (state, action: PayloadAction<boolean>) => {
       state.isBackBtnPressed = action.payload;
     },
-    setEditProductBasis: (state, action) => {
+    setEditProductBasis: (
+      state,
+      action: PayloadAction<IProductEditedValueBasis>
+    ) => {
       state.editProductBasis = action.payload;
+    },
+    setNewImagesBasis: (
+      state,
+      action: PayloadAction<IAddNewProductImagesBasis>
+    ) => {
+      state.newImagesObj = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -109,6 +130,6 @@ const singleProductSlice = createSlice({
   },
 });
 
-export const { setBackBtnStatus, setEditProductBasis } =
+export const { setBackBtnStatus, setEditProductBasis, setNewImagesBasis } =
   singleProductSlice.actions;
 export const singleProductReducer = singleProductSlice.reducer;

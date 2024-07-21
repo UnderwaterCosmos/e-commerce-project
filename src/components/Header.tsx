@@ -16,30 +16,34 @@ const headerWrapper = cn(
   'flex',
   'justify-between',
   'items-center',
-  'py-4',
+  'py-5',
   'text-white'
 );
-const logoName = cn('text-main-black', 'font-[InterTightSemiBold]', 'text-2xl');
-const navList = cn('flex', 'gap-x-2', 'bg-main-gray', 'p-1', 'rounded-[10px]');
+const logoName = cn(
+  'text-primary-black',
+  'font-[InterTightSemiBold]',
+  'text-2xl'
+);
+const navList = cn('flex', 'gap-x-2', 'bg-primary-gray', 'p-1', 'rounded-main');
 const controls = cn('flex', 'gap-x-4', 'items-center');
-const controlsCart = cn('px-4', 'py-2.5', 'bg-main-black rounded-[10px]');
-const navListLink = cn('text-main-black', 'px-4', 'py-2', 'rounded-lg');
+const controlsCart = cn('px-4', 'py-2.5', 'bg-primary-black rounded-main');
+const navListLink = cn('text-primary-black', 'px-4', 'py-2', 'rounded-lg');
 const logOutBtn = cn(
   'cursor-pointer',
   'flex',
   'gap-x-2.5',
-  'bg-main-gray',
+  'bg-primary-gray',
   'px-4',
   'py-2.5',
-  'rounded-[10px]',
+  'rounded-main',
   'text-black'
 );
 const logInBtn = cn(
   'cursor-pointer',
-  'bg-main-black',
+  'bg-primary-black',
   'px-4',
   'py-2.5',
-  'rounded-[10px]',
+  'rounded-main',
   'text-white'
 );
 const lightSwitcher = cn(
@@ -60,7 +64,7 @@ const darkSwitcher = cn(
   'items-center',
   'p-0.5',
   'rounded-full',
-  'bg-main-blue'
+  'bg-primary-blue'
 );
 
 const customerLinks = [
@@ -171,7 +175,7 @@ export function Header() {
                   <img
                     src="images/avatar-placeholder.png"
                     width={60}
-                    alt="Your's avatar"
+                    alt="placeholder"
                   />
                 </li>
               </>

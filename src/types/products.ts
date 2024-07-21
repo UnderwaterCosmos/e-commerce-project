@@ -1,4 +1,4 @@
-import { IProductEditedValueBasis } from './forms';
+import { IProductEditedValueBasis, IAddNewProductImagesBasis } from './forms';
 
 export interface ISingleProduct {
   id?: number;
@@ -27,6 +27,7 @@ export interface ISingleProductState {
   isLoading: boolean;
   isBackBtnPressed: boolean;
   editProductBasis: IProductEditedValueBasis;
+  newImagesObj: IAddNewProductImagesBasis;
 }
 
 export const isSingleProduct = (

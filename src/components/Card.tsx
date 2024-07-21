@@ -6,8 +6,11 @@ import { ISingleProduct } from '../types/products';
 import { useAppDispatch } from '../redux/store';
 import { manageProductInCart } from '../redux/slices/usersSlice';
 
-const singleCard = cn('border-2', 'border-black', 'p-1.5');
-const image = cn('max-w-full', 'h-auto', 'object-cover');
+const singleCard = cn('p-4', 'rounded-main', 'bg-primary-gray', 'h-full');
+const cardWrapper = cn('min-h-full', 'flex', 'flex-col', 'overflow-hidden');
+const image = cn('max-w-full', 'h-auto', 'object-cover', 'rounded-main');
+const productCategory = cn('text-sm', 'text-left', 'text-[#9A9A9A]', 'mb-1.5');
+const productTitle = cn('text-left', 'font-semibold', 'mb-4');
 
 interface IProduct {
   product: ISingleProduct;
@@ -18,25 +21,28 @@ export function Card({ product }: IProduct) {
 
   return (
     <li className={singleCard}>
-      <Link to={`/products/${product.id}`}>
-        <div>
-          <img
-            className={image}
-            src={product.images[0]}
-            alt={`${product.title}'s photo`}
-            width={250}
-            loading="lazy"
-          />
+      <div className={cardWrapper}>
+        <Link to={`/products/${product.id}`} className="grow">
+          <div className="mb-4">
+            <img
+              className={image}
+              src={product.images[0]}
+              alt={`${product.title}'s photo`}
+              loading="lazy"
+            />
+          </div>
+          <h4 className={productCategory}>{product.category}</h4>
+          <h3 className={productTitle}>{product.title}</h3>
+        </Link>
+        <div className="flex justify-between items-center">
+          <p>{product.price} ₽</p>
+          <CartBtn
+            productId={product.id}
+            onClick={() => dispatch(manageProductInCart(product))}
+          >
+            +
+          </CartBtn>
         </div>
-        <h3 className="text-center">{product.title}</h3>
-        <h4 className="text-sm text-left">{product.category}</h4>
-      </Link>
-      <div className="flex justify-between z-50">
-        <p>{product.price}р</p>
-        <CartBtn
-          productId={product.id}
-          onClick={() => dispatch(manageProductInCart(product))}
-        />
       </div>
     </li>
   );

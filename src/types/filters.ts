@@ -1,4 +1,3 @@
-import { IAddNewProductImagesBasis } from './forms';
 export interface ICategoriesElem {
   id?: number;
   value: string;
@@ -16,5 +15,4 @@ export interface IFiltersState {
   categoriesList: ICategoriesElem[];
   isLoading: boolean;
   newCategoryBasis: ICategoriesElem;
-  newImagesObj: IAddNewProductImagesBasis;
 }

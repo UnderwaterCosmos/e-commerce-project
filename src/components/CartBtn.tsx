@@ -11,11 +11,13 @@ import { setNotification } from '../redux/slices/notificationSlice';
 interface IProductId {
   productId?: number;
   onClick: () => void;
+  children: React.ReactNode;
 }
 
 export function CartBtn({
   productId,
   onClick,
+  children,
   ...props
 }: IProductId & React.HTMLProps<HTMLButtonElement>) {
   const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
@@ -26,10 +28,22 @@ export function CartBtn({
     [fullUserInfo?.cart]
   );
 
-  const cartBtn = cn('bg-emerald-300', 'rounded-xl', 'p-1', {
-    'bg-red-300 opacity-75 cursor-default':
-      isProductInCart || !Boolean(fullUserInfo),
-  });
+  const cartBtn = cn(
+    'bg-primary-blue',
+    'rounded-lg',
+    'text-white',
+    'font-medium',
+    'max-w-40',
+    'py-2.5',
+    'px-4',
+    'whitespace-nowrap',
+    'flex',
+    'justify-center',
+    {
+      'px-[11px] !py-0.5 text-2xl': children === '+',
+      'opacity-50 cursor-default': isProductInCart || !Boolean(fullUserInfo),
+    }
+  );
 
   const clickHandler = () => {
     if (!Boolean(fullUserInfo)) {
@@ -50,7 +64,7 @@ export function CartBtn({
 
   return (
     <button {...props} className={cartBtn} type="button" onClick={clickHandler}>
-      Добавить в корзину
+      {children}
     </button>
   );
 }

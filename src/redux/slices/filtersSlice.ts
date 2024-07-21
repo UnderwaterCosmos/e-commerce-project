@@ -75,7 +75,6 @@ export const addNewCategory = createAsyncThunk.withTypes<{
 const initialState: IFiltersState = {
   isLoading: false,
   newCategoryBasis: ADD_CATEGORY_INITIAL_DATA,
-  newImagesObj: ADD_PRODUCT_IMAGES_OBJ,
   categoriesList: [],
   select: {
     value: '',
@@ -97,12 +96,6 @@ const filtersSlice = createSlice({
     setCategoryBasis: (state, action: PayloadAction<ICategoriesElem>) => {
       state.newCategoryBasis = action.payload;
     },
-    setNewImagesBasis: (
-      state,
-      action: PayloadAction<IAddNewProductImagesBasis>
-    ) => {
-      state.newImagesObj = action.payload;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -122,10 +115,6 @@ const filtersSlice = createSlice({
   },
 });
 
-export const {
-  setSearchValue,
-  setSelectValue,
-  setCategoryBasis,
-  setNewImagesBasis,
-} = filtersSlice.actions;
+export const { setSearchValue, setSelectValue, setCategoryBasis } =
+  filtersSlice.actions;
 export const filtersReducer = filtersSlice.reducer;

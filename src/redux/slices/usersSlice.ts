@@ -174,14 +174,14 @@ export const manageProductInCart = createAsyncThunk.withTypes<{
         dispatch(
           setNotification({
             type: 'success',
-            message: '+1',
+            message: 'Количество увеличено на 1',
           })
         );
       } else {
         dispatch(
           setNotification({
             type: 'success',
-            message: '-1',
+            message: 'Количество уменьшено на 1',
           })
         );
       }

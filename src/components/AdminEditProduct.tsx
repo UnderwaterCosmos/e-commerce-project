@@ -21,7 +21,7 @@ import {
   editSingleProduct,
   fetchSingleProduct,
 } from '../redux/slices/singleProductSlice';
-import { setNewImagesBasis } from '../redux/slices/filtersSlice';
+import { setNewImagesBasis } from '../redux/slices/singleProductSlice';
 import {
   EDIT_PRODUCT_INITIAL_DATA,
   EDIT_PRODUCT_INPUT_FIELDS,
@@ -35,6 +35,14 @@ import {
 import { editProductSchema } from '../formsSettings/validation/editProductSchema';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
+const editTitle = cn(
+  'text-primary-h1',
+  'font-semibold',
+  'text-center',
+  'mt-[-45px]',
+  'mb-4'
+);
+const nonEditableInfo = cn('text-center', 'text-lg', 'mb-3.5');
 const editProductForm = cn(
   'flex',
   'flex-col',
@@ -49,20 +57,16 @@ export function AdminEditProduct() {
   const isLoading = useAppSelector(selectSingleProductsData).isLoading;
   const singleProduct = useAppSelector(selectSingleProductsData).singleProduct;
   const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
-  const newImagesObj = useAppSelector(selectFiltersData).newImagesObj;
+  const newImagesObj = useAppSelector(selectSingleProductsData).newImagesObj;
   const editProductBasis = useAppSelector(
     selectSingleProductsData
   ).editProductBasis;
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
-  const token = useLocalStorage('token');
   const refreshedFlag = useLocalStorage('isEditProductRefreshed');
 
   React.useEffect(() => {
-    if (!token.getItem() || fullUserInfo?.type !== 'admin') {
-      navigate('/main');
-    }
     if (!singleProduct) {
       dispatch(fetchSingleProduct(id!));
       refreshedFlag.setItem(true);
@@ -101,11 +105,6 @@ export function AdminEditProduct() {
     const editedData = Object.fromEntries(
       Object.entries(editProductBasis).filter((elem) => elem[1] !== '')
     );
-    // const editedData: IProductEditedValueBasis = {};
-    // for (const key in editProductBasis) {
-    //   if (editProductBasis[key] === '') continue;
-    //   editedData[key] = editProductBasis[key];
-    // }
 
     dispatch(
       editSingleProduct({
@@ -126,13 +125,16 @@ export function AdminEditProduct() {
         ) : (
           <>
             <BackBtn onClick={() => navigate(-1)} />
+            <h1 className={editTitle}>Редактировать товар</h1>
+            <p className={nonEditableInfo}>ID: {singleProduct?.id}</p>
+            <p className={nonEditableInfo}>
+              CATEGORY: {singleProduct?.category.toUpperCase()}
+            </p>
             <form
               className={editProductForm}
               onSubmit={handleSubmit(submitHandler)}
               onKeyDown={enterKeyHandler}
             >
-              <p>ID: {singleProduct?.id}</p>
-              <p>CATEGORY: {singleProduct?.category.toUpperCase()}</p>
               {singleProduct &&
                 EDIT_PRODUCT_INPUT_FIELDS.map((fieldObj) => {
                   const placeholderObj = {

@@ -17,7 +17,7 @@ import { fetchProducts } from '../redux/slices/productsSlice';
 import { useDebounce } from '../hooks/useDebounce';
 import { useInfiniteScroll } from '../hooks/useInfiniteScroll';
 
-const list = cn('grid', 'gap-4', 'grid-cols-4', 'mb-4');
+const list = cn('grid', 'gap-4', 'grid-cols-4');
 
 export function CardList() {
   const isLoading = useAppSelector(selectProductsData).isLoading;
