@@ -116,7 +116,7 @@ export function SingleProduct() {
                 >
                   Добавить в корзину
                 </CartBtn>
-                {fullUserInfo?.type === 'admin' && (
+                {fullUserInfo?.accType === 'admin' && (
                   <Link
                     to={`/products/${id}/edit`}
                     className="text-primary-blue font-medium flex gap-x-2.5"

@@ -1,52 +1,26 @@
 import cn from 'classnames';
-import { UseFormRegister, FieldErrors } from 'react-hook-form';
+
+import { UseFormRegister } from 'react-hook-form';
+import { incorrectInput } from '../formsSettings/utilsFunctions';
 
 import {
-  RegistrationBasis,
-  LoginBasis,
-  IRegistrationInputField,
-  RegistrationFieldsNames,
-  LoginFieldsNames,
-  ILoginInputField,
-  IAddNewCategoryInputField,
-  IAddNewProductInputField,
-  IAddNewProductsImageInputField,
-  IAddNewProductImagesBasis,
-  IProductEditedValueBasis,
-  IEditProductInputField,
+  // RegistrationFieldsNames,
+  // LoginFieldsNames,
+  State,
+  Errors,
+  FieldObj,
 } from '../types/forms';
-import { ICategoriesElem } from '../types/filters';
-import { ISingleProduct } from '../types/products';
 
-const inputField = cn('bg-slate-200', 'rounded-full', 'mb-2', 'p-1.5');
-const errMessage = cn('mb-0.5', 'text-red-600', 'font-semibold');
+const errMessage = cn('text-rose-500', 'font-semibold');
 
 interface IProps {
-  state:
-    | RegistrationBasis
-    | LoginBasis
-    | ICategoriesElem
-    | ISingleProduct
-    | IAddNewProductImagesBasis
-    | IProductEditedValueBasis;
+  state: State;
   register: UseFormRegister<any>;
   // register:
   // | UseFormRegister<Omit<RegistrationBasis, 'type'>>
   // | UseFormRegister<LoginBasis>;
-  errors:
-    | FieldErrors<Omit<RegistrationBasis, 'type'>>
-    | FieldErrors<LoginBasis>
-    | FieldErrors<ICategoriesElem>
-    | FieldErrors<ISingleProduct>
-    | FieldErrors<IAddNewProductImagesBasis>
-		| FieldErrors<IProductEditedValueBasis>;
-  fieldObj:
-    | IRegistrationInputField
-    | ILoginInputField
-    | IAddNewCategoryInputField
-    | IAddNewProductInputField
-    | IAddNewProductsImageInputField
-    | IEditProductInputField;
+  errors: Errors;
+  fieldObj: FieldObj;
   fieldsHandler: (
     event: React.ChangeEvent<HTMLInputElement>,
     key: any
@@ -61,9 +35,22 @@ export function FormInputField({
   fieldObj,
   fieldsHandler,
 }: IProps) {
+  const inputField = cn(
+    'rounded-md',
+    'py-2.5',
+    'px-3',
+    'placeholder:text-[#CACACA]',
+    'border',
+    {
+      'border-2 border-rose-500': incorrectInput(errors, fieldObj),
+    }
+  );
+
   return (
-    <>
-      <label htmlFor={fieldObj.name}>{fieldObj.label}</label>
+    <div className="flex flex-col">
+      <label htmlFor={fieldObj.name} className="mb-1 text-left">
+        {fieldObj.label}
+      </label>
       <input
         {...register(fieldObj.name)}
         className={inputField}
@@ -78,6 +65,6 @@ export function FormInputField({
           {errors[fieldObj.name as keyof typeof errors]?.message}
         </p>
       )}
-    </>
+    </div>
   );
 }

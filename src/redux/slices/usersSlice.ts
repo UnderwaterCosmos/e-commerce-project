@@ -8,6 +8,7 @@ import type { Router } from '@remix-run/router';
 
 import { IUser, IUserState } from '../../types/users';
 import { RegistrationBasis, LoginBasis } from '../../types/forms';
+import { ISelect } from '../../types/filters';
 import {
   ISingleProduct,
   isSingleProduct,
@@ -218,6 +219,9 @@ const usersSlice = createSlice({
     setRegistrationBasis: (state, action: PayloadAction<RegistrationBasis>) => {
       state.registrationBasis = action.payload;
     },
+    setRegSelectBasis: (state, action: PayloadAction<ISelect>) => {
+      state.registrationBasis.type = action.payload;
+    },
     setLoginBasis: (state, action: PayloadAction<LoginBasis>) => {
       state.loginBasis = action.payload;
     },
@@ -260,6 +264,10 @@ const usersSlice = createSlice({
   },
 });
 
-export const { setRegistrationBasis, setLoginBasis, resetFullUserInfo } =
-  usersSlice.actions;
+export const {
+  setRegistrationBasis,
+  setLoginBasis,
+  resetFullUserInfo,
+  setRegSelectBasis,
+} = usersSlice.actions;
 export const usersReducer = usersSlice.reducer;

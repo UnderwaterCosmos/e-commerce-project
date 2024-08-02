@@ -20,7 +20,10 @@ export const REGISTRATION_INITIAL_USER_DATA: RegistrationBasis = {
   confirmPassword: '',
   login: '',
   avatarUrl: '',
-  type: 'customer',
+  type: {
+    value: 'customer',
+    label: 'Покупатель',
+  },
 };
 export const REGISTRATION_INPUT_FIELDS: IRegistrationInputField[] = [
   {

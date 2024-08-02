@@ -1,5 +1,8 @@
+import { FieldErrors } from 'react-hook-form';
+
 import { IUser } from './users';
 import { ISingleProduct } from './products';
+import { ICategoriesElem } from './filters';
 
 // REGISTRATION
 export type RegistrationFieldsNames = Exclude<
@@ -73,3 +76,28 @@ export interface IEditProductInputField {
   label: string;
   type: string;
 }
+
+// FORM INPUT FIELD PROPS
+export type State =
+  | RegistrationBasis
+  | LoginBasis
+  | ICategoriesElem
+  | ISingleProduct
+  | IAddNewProductImagesBasis
+  | IProductEditedValueBasis;
+
+export type Errors =
+  | FieldErrors<Omit<RegistrationBasis, 'type'>>
+  | FieldErrors<LoginBasis>
+  | FieldErrors<ICategoriesElem>
+  | FieldErrors<ISingleProduct>
+  | FieldErrors<IAddNewProductImagesBasis>
+  | FieldErrors<IProductEditedValueBasis>;
+
+export type FieldObj =
+  | IRegistrationInputField
+  | ILoginInputField
+  | IAddNewCategoryInputField
+  | IAddNewProductInputField
+  | IAddNewProductsImageInputField
+  | IEditProductInputField;

@@ -2,17 +2,15 @@ import React from 'react';
 import cn from 'classnames';
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
 
+import { incorrectInput } from '../formsSettings/utilsFunctions';
 import {
   RegistrationBasis,
   LoginBasis,
   IRegistrationInputField,
-  RegistrationFieldsNames,
-  LoginFieldsNames,
+  // RegistrationFieldsNames,
+  // LoginFieldsNames,
   ILoginInputField,
 } from '../types/forms';
-
-const inputField = cn('bg-slate-200', 'rounded-full', 'mb-2', 'p-1.5');
-const errMessage = cn('mb-0.5', 'text-red-600', 'font-semibold');
 
 interface IProps {
   state: RegistrationBasis | LoginBasis;
@@ -40,10 +38,23 @@ export function FormPasswordField({
 }: IProps) {
   const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
 
+  const inputField = cn(
+    'rounded-md',
+    'py-2.5',
+    'px-3',
+    'placeholder:text-[#CACACA]',
+    'border',
+    {
+      'border-2 border-rose-500': incorrectInput(errors, fieldObj),
+    }
+  );
+
   return (
-    <>
+    <div>
       <div className="flex flex-col relative">
-        <label htmlFor={fieldObj.name}>{fieldObj.label}</label>
+        <label htmlFor={fieldObj.name} className=" text-left mb-1">
+          {fieldObj.label}
+        </label>
         <input
           {...register(fieldObj.name)}
           className={inputField}
@@ -54,7 +65,7 @@ export function FormPasswordField({
           onChange={(event) => fieldsHandler(event, fieldObj.name)}
         />
 
-        <div className="absolute right-5 bottom-2.5">
+        <div className="absolute right-5 bottom-1.5">
           {isPasswordVisible ? (
             <button
               className="w-5 h-5"
@@ -75,10 +86,10 @@ export function FormPasswordField({
         </div>
       </div>
       {errors[fieldObj.name as keyof typeof errors] && (
-        <p className={errMessage}>
+        <p className="text-rose-500 font-semibold">
           {errors[fieldObj.name as keyof typeof errors]?.message}
         </p>
       )}
-    </>
+    </div>
   );
 }

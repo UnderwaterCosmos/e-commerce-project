@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import Select from 'react-select';
 
 import {
   REGISTRATION_INPUT_FIELDS,
@@ -10,6 +11,7 @@ import {
 } from '../formsSettings/formsData';
 import { Container } from '../components/Container';
 import { Loader } from '../components/Loader';
+import { FormBtn } from '../components/FormBtn';
 import { FormInputField } from '../components/FormInputField';
 import { FormPasswordField } from '../components/FormPasswordField';
 import { registrationSchema } from '../formsSettings/validation/registrationSchema';
@@ -18,20 +20,33 @@ import {
   useAppSelector,
   selectUsersData,
 } from '../redux/store';
-import { addNewUser, setRegistrationBasis } from '../redux/slices/usersSlice';
+import {
+  addNewUser,
+  setRegistrationBasis,
+  setRegSelectBasis,
+} from '../redux/slices/usersSlice';
 import { enterKeyHandler } from '../formsSettings/utilsFunctions';
 import { RegistrationFieldsNames } from '../types/forms';
+import { ISelect } from '../types/filters';
 
-const regForm = cn(
+const formWrapper = cn(
+  'text-center',
+  'border',
+  'max-w-[458px]',
+  'mx-auto',
+  'rounded-2xl',
+  'bg-white',
+  'py-5',
+  'px-6',
   'flex',
   'flex-col',
-  'max-w-lg',
-  'mx-auto',
-  'mb-3',
-  'p-5',
-  'border-2'
+  'gap-y-5'
 );
-const inputField = cn('bg-slate-200', 'rounded-full', 'mb-2', 'p-1.5');
+
+const selectOptions = [
+  { value: 'customer', label: 'Покупатель' },
+  { value: 'admin', label: 'Администратор' },
+];
 
 export function RegistrationForm() {
   const isLoading = useAppSelector(selectUsersData).isLoading;
@@ -58,14 +73,30 @@ export function RegistrationForm() {
     );
   };
 
+  const selectHandler = (option: ISelect) => {
+    dispatch(
+      setRegSelectBasis({
+        value: option.value,
+        label: option.label,
+      })
+    );
+  };
+
   const clearFieldsHandler = () => {
     dispatch(setRegistrationBasis(REGISTRATION_INITIAL_USER_DATA));
     reset();
   };
 
   const submitHandler = () => {
-    const { confirmPassword, ...regData } = registrationBasis;
-    dispatch(addNewUser({ ...regData, cart: [], ordersHistory: {} }));
+    const { confirmPassword, type, ...regData } = registrationBasis;
+    dispatch(
+      addNewUser({
+        ...regData,
+        accType: registrationBasis.type!.value,
+        cart: [],
+        ordersHistory: {},
+      })
+    );
     clearFieldsHandler();
   };
 
@@ -75,10 +106,10 @@ export function RegistrationForm() {
         {isLoading ? (
           <Loader />
         ) : (
-          <div className="text-center">
-            <h1 className="mb-3">РЕГИСТРАЦИЯ</h1>
+          <div className={formWrapper}>
+            <h1>Регистрация</h1>
             <form
-              className={regForm}
+              className="flex flex-col gap-y-5"
               onSubmit={handleSubmit(submitHandler)}
               onKeyDown={enterKeyHandler}
             >
@@ -103,25 +134,39 @@ export function RegistrationForm() {
                   />
                 )
               )}
-              <label htmlFor="userType">Тип пользователя:</label>
-              <select
-                className={inputField}
-                id="userType"
-                value={registrationBasis.type}
-                onChange={(event) => fieldsHandler(event, 'type')}
-              >
-                <option value="customer">Покупатель</option>
-                <option value="admin">Администратор</option>
-              </select>
-              <button className="bg-emerald-200 rounded-full mt-2">
-                ЗАРЕГИСТРИРОВАТЬСЯ
-              </button>
+              <div className="text-left">
+                <label htmlFor="userType">Тип пользователя:</label>
+                <Select
+                  options={selectOptions}
+                  value={registrationBasis.type}
+                  onChange={(option) => selectHandler(option as ISelect)}
+                  styles={{
+                    control: (baseStyles) => ({
+                      ...baseStyles,
+                      width: '410px',
+                      height: '42px',
+                      borderRadius: '6px',
+                      borderColor: '#EEEEEE',
+                    }),
+                    option: (baseStyles, { isSelected, isFocused }) => ({
+                      ...baseStyles,
+                      backgroundColor: isSelected
+                        ? '#0147FF'
+                        : isFocused
+                        ? 'rgba(163, 179, 217, 0.6)'
+                        : '',
+                      color: isSelected ? 'white' : '',
+                    }),
+                  }}
+                />
+              </div>
+              <FormBtn>Зарегистрироваться</FormBtn>
               <button
                 type="button"
-                className="bg-emerald-200 rounded-full mt-2"
+                className="bg-primary-blue text-white py-2.5 rounded-main"
                 onClick={clearFieldsHandler}
               >
-                ОЧИСТИТЬ ФОРМУ
+                Очистить форму
               </button>
             </form>
             <p>

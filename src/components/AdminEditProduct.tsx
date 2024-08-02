@@ -46,11 +46,12 @@ const nonEditableInfo = cn('text-center', 'text-lg', 'mb-3.5');
 const editProductForm = cn(
   'flex',
   'flex-col',
-  'max-w-lg',
+  'max-w-4xl',
   'mx-auto',
-  'mb-3',
-  'p-5',
-  'border-2'
+  'px-6',
+  'py-5',
+  'border',
+	'rounded-2xl'
 );
 
 export function AdminEditProduct() {

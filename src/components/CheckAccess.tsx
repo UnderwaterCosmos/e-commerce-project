@@ -13,10 +13,11 @@ export function CheckAccess({ children }: IProps) {
   const navigate = useNavigate();
   const token = useLocalStorage('token');
 
-  if (!token.getItem() || fullUserInfo?.type !== 'admin') {
-    navigate('/main');
-    return null;
-  }
+  React.useEffect(() => {
+    if (!token.getItem() || fullUserInfo?.accType !== 'admin') {
+      navigate('/main');
+    }
+  }, []);
 
   return children;
 }

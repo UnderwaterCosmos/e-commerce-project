@@ -1,5 +1,6 @@
 import { ISingleProduct } from '../types/products';
 import { RegistrationBasis, LoginBasis } from './forms';
+import { ISelect } from './filters';
 
 export interface IUser {
   id?: number;
@@ -8,7 +9,8 @@ export interface IUser {
   confirmPassword?: string;
   login: string;
   avatarUrl: string;
-  type: string;
+  type?: ISelect;
+	accType?: string;
   cart: ISingleProduct[];
   ordersHistory: {
     [key: string]: ISingleProduct[];

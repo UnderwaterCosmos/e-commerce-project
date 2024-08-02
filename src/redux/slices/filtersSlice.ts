@@ -1,11 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IFiltersState, ISelect, ICategoriesElem } from '../../types/filters';
-import {
-  ADD_CATEGORY_INITIAL_DATA,
-  ADD_PRODUCT_IMAGES_OBJ,
-} from '../../formsSettings/formsData';
-import { IAddNewProductImagesBasis } from '../../types/forms';
+import { ADD_CATEGORY_INITIAL_DATA } from '../../formsSettings/formsData';
 import { AppDispatch } from '../store';
 import { setNotification } from './notificationSlice';
 

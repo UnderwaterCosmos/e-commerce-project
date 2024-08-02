@@ -5,6 +5,10 @@
 html,
 body {
   @apply h-full bg-light-background font-['InterTightRegular'];
+
+  input:focus {
+    @apply outline-none;
+  }
 }
 
 #root {

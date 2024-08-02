@@ -26,7 +26,13 @@ const logoName = cn(
 );
 const navList = cn('flex', 'gap-x-2', 'bg-primary-gray', 'p-1', 'rounded-main');
 const controls = cn('flex', 'gap-x-4', 'items-center');
-const controlsCart = cn('px-4', 'py-2.5', 'bg-primary-black rounded-main');
+const controlsCart = cn(
+  'px-4',
+  'py-2.5',
+  'bg-primary-black rounded-main',
+  'flex',
+  'gap-x-2.5'
+);
 const navListLink = cn('text-primary-black', 'px-4', 'py-2', 'rounded-lg');
 const logOutBtn = cn(
   'cursor-pointer',
@@ -102,7 +108,7 @@ export function Header() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const links = fullUserInfo?.type === 'admin' ? adminLinks : customerLinks;
+  const links = fullUserInfo?.accType === 'admin' ? adminLinks : customerLinks;
 
   const logOutHandler = () => {
     dispatch(resetFullUserInfo());
@@ -145,8 +151,8 @@ export function Header() {
           <ul className={controls}>
             {fullUserInfo ? (
               <>
-                <li className={controlsCart}>
-                  <Link to={'/cart'} className="flex gap-x-2.5">
+                <li>
+                  <Link to={'/cart'} className={controlsCart}>
                     <img src="/images/cart.svg" alt="cart" />
                     <span>Корзина</span>
                   </Link>
@@ -168,8 +174,10 @@ export function Header() {
               </>
             ) : (
               <>
-                <li className={logInBtn}>
-                  <Link to={'/login'}>Войти</Link>
+                <li>
+                  <Link className={logInBtn} to={'/login'}>
+                    Войти
+                  </Link>
                 </li>
                 <li>
                   <img

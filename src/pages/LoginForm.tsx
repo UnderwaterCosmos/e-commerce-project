@@ -9,6 +9,7 @@ import {
 } from '../formsSettings/formsData';
 import { Container } from '../components/Container';
 import { Loader } from '../components/Loader';
+import { FormBtn } from '../components/FormBtn';
 import { FormInputField } from '../components/FormInputField';
 import { FormPasswordField } from '../components/FormPasswordField';
 import { logInUser, setLoginBasis } from '../redux/slices/usersSlice';
@@ -21,14 +22,18 @@ import { enterKeyHandler } from '../formsSettings/utilsFunctions';
 import { loginSchema } from '../formsSettings/validation/loginSchema';
 import { LoginFieldsNames } from '../types/forms';
 
-const loginForm = cn(
+const formWrapper = cn(
+  'text-center',
+  'border',
+  'max-w-[458px]',
+  'mx-auto',
+  'rounded-2xl',
+  'bg-white',
+  'py-5',
+  'px-6',
   'flex',
   'flex-col',
-  'max-w-lg',
-  'mx-auto',
-  'mb-3',
-  'p-5',
-  'border-2'
+	'gap-y-5'
 );
 
 export function LoginForm() {
@@ -59,15 +64,15 @@ export function LoginForm() {
   };
 
   return (
-    <main className="grow">
+    <main className="grow mt-36">
       <Container>
         {isLoading ? (
           <Loader />
         ) : (
-          <div className="text-center">
-            <h1 className="mb-3">ВXОД</h1>
+          <div className={formWrapper}>
+            <h1 className="text-xl font-semibold">Войти</h1>
             <form
-              className={loginForm}
+              className="flex flex-col gap-y-5"
               onSubmit={handleSubmit(submitHandler)}
               onKeyDown={enterKeyHandler}
             >
@@ -92,14 +97,12 @@ export function LoginForm() {
                   />
                 )
               )}
-              <button className="bg-emerald-200 rounded-full mt-3">
-                ВОЙТИ
-              </button>
+              <FormBtn>Войти</FormBtn>
             </form>
             <p>
-              Если Вы еще не зарегистрированы -{' '}
-              <Link to={'/registration'} className="text-blue-600">
-                зарегистрируйтесь
+              Нет аккаунта?{' '}
+              <Link to={'/registration'} className="text-primary-blue">
+                Зарегистироваться
               </Link>
             </p>
           </div>
