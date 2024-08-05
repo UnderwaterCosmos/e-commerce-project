@@ -14,6 +14,7 @@ import {
 import { ADD_PRODUCT_INITIAL_DATA } from '../../formsSettings/formsData';
 import { AppDispatch } from '../store';
 import { setNotification } from './notificationSlice';
+import { ISelect } from '../../types/filters';
 
 export const fetchProducts = createAsyncThunk.withTypes<{
   dispatch: AppDispatch;
@@ -93,6 +94,9 @@ const productSlice = createSlice({
     setProductsBasis: (state, action: PayloadAction<ISingleProduct>) => {
       state.newProductBasis = action.payload;
     },
+    setNewProductSelectBasis: (state, action: PayloadAction<ISelect>) => {
+      state.newProductBasis.productGroup = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -127,5 +131,5 @@ const productSlice = createSlice({
   },
 });
 
-export const { setProductsBasis } = productSlice.actions;
+export const { setProductsBasis, setNewProductSelectBasis } = productSlice.actions;
 export const productsReducer = productSlice.reducer;

@@ -2634,7 +2634,7 @@
       "password": "123123",
       "login": "UnderwaterCosmos",
       "avatarUrl": "https://uznayvse.ru/person/winnie-harlow/Winnie_Harlow01.jpg",
-      "accType": "admin",
+      "type": "admin",
       "cart": [],
       "ordersHistory": {
         "Thu Jul 11 2024 07:08:04 GMT+0300 (Москва, стандартное время)": [
@@ -2785,7 +2785,7 @@
       "password": "asdsa",
       "login": "Mnu_lapkami",
       "avatarUrl": "https://img0.liveinternet.ru/images/attach/b/3/30/172/30172285_ipvpp.jpg",
-      "accType": "customer",
+      "type": "customer",
       "cart": [],
       "ordersHistory": {},
       "id": 2
@@ -2795,7 +2795,7 @@
       "password": "qwaaaa",
       "login": "dsaasdsad",
       "avatarUrl": "https://cdn.fifi.ru/person/240x253/anne-hathaway.jpg",
-      "accType": "customer",
+      "type": "customer",
       "cart": [],
       "ordersHistory": {},
       "id": 3

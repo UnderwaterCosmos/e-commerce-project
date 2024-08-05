@@ -88,11 +88,11 @@ export function RegistrationForm() {
   };
 
   const submitHandler = () => {
-    const { confirmPassword, type, ...regData } = registrationBasis;
+    const { confirmPassword, accType, ...regData } = registrationBasis;
     dispatch(
       addNewUser({
         ...regData,
-        accType: registrationBasis.type!.value,
+        type: registrationBasis.accType!.value,
         cart: [],
         ordersHistory: {},
       })
@@ -138,12 +138,11 @@ export function RegistrationForm() {
                 <label htmlFor="userType">Тип пользователя:</label>
                 <Select
                   options={selectOptions}
-                  value={registrationBasis.type}
+                  value={registrationBasis.accType}
                   onChange={(option) => selectHandler(option as ISelect)}
                   styles={{
                     control: (baseStyles) => ({
                       ...baseStyles,
-                      width: '410px',
                       height: '42px',
                       borderRadius: '6px',
                       borderColor: '#EEEEEE',

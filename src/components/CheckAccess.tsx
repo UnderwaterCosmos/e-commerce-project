@@ -14,7 +14,7 @@ export function CheckAccess({ children }: IProps) {
   const token = useLocalStorage('token');
 
   React.useEffect(() => {
-    if (!token.getItem() || fullUserInfo?.accType !== 'admin') {
+    if (!token.getItem() || fullUserInfo?.type !== 'admin') {
       navigate('/main');
     }
   }, []);

@@ -1,4 +1,5 @@
 import { IProductEditedValueBasis, IAddNewProductImagesBasis } from './forms';
+import { ISelect } from './filters';
 
 export interface ISingleProduct {
   id?: number;
@@ -6,7 +7,8 @@ export interface ISingleProduct {
   price: number;
   quantity: number;
   description: string;
-  category: string;
+  category?: string;
+  productGroup?: ISelect;
   images: string[];
 }
 export interface IGetProductsConfig {

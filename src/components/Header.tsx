@@ -29,7 +29,8 @@ const controls = cn('flex', 'gap-x-4', 'items-center');
 const controlsCart = cn(
   'px-4',
   'py-2.5',
-  'bg-primary-black rounded-main',
+  'bg-primary-black',
+  'rounded-main',
   'flex',
   'gap-x-2.5'
 );
@@ -108,7 +109,7 @@ export function Header() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const links = fullUserInfo?.accType === 'admin' ? adminLinks : customerLinks;
+  const links = fullUserInfo?.type === 'admin' ? adminLinks : customerLinks;
 
   const logOutHandler = () => {
     dispatch(resetFullUserInfo());

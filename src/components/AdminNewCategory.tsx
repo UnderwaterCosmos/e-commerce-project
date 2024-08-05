@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Container } from './Container';
 import { Loader } from './Loader';
+import { FormBtn } from './FormBtn';
 import { FormInputField } from './FormInputField';
 import { enterKeyHandler } from '../formsSettings/utilsFunctions';
 import {
@@ -19,14 +20,18 @@ import {
 } from '../formsSettings/formsData';
 import { newCategorySchema } from '../formsSettings/validation/newCategorySchema';
 
-const newCategoryForm = cn(
+const formWrapper = cn(
+  'text-center',
+  'border',
+  'max-w-[458px]',
+  'mx-auto',
+  'rounded-2xl',
+  'bg-white',
+  'py-5',
+  'px-6',
   'flex',
   'flex-col',
-  'max-w-lg',
-  'mx-auto',
-  'mb-3',
-  'p-5',
-  'border-2'
+  'gap-y-5'
 );
 
 export function AdminNewCategory() {
@@ -64,25 +69,27 @@ export function AdminNewCategory() {
         {isLoading ? (
           <Loader />
         ) : (
-          <form
-            className={newCategoryForm}
-            onSubmit={handleSubmit(submitHandler)}
-            onKeyDown={enterKeyHandler}
-          >
-            {ADD_CATEGORY_INPUT_FIELDS.map((fieldObj) => (
-              <FormInputField
-                state={newCategoryBasis}
-                register={register}
-                errors={errors}
-                fieldObj={fieldObj}
-                fieldsHandler={fieldsHandler}
-                key={fieldObj.id}
-              />
-            ))}
-            <button className="bg-emerald-200 rounded-full mt-3">
-              ДОБАВИТЬ КАТЕГОРИЮ ТОВАРОВ
-            </button>
-          </form>
+          <div className={formWrapper}>
+            <form
+              className="flex flex-col gap-y-5"
+              onSubmit={handleSubmit(submitHandler)}
+              onKeyDown={enterKeyHandler}
+            >
+              {ADD_CATEGORY_INPUT_FIELDS.map((fieldObj) => (
+              
+                  <FormInputField
+                    state={newCategoryBasis}
+                    register={register}
+                    errors={errors}
+                    fieldObj={fieldObj}
+                    fieldsHandler={fieldsHandler}
+                    key={fieldObj.id}
+                  />
+                
+              ))}
+              <FormBtn>Добавить категорию</FormBtn>
+            </form>
+          </div>
         )}
       </Container>
     </main>

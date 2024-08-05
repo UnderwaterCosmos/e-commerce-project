@@ -20,7 +20,7 @@ export const REGISTRATION_INITIAL_USER_DATA: RegistrationBasis = {
   confirmPassword: '',
   login: '',
   avatarUrl: '',
-  type: {
+  accType: {
     value: 'customer',
     label: 'Покупатель',
   },
@@ -113,7 +113,7 @@ export const ADD_PRODUCT_INITIAL_DATA: ISingleProduct = {
   price: -Infinity,
   quantity: 1,
   description: '',
-  category: 'houseplants',
+  productGroup: { value: 'houseplants', label: 'Комнатные растения' },
   images: [],
 };
 export const ADD_PRODUCT_INPUT_FIELDS: IAddNewProductInputField[] = [

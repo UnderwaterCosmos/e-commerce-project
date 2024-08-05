@@ -9,8 +9,8 @@ export interface IUser {
   confirmPassword?: string;
   login: string;
   avatarUrl: string;
-  type?: ISelect;
-	accType?: string;
+  type?: string;
+  accType?: ISelect;
   cart: ISingleProduct[];
   ordersHistory: {
     [key: string]: ISingleProduct[];

@@ -5,7 +5,14 @@ import { Container } from '../components/Container';
 import { Loader } from '../components/Loader';
 import { useAppSelector, selectUsersData } from '../redux/store';
 
-const btn = cn('p-1', 'bg-black', 'rounded-lg', 'text-white');
+const list = cn('flex', 'gap-x-3', 'mb-8', 'justify-center', 'mt-2');
+const btn = cn(
+  'text-white',
+  'px-4',
+  'py-3',
+  'bg-primary-black',
+  'rounded-main'
+);
 
 const links = [
   {
@@ -28,11 +35,12 @@ export function Admin() {
           <Loader />
         ) : (
           <>
-            <h1 className="mb-5">Добро пожаловать 👋!</h1>
-            <ul className="flex gap-x-3 mb-4">
+            <ul className={list}>
               {links.map((link) => (
-                <li className={btn} key={link.name}>
-                  <Link to={link.path}>{link.name}</Link>
+                <li key={link.name}>
+                  <Link to={link.path} className={btn}>
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>
