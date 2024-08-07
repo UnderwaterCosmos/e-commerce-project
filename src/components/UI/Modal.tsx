@@ -24,16 +24,14 @@ export function Modal({ modalActive, setModalActive, children }: IProps) {
     { 'opacity-100 pointer-events-auto': modalActive }
   );
   const content = cn(
-    'p-5',
-    'rounded-lg',
+    'max-w-[601px]',
+    'p-4',
+    'rounded-main',
     'bg-white',
     'scale-50',
     'duration-300',
     'transition all',
-    'w-[50vw]',
-    {
-      'scale-100': modalActive,
-    }
+    { 'scale-100': modalActive }
   );
 
   return (

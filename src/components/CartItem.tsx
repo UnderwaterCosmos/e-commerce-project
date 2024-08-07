@@ -9,14 +9,37 @@ import {
 import { ISingleProduct } from '../types/products';
 
 const listItem = cn(
-  'border-2',
-  'border-black',
+  'rounded-main',
+  'p-3.5',
+  'bg-white',
   'flex',
   'p-3',
   'items-center',
-  'mb-2.5'
+  'mb-2'
 );
-const controlBtn = cn('px-2', 'py-0.5', 'bg-orange-300', 'rounded-full');
+const controlBtn = cn(
+  'w-[42px]',
+  'h-[42px]',
+  'px-2',
+  'py-0.5',
+  'rounded-main',
+  'text-2xl',
+  'bg-primary-gray',
+  'transition-all',
+  'hover:bg-hover-gray',
+  'active:bg-active-gray'
+);
+const removeItemBtn = cn(
+  'w-[42px]',
+  'h-[42px]',
+  'px-2',
+  'py-0.5',
+  'rounded-main',
+  'bg-primary-black',
+  'transition-all',
+  'hover:bg-hover-black',
+  'active:bg-active-black'
+);
 
 interface ICartItem {
   cartItem: ISingleProduct;
@@ -51,16 +74,16 @@ export function CartItem({ cartItem, index }: ICartItem) {
   return (
     <li className={listItem}>
       <img
+        className="rounded-main"
         src={cartItem.images[0]}
-        width={100}
-        height={100}
+        width={163}
         alt={cartItem.title}
       />
-      <div className="mr-auto ml-5">
-        <h4>{cartItem.title}</h4>
+      <div className="mr-auto ml-10">
+        <h4 className="font-semibold mb-4">{cartItem.title}</h4>
         <p>{cartItem.price} ₽</p>
       </div>
-      <div className="flex gap-x-2">
+      <div className="flex gap-x-2 items-center">
         <button
           type="button"
           className={controlBtn}
@@ -68,7 +91,7 @@ export function CartItem({ cartItem, index }: ICartItem) {
         >
           +
         </button>
-        <span>{cartItem.quantity}</span>
+        <span className="font-semibold">{cartItem.quantity}</span>
         <button
           type="button"
           className={controlBtn}
@@ -78,10 +101,14 @@ export function CartItem({ cartItem, index }: ICartItem) {
         </button>
         <button
           type="button"
-          className={controlBtn}
+          className={removeItemBtn}
           onClick={() => dispatch(manageProductInCart({ index, quantity: 0 }))}
         >
-          X
+          <img
+            className="inline-block"
+            src="/images/trash-empty.svg"
+            alt="bucket"
+          />
         </button>
       </div>
     </li>

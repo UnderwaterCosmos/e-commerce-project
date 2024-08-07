@@ -2635,7 +2635,34 @@
       "login": "UnderwaterCosmos",
       "avatarUrl": "https://uznayvse.ru/person/winnie-harlow/Winnie_Harlow01.jpg",
       "type": "admin",
-      "cart": [],
+      "cart": [
+        {
+          "id": 7,
+          "title": "Eyeliner elegant deluxe 21",
+          "price": 92697,
+          "description": "Precision eyeliner for defined, dramatic eyes.",
+          "quantity": 1,
+          "category": "cosmetics",
+          "images": [
+            "https://picsum.photos/id/19/280/220",
+            "https://picsum.photos/id/20/280/220",
+            "https://picsum.photos/id/21/280/220"
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Coffee Maker iconic 24",
+          "price": 3979,
+          "description": "Programmable coffee maker with brew strength control.",
+          "quantity": 1,
+          "category": "appliances",
+          "images": [
+            "https://picsum.photos/id/4/280/220",
+            "https://picsum.photos/id/5/280/220",
+            "https://picsum.photos/id/6/280/220"
+          ]
+        }
+      ],
       "ordersHistory": {
         "Thu Jul 11 2024 07:08:04 GMT+0300 (Москва, стандартное время)": [
           {
