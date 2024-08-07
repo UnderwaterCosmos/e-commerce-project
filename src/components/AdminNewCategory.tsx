@@ -3,10 +3,10 @@ import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Container } from './Container';
-import { Loader } from './Loader';
-import { FormBtn } from './FormBtn';
-import { FormInputField } from './FormInputField';
+import { Container } from './UI/Container';
+import { Loader } from './UI/Loader';
+import { FormBtn } from './UI/FormBtn';
+import { FormInputField } from './UI/FormInputField';
 import { enterKeyHandler } from '../formsSettings/utilsFunctions';
 import {
   selectFiltersData,
@@ -76,16 +76,14 @@ export function AdminNewCategory() {
               onKeyDown={enterKeyHandler}
             >
               {ADD_CATEGORY_INPUT_FIELDS.map((fieldObj) => (
-              
-                  <FormInputField
-                    state={newCategoryBasis}
-                    register={register}
-                    errors={errors}
-                    fieldObj={fieldObj}
-                    fieldsHandler={fieldsHandler}
-                    key={fieldObj.id}
-                  />
-                
+                <FormInputField
+                  state={newCategoryBasis}
+                  register={register}
+                  errors={errors}
+                  fieldObj={fieldObj}
+                  fieldsHandler={fieldsHandler}
+                  key={fieldObj.id}
+                />
               ))}
               <FormBtn>Добавить категорию</FormBtn>
             </form>

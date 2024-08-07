@@ -220,7 +220,7 @@ const usersSlice = createSlice({
       state.registrationBasis = action.payload;
     },
     setRegSelectBasis: (state, action: PayloadAction<ISelect>) => {
-      state.registrationBasis.type = action.payload;
+      state.registrationBasis.accType = action.payload;
     },
     setLoginBasis: (state, action: PayloadAction<LoginBasis>) => {
       state.loginBasis = action.payload;

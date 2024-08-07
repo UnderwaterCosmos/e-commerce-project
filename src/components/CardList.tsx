@@ -2,10 +2,10 @@ import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import cn from 'classnames';
 
-import { Container } from './Container';
+import { Container } from './UI/Container';
 import { Card } from './Card';
-import { Loader } from './Loader';
-import { UpBtn } from './UpBtn';
+import { Loader } from './UI/Loader';
+import { UpBtn } from './UI/UpBtn';
 import {
   useAppDispatch,
   useAppSelector,

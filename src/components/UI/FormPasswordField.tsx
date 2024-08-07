@@ -2,7 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
 
-import { incorrectInput } from '../formsSettings/utilsFunctions';
+import { incorrectInput } from '../../formsSettings/utilsFunctions';
 import {
   RegistrationBasis,
   LoginBasis,
@@ -10,7 +10,7 @@ import {
   // RegistrationFieldsNames,
   // LoginFieldsNames,
   ILoginInputField,
-} from '../types/forms';
+} from '../../types/forms';
 
 interface IProps {
   state: RegistrationBasis | LoginBasis;
@@ -44,6 +44,8 @@ export function FormPasswordField({
     'px-3',
     'placeholder:text-[#CACACA]',
     'border',
+    'transition-all',
+    'hover:border-active-gray',
     {
       'border-2 border-rose-500': incorrectInput(errors, fieldObj),
     }

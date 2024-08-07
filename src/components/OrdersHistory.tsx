@@ -1,4 +1,4 @@
-import { Container } from './Container';
+import { Container } from './UI/Container';
 import { OrdersHistoryInnerItem } from './OrdersHistoryInnerItem';
 import { selectUsersData, useAppSelector } from '../redux/store';
 

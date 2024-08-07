@@ -3,17 +3,18 @@ import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Select from 'react-select';
 
 import {
   REGISTRATION_INPUT_FIELDS,
   REGISTRATION_INITIAL_USER_DATA,
+  REG_SELECT_OPTIONS,
 } from '../formsSettings/formsData';
-import { Container } from '../components/Container';
-import { Loader } from '../components/Loader';
-import { FormBtn } from '../components/FormBtn';
-import { FormInputField } from '../components/FormInputField';
-import { FormPasswordField } from '../components/FormPasswordField';
+import { Container } from '../components/UI/Container';
+import { Loader } from '../components/UI/Loader';
+import { CustomSelect } from '../components/UI/CustomSelect';
+import { FormBtn } from '../components/UI/FormBtn';
+import { FormInputField } from '../components/UI/FormInputField';
+import { FormPasswordField } from '../components/UI/FormPasswordField';
 import { registrationSchema } from '../formsSettings/validation/registrationSchema';
 import {
   useAppDispatch,
@@ -42,11 +43,21 @@ const formWrapper = cn(
   'flex-col',
   'gap-y-5'
 );
-
-const selectOptions = [
-  { value: 'customer', label: 'Покупатель' },
-  { value: 'admin', label: 'Администратор' },
-];
+const clearBtn = cn(
+  'bg-primary-blue',
+  ' transition-all',
+  ' hover:bg-hover-blue',
+  ' active:bg-active-blue',
+  'text-white',
+  'py-2.5',
+  'rounded-main'
+);
+const loginLink = cn(
+  'text-blue-600',
+  'transition-all',
+  'hover:text-hover-blue',
+  'active:text-active-blue'
+);
 
 export function RegistrationForm() {
   const isLoading = useAppSelector(selectUsersData).isLoading;
@@ -107,9 +118,9 @@ export function RegistrationForm() {
           <Loader />
         ) : (
           <div className={formWrapper}>
-            <h1>Регистрация</h1>
+            <h1 className="text-xl font-semibold">Регистрация</h1>
             <form
-              className="flex flex-col gap-y-5"
+              className="flex flex-col gap-y-4"
               onSubmit={handleSubmit(submitHandler)}
               onKeyDown={enterKeyHandler}
             >
@@ -135,34 +146,18 @@ export function RegistrationForm() {
                 )
               )}
               <div className="text-left">
-                <label htmlFor="userType">Тип пользователя:</label>
-                <Select
-                  options={selectOptions}
+                <p>Тип пользователя:</p>
+                <CustomSelect
+                  name="registration"
+                  options={REG_SELECT_OPTIONS}
                   value={registrationBasis.accType}
-                  onChange={(option) => selectHandler(option as ISelect)}
-                  styles={{
-                    control: (baseStyles) => ({
-                      ...baseStyles,
-                      height: '42px',
-                      borderRadius: '6px',
-                      borderColor: '#EEEEEE',
-                    }),
-                    option: (baseStyles, { isSelected, isFocused }) => ({
-                      ...baseStyles,
-                      backgroundColor: isSelected
-                        ? '#0147FF'
-                        : isFocused
-                        ? 'rgba(163, 179, 217, 0.6)'
-                        : '',
-                      color: isSelected ? 'white' : '',
-                    }),
-                  }}
+                  selectHandler={selectHandler}
                 />
               </div>
               <FormBtn>Зарегистрироваться</FormBtn>
               <button
                 type="button"
-                className="bg-primary-blue text-white py-2.5 rounded-main"
+                className={clearBtn}
                 onClick={clearFieldsHandler}
               >
                 Очистить форму
@@ -170,7 +165,7 @@ export function RegistrationForm() {
             </form>
             <p>
               Если Вы уже зарегистрированы -{' '}
-              <Link to={'/login'} className="text-blue-600">
+              <Link to={'/login'} className={loginLink}>
                 войдите
               </Link>
             </p>

@@ -2,12 +2,12 @@ import React from 'react';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Select from 'react-select';
 
-import { Container } from './Container';
-import { Loader } from './Loader';
-import { FormBtn } from './FormBtn';
-import { FormInputField } from './FormInputField';
+import { Container } from './UI/Container';
+import { Loader } from './UI/Loader';
+import { CustomSelect } from './UI/CustomSelect';
+import { FormBtn } from './UI/FormBtn';
+import { FormInputField } from './UI/FormInputField';
 import { enterKeyHandler } from '../formsSettings/utilsFunctions';
 import {
   selectFiltersData,
@@ -135,32 +135,12 @@ export function AdminNewProduct() {
                 />
               ))}
               <div className="flex justify-center flex-col">
-                <label htmlFor="selectCategory" className="text-left mb-1">
-                  Категория товара
-                </label>
-                <Select
-                  id="selectCategory"
+                <p className="text-left mb-1">Категория товара</p>
+                <CustomSelect
+                  name="newProduct"
                   options={modifiedCategoriesList}
                   value={newProductBasis.productGroup}
-                  onChange={(option) => selectHandler(option as ISelect)}
-                  styles={{
-                    control: (baseStyles) => ({
-                      ...baseStyles,
-                      height: '42px',
-                      borderRadius: '6px',
-                      borderColor: '#EEEEEE',
-                      textAlign: 'left',
-                    }),
-                    option: (baseStyles, { isSelected, isFocused }) => ({
-                      ...baseStyles,
-                      backgroundColor: isSelected
-                        ? '#0147FF'
-                        : isFocused
-                        ? 'rgba(163, 179, 217, 0.6)'
-                        : '',
-                      color: isSelected ? 'white' : '',
-                    }),
-                  }}
+                  selectHandler={selectHandler}
                 />
               </div>
               {ADD_PRODUCT_IMAGES_FIELDS.map((imageObj) => (

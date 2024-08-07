@@ -7,11 +7,11 @@ import {
   LOGIN_INPUT_FIELDS,
   LOGIN_INITIAL_USER_DATA,
 } from '../formsSettings/formsData';
-import { Container } from '../components/Container';
-import { Loader } from '../components/Loader';
-import { FormBtn } from '../components/FormBtn';
-import { FormInputField } from '../components/FormInputField';
-import { FormPasswordField } from '../components/FormPasswordField';
+import { Container } from '../components/UI/Container';
+import { Loader } from '../components/UI/Loader';
+import { FormBtn } from '../components/UI/FormBtn';
+import { FormInputField } from '../components/UI/FormInputField';
+import { FormPasswordField } from '../components/UI/FormPasswordField';
 import { logInUser, setLoginBasis } from '../redux/slices/usersSlice';
 import {
   useAppSelector,
@@ -33,7 +33,13 @@ const formWrapper = cn(
   'px-6',
   'flex',
   'flex-col',
-	'gap-y-5'
+  'gap-y-5'
+);
+const regLink = cn(
+  'text-primary-blue',
+  ' transition-all',
+  'hover:text-hover-blue',
+  'active:text-active-blue'
 );
 
 export function LoginForm() {
@@ -101,7 +107,7 @@ export function LoginForm() {
             </form>
             <p>
               Нет аккаунта?{' '}
-              <Link to={'/registration'} className="text-primary-blue">
+              <Link to={'/registration'} className={regLink}>
                 Зарегистироваться
               </Link>
             </p>

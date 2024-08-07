@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
-import { Container } from '../components/Container';
-import { Loader } from '../components/Loader';
+import { Container } from './UI/Container';
+import { Loader } from './UI/Loader';
 import { useAppSelector, selectUsersData } from '../redux/store';
 
 const list = cn('flex', 'gap-x-3', 'mb-8', 'justify-center', 'mt-2');
@@ -25,7 +25,7 @@ const links = [
   },
 ];
 
-export function Admin() {
+export function AdminControls() {
   const isLoading = useAppSelector(selectUsersData).isLoading;
 
   return (

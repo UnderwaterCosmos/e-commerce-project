@@ -6,8 +6,8 @@ import {
   selectNotificationData,
   useAppSelector,
   useAppDispatch,
-} from '../redux/store';
-import { clearNotification } from '../redux/slices/notificationSlice';
+} from '../../redux/store';
+import { clearNotification } from '../../redux/slices/notificationSlice';
 
 export function Notification() {
   const { type, message } = useAppSelector(selectNotificationData);

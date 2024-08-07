@@ -2,10 +2,10 @@ import React from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import cn from 'classnames';
 
-import { Container } from '../components/Container';
+import { Container } from '../components/UI/Container';
 import { CartBtn } from '../components/CartBtn';
-import { Loader } from '../components/Loader';
-import { BackBtn } from '../components/BackBtn';
+import { Loader } from '../components/UI/Loader';
+import { BackBtn } from '../components/UI/BackBtn';
 import {
   useAppDispatch,
   useAppSelector,
@@ -23,7 +23,6 @@ import { fetchProducts } from '../redux/slices/productsSlice';
 import { fetchCategories } from '../redux/slices/filtersSlice';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
-const description = cn('flex', 'flex-col', 'gap-y-8');
 const mainImage = cn('max-w-full', 'h-auto', 'object-cover', 'rounded-main');
 
 export function SingleProduct() {
@@ -37,6 +36,14 @@ export function SingleProduct() {
   const [mainImageUrl, setMainImageUrl] = React.useState('');
   const refreshedFlag = useLocalStorage('isEditProductRefreshed');
 
+  const onLeavePage = () => {
+    dispatch(setBackBtnStatus(false));
+    if (productsList.length === 0) {
+      dispatch(fetchCategories(false));
+      dispatch(fetchProducts({ _page: 1 }));
+    }
+  };
+
   React.useEffect(() => {
     const fetchData = async () => {
       const singleProductPromise = await dispatch(fetchSingleProduct(id!));
@@ -47,13 +54,7 @@ export function SingleProduct() {
     };
 
     fetchData();
-    return () => {
-      dispatch(setBackBtnStatus(false));
-      if (productsList.length === 0) {
-        dispatch(fetchCategories(false));
-        dispatch(fetchProducts({ _page: 1 }));
-      }
-    };
+    return () => onLeavePage();
   }, [dispatch, id]);
 
   const backBtnHandler = () => {
@@ -98,7 +99,7 @@ export function SingleProduct() {
               </div>
             </article>
             <div className="flex items-center">
-              <article className={description}>
+              <article className="flex flex-col gap-y-8">
                 <h1 className="text-primary-h1 font-semibold">
                   {singleProduct?.title}
                 </h1>

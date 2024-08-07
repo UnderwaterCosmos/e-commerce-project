@@ -30,6 +30,9 @@ export function CartBtn({
 
   const cartBtn = cn(
     'bg-primary-blue',
+    'transition-all',
+    'hover:bg-hover-blue',
+    'active:bg-active-blue',
     'rounded-lg',
     'text-white',
     'font-medium',
@@ -41,7 +44,8 @@ export function CartBtn({
     'justify-center',
     {
       'px-[11px] !py-0.5 text-2xl': children === '+',
-      'opacity-50 cursor-default': isProductInCart || !Boolean(fullUserInfo),
+      'opacity-50 hover:bg-primary-blue active:bg-primary-blue transition-none cursor-default':
+        isProductInCart || !Boolean(fullUserInfo),
     }
   );
 

@@ -15,7 +15,10 @@ const back = cn(
   'border',
   'p-5',
   'rounded-main',
-  'bg-primary-blue'
+  'bg-primary-blue',
+  'transition-all',
+  'hover:bg-hover-blue',
+  'active:bg-active-blue'
 );
 
 export function NotFound() {

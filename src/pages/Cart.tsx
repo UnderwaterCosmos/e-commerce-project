@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Container } from '../components/Container';
+import { Container } from '../components/UI/Container';
 import { CartItem } from '../components/CartItem';
-import { Modal } from '../components/Modal';
+import { Modal } from '../components/UI/Modal';
 import { Checkout } from '../components/Checkout';
 import { selectUsersData, useAppSelector } from '../redux/store';
 

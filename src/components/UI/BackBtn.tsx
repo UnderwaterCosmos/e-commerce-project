@@ -6,16 +6,13 @@ const backBtn = cn(
   'h-[42px]',
   'p-2',
   'bg-slate-300',
-  'rounded-main',
-  'flex',
-  'items-center',
-  'justify-center',
+  'rounded-main'
 );
 
 export function BackBtn(props: React.HTMLProps<HTMLButtonElement>) {
   return (
     <button {...props} type="button" className={backBtn}>
-      <img src="/images/back-arrow.svg" alt="back" />
+      <img className="inline-block" src="/images/back-arrow.svg" alt="back" />
     </button>
   );
 }

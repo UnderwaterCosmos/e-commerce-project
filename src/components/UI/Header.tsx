@@ -3,14 +3,14 @@ import cn from 'classnames';
 import Select from 'react-select';
 
 import { Container } from './Container';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 import {
   useAppSelector,
   selectUsersData,
   useAppDispatch,
-} from '../redux/store';
-import { resetFullUserInfo } from '../redux/slices/usersSlice';
-import { setNotification } from '../redux/slices/notificationSlice';
+} from '../../redux/store';
+import { resetFullUserInfo } from '../../redux/slices/usersSlice';
+import { setNotification } from '../../redux/slices/notificationSlice';
 
 const headerWrapper = cn(
   'flex',
@@ -32,9 +32,20 @@ const controlsCart = cn(
   'bg-primary-black',
   'rounded-main',
   'flex',
-  'gap-x-2.5'
+  'gap-x-2.5',
+  'transition-all',
+  'hover:bg-hover-black',
+  'active:bg-active-black'
 );
-const navListLink = cn('text-primary-black', 'px-4', 'py-2', 'rounded-lg');
+const navListLink = cn(
+  'text-primary-black',
+  'px-4',
+  'py-2',
+  'rounded-lg',
+  'transition-all',
+  'hover:bg-hover-gray',
+  'active:bg-active-gray'
+);
 const logOutBtn = cn(
   'cursor-pointer',
   'flex',
@@ -43,7 +54,10 @@ const logOutBtn = cn(
   'px-4',
   'py-2.5',
   'rounded-main',
-  'text-black'
+  'text-black',
+  'transition-all',
+  'hover:bg-hover-gray',
+  'active:bg-active-gray'
 );
 const logInBtn = cn(
   'cursor-pointer',
@@ -51,7 +65,10 @@ const logInBtn = cn(
   'px-4',
   'py-2.5',
   'rounded-main',
-  'text-white'
+  'text-white',
+  'transition-all',
+  'hover:bg-hover-black',
+  'active:bg-active-black'
 );
 const lightSwitcher = cn(
   'w-14',

@@ -1,7 +1,7 @@
 import cn from 'classnames';
 
 import { UseFormRegister } from 'react-hook-form';
-import { incorrectInput } from '../formsSettings/utilsFunctions';
+import { incorrectInput } from '../../formsSettings/utilsFunctions';
 
 import {
   // RegistrationFieldsNames,
@@ -9,7 +9,7 @@ import {
   State,
   Errors,
   FieldObj,
-} from '../types/forms';
+} from '../../types/forms';
 
 const errMessage = cn('text-rose-500', 'font-semibold');
 
@@ -41,6 +41,8 @@ export function FormInputField({
     'px-3',
     'placeholder:text-[#CACACA]',
     'border',
+    'transition-all',
+    'hover:border-active-gray',
     {
       'border-2 border-rose-500': incorrectInput(errors, fieldObj),
     }

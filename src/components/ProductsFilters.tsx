@@ -1,8 +1,8 @@
 import React from 'react';
 import cn from 'classnames';
-import Select from 'react-select';
 
-import { Container } from './Container';
+import { Container } from './UI/Container';
+import { CustomSelect } from './UI/CustomSelect';
 import {
   useAppSelector,
   useAppDispatch,
@@ -80,28 +80,11 @@ export function ProductsFilters() {
                 />
               )}
             </div>
-            <Select
+            <CustomSelect
+              name="filters"
               options={categoriesList}
               value={select}
-              onChange={(option) => selectHandler(option as ISelect)}
-              styles={{
-                control: (baseStyles) => ({
-                  ...baseStyles,
-                  width: '240px',
-                  height: '42px',
-                  borderRadius: '6px',
-                  borderColor: '#EEEEEE',
-                }),
-                option: (baseStyles, { isSelected, isFocused }) => ({
-                  ...baseStyles,
-                  backgroundColor: isSelected
-                    ? '#0147FF'
-                    : isFocused
-                    ? 'rgba(163, 179, 217, 0.6)'
-                    : '',
-                  color: isSelected ? 'white' : '',
-                }),
-              }}
+              selectHandler={selectHandler}
             />
           </div>
         </div>

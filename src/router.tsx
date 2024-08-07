@@ -1,26 +1,19 @@
-import {
-  createBrowserRouter,
-  Outlet,
-  redirect,
-  Navigate,
-} from 'react-router-dom';
+import { createBrowserRouter, redirect, Navigate } from 'react-router-dom';
 
-import { Header } from './components/Header';
+import { MainLayout } from './pages/MainLayout';
 import { Main } from './pages/Main';
 import { Products } from './pages/Products';
 import { SingleProduct } from './pages/SingleProduct';
 import { LoginForm } from './pages/LoginForm';
 import { RegistrationForm } from './pages/RegistrationForm';
-import { User } from './pages/User';
+import { UserPage } from './pages/UserPage';
 import { UserInfo } from './components/UserInfo';
 import { OrdersHistory } from './components/OrdersHistory';
-import { Admin } from './pages/Admin';
+import { AdminPage } from './pages/AdminPage';
 import { AdminNewProduct } from './components/AdminNewProduct';
 import { AdminNewCategory } from './components/AdminNewCategory';
 import { AdminEditProduct } from './components/AdminEditProduct';
 import { Cart } from './pages/Cart';
-import { Footer } from './components/Footer';
-import { Notification } from './components/Notification';
 import { NotFound } from './pages/NotFound';
 import { CheckAccess } from './components/CheckAccess';
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -30,14 +23,7 @@ const token = useLocalStorage('token');
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: (
-      <>
-        <Header />
-        <Outlet />
-        <Footer />
-        <Notification />
-      </>
-    ),
+    element: <MainLayout />,
     errorElement: <NotFound />,
     children: [
       {
@@ -66,14 +52,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'admin',
-        element: (
-          <div className="grow text-center">
-            <CheckAccess>
-              <Admin />
-              <Outlet />
-            </CheckAccess>
-          </div>
-        ),
+        element: <AdminPage />,
         children: [
           {
             index: true,
@@ -99,12 +78,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'user',
-        element: (
-          <div className="grow text-center">
-            <User />
-            <Outlet />
-          </div>
-        ),
+        element: <UserPage />,
         children: [
           {
             path: 'info',

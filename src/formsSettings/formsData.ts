@@ -10,7 +10,7 @@ import {
   IProductEditedValueBasis,
   IEditProductInputField,
 } from '../types/forms';
-import { ICategoriesElem } from '../types/filters';
+import { ICategoriesElem, ISelect } from '../types/filters';
 import { ISingleProduct } from '../types/products';
 
 // REGISTRATION
@@ -61,6 +61,10 @@ export const REGISTRATION_INPUT_FIELDS: IRegistrationInputField[] = [
     label: 'Аватар:',
     type: 'text',
   },
+];
+export const REG_SELECT_OPTIONS: ISelect[] = [
+  { value: 'customer', label: 'Покупатель' },
+  { value: 'admin', label: 'Администратор' },
 ];
 
 // LOGIN

@@ -4,17 +4,16 @@ import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Container } from './Container';
-import { Loader } from './Loader';
-import { BackBtn } from './BackBtn';
-import { FormInputField } from './FormInputField';
+import { Container } from './UI/Container';
+import { Loader } from './UI/Loader';
+import { FormBtn } from './UI/FormBtn';
+import { BackBtn } from './UI/BackBtn';
+import { FormInputField } from './UI/FormInputField';
 import { enterKeyHandler } from '../formsSettings/utilsFunctions';
 import {
   selectSingleProductsData,
   useAppSelector,
   useAppDispatch,
-  selectFiltersData,
-  selectUsersData,
 } from '../redux/store';
 import {
   setEditProductBasis,
@@ -28,10 +27,7 @@ import {
   ADD_PRODUCT_IMAGES_FIELDS,
   ADD_PRODUCT_IMAGES_OBJ,
 } from '../formsSettings/formsData';
-import {
-  EditProductFieldsNames,
-  IProductEditedValueBasis,
-} from '../types/forms';
+import { EditProductFieldsNames } from '../types/forms';
 import { editProductSchema } from '../formsSettings/validation/editProductSchema';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
@@ -40,24 +36,26 @@ const editTitle = cn(
   'font-semibold',
   'text-center',
   'mt-[-45px]',
-  'mb-4'
+  'mb-3'
 );
 const nonEditableInfo = cn('text-center', 'text-lg', 'mb-3.5');
 const editProductForm = cn(
+  'text-center',
+  'border',
+  'max-w-[458px]',
+  'mx-auto',
+  'rounded-2xl',
+  'bg-white',
+  'py-5',
+  'px-6',
   'flex',
   'flex-col',
-  'max-w-4xl',
-  'mx-auto',
-  'px-6',
-  'py-5',
-  'border',
-	'rounded-2xl'
+  'gap-y-4'
 );
 
 export function AdminEditProduct() {
   const isLoading = useAppSelector(selectSingleProductsData).isLoading;
   const singleProduct = useAppSelector(selectSingleProductsData).singleProduct;
-  const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
   const newImagesObj = useAppSelector(selectSingleProductsData).newImagesObj;
   const editProductBasis = useAppSelector(
     selectSingleProductsData
@@ -129,7 +127,7 @@ export function AdminEditProduct() {
             <h1 className={editTitle}>Редактировать товар</h1>
             <p className={nonEditableInfo}>ID: {singleProduct?.id}</p>
             <p className={nonEditableInfo}>
-              CATEGORY: {singleProduct?.category.toUpperCase()}
+              CATEGORY: {singleProduct?.category?.toUpperCase()}
             </p>
             <form
               className={editProductForm}
@@ -163,12 +161,7 @@ export function AdminEditProduct() {
                   key={imageObj.id}
                 />
               ))}
-              <p>
-                При изменении хотя бы одного URL остальные фото будут удалены!
-              </p>
-              <button className="bg-emerald-200 rounded-full mt-3">
-                ОТРЕДАКТИРОВАТЬ ТОВАР
-              </button>
+              <FormBtn>Готово</FormBtn>
             </form>
           </>
         )}
