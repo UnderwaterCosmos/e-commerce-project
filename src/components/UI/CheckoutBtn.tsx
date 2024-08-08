@@ -4,9 +4,12 @@ import cn from 'classnames';
 const checkoutBtn = cn(
   'px-4',
   'py-[10px]',
-  'bg-primary-blue',
   'text-white',
-  'rounded-main'
+  'rounded-main',
+  'bg-primary-blue',
+  'transition-all',
+  'hover:bg-hover-blue',
+  'active:bg-active-blue'
 );
 
 export function CheckoutBtn(props: React.HTMLProps<HTMLButtonElement>) {

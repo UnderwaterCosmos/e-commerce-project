@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
 import { Container } from './UI/Container';
@@ -7,11 +7,15 @@ import { useAppSelector, selectUsersData } from '../redux/store';
 
 const list = cn('flex', 'gap-x-3', 'mb-8', 'justify-center', 'mt-2');
 const btn = cn(
-  'text-white',
+  'text-primary-black',
   'px-4',
   'py-3',
-  'bg-primary-black',
-  'rounded-main'
+  'rounded-main',
+  'bg-primary-gray',
+  'transition-all',
+  'hover:bg-hover-gray',
+  'active:bg-active-gray',
+  'flex'
 );
 
 const links = [
@@ -38,9 +42,16 @@ export function AdminControls() {
             <ul className={list}>
               {links.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.path} className={btn}>
+                  <NavLink
+                    to={link.path}
+                    className={btn}
+                    style={({ isActive }) => ({
+                      backgroundColor: isActive ? 'rgba(29, 29, 29, 1)' : '',
+                      color: isActive ? 'white' : '',
+                    })}
+                  >
                     {link.name}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>

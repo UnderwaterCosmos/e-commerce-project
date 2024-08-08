@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
 import { manageProductInCart } from '../redux/slices/usersSlice';
@@ -73,12 +74,14 @@ export function CartItem({ cartItem, index }: ICartItem) {
 
   return (
     <li className={listItem}>
-      <img
-        className="rounded-main"
-        src={cartItem.images[0]}
-        width={163}
-        alt={cartItem.title}
-      />
+      <Link to={`/products/${cartItem.id}`}>
+        <img
+          className="rounded-main"
+          src={cartItem.images[0]}
+          width={163}
+          alt={cartItem.title}
+        />
+      </Link>
       <div className="mr-auto ml-10">
         <h4 className="font-semibold mb-4">{cartItem.title}</h4>
         <p>{cartItem.price} ₽</p>

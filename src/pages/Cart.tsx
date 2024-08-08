@@ -7,8 +7,9 @@ import { CartItem } from '../components/CartItem';
 import { Modal } from '../components/UI/Modal';
 import { BackBtn } from '../components/UI/BackBtn';
 import { Checkout } from '../components/Checkout';
-import { selectUsersData, useAppSelector } from '../redux/store';
 import { CheckoutBtn } from '../components/UI/CheckoutBtn';
+import { PathToProductsBtn } from '../components/UI/PathToProductsBtn';
+import { selectUsersData, useAppSelector } from '../redux/store';
 
 const cartTitle = cn('text-[40px]/[60px]', 'mb-8', 'mt-10', 'font-semibold');
 const checkoutWrapper = cn('flex', 'justify-center', 'items-center', 'gap-x-6');
@@ -26,24 +27,33 @@ export function Cart() {
   return (
     <main className="grow">
       <Container>
-        <BackBtn onClick={() => navigate(-1)} />
-        <h1 className={cartTitle}>Корзина</h1>
-        <ul className="mb-6">
-          {usersCart.map((cartItem, index) => (
-            <CartItem cartItem={cartItem} index={index} key={cartItem.id} />
-          ))}
-        </ul>
-        <div className={checkoutWrapper}>
-          <h3 className="font-semibold">Итого: {totalSum}₽</h3>
-          <CheckoutBtn onClick={() => setModalActive(true)} />
-        </div>
-        <Modal modalActive={modalActive} setModalActive={setModalActive}>
-          <Checkout
-            usersCart={usersCart}
-            totalSum={totalSum}
-            setModalActive={setModalActive}
-          />
-        </Modal>
+        {usersCart.length === 0 ? (
+          <div className='text-center'>
+            <h1 className="text-4xl mt-32 mb-6">Корзина пуста ;(</h1>
+            <PathToProductsBtn>Перейти к каталогу товаров</PathToProductsBtn>
+          </div>
+        ) : (
+          <>
+            <BackBtn onClick={() => navigate(-1)} />
+            <h1 className={cartTitle}>Корзина</h1>
+            <ul className="mb-6">
+              {usersCart.map((cartItem, index) => (
+                <CartItem cartItem={cartItem} index={index} key={cartItem.id} />
+              ))}
+            </ul>
+            <div className={checkoutWrapper}>
+              <h3 className="font-semibold">Итого: {totalSum}₽</h3>
+              <CheckoutBtn onClick={() => setModalActive(true)} />
+            </div>
+            <Modal modalActive={modalActive} setModalActive={setModalActive}>
+              <Checkout
+                usersCart={usersCart}
+                totalSum={totalSum}
+                setModalActive={setModalActive}
+              />
+            </Modal>
+          </>
+        )}
       </Container>
     </main>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 
 import { Container } from './UI/Container';
@@ -7,7 +7,17 @@ import { Loader } from './UI/Loader';
 import { useAppSelector, selectUsersData } from '../redux/store';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
-const btn = cn('p-1', 'bg-black', 'rounded-lg', 'text-white');
+const btnList = cn('flex', ' gap-x-3', ' mb-8', ' justify-center');
+const btn = cn(
+  'px-4',
+  'py-2.5',
+  'rounded-main',
+  'text-primary-black',
+  'bg-primary-gray',
+  'transition-all',
+  'hover:bg-hover-gray',
+  'active:bg-active-gray'
+);
 
 const buttonsData = [
   { path: '/user/history', name: 'История заказов' },
@@ -32,13 +42,22 @@ export function User() {
           <Loader />
         ) : (
           <>
-            <h1 className="mb-5">Добро пожаловать 👋!</h1>
-            <ul className="flex gap-x-3 mb-4">
+            <h1 className="text-[40px]/[60px] mb-7 font-semibold">
+              Добро пожаловать! 👋
+            </h1>
+            <ul className={btnList}>
               {buttonsData.map((data) => (
                 <li key={data.name}>
-                  <Link to={data.path} className={btn}>
+                  <NavLink
+                    to={data.path}
+                    className={btn}
+                    style={({ isActive }) => ({
+                      backgroundColor: isActive ? 'rgba(1, 71, 255, 1)' : '',
+                      color: isActive ? 'white' : '',
+                    })}
+                  >
                     {data.name}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>

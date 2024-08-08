@@ -2637,34 +2637,21 @@
       "type": "admin",
       "cart": [
         {
-          "id": 7,
-          "title": "Eyeliner elegant deluxe 21",
-          "price": 92697,
-          "description": "Precision eyeliner for defined, dramatic eyes.",
+          "id": 6,
+          "title": "Peace Lily chocolate banana happy 20",
+          "price": 4835,
+          "description": "Beautiful peace lily that blooms throughout the year.",
           "quantity": 1,
-          "category": "cosmetics",
+          "category": "houseplants",
           "images": [
-            "https://picsum.photos/id/19/280/220",
-            "https://picsum.photos/id/20/280/220",
-            "https://picsum.photos/id/21/280/220"
-          ]
-        },
-        {
-          "id": 2,
-          "title": "Coffee Maker iconic 24",
-          "price": 3979,
-          "description": "Programmable coffee maker with brew strength control.",
-          "quantity": 1,
-          "category": "appliances",
-          "images": [
-            "https://picsum.photos/id/4/280/220",
-            "https://picsum.photos/id/5/280/220",
-            "https://picsum.photos/id/6/280/220"
+            "https://picsum.photos/id/16/280/220",
+            "https://picsum.photos/id/17/280/220",
+            "https://picsum.photos/id/18/280/220"
           ]
         }
       ],
       "ordersHistory": {
-        "Thu Jul 11 2024 07:08:04 GMT+0300 (Москва, стандартное время)": [
+        "Thu Aug 08 2024 13:45:29 GMT+0300 (Москва, стандартное время)": [
           {
             "id": 7,
             "title": "Eyeliner elegant deluxe 21",
@@ -2673,110 +2660,11 @@
             "quantity": 1,
             "category": "cosmetics",
             "images": [
-              "https://pcdn.goldapple.ru/p/p/19000189672/web/696d674d61696e8dc84018a003c57fullhd.jpg",
-              "https://pcdn.goldapple.ru/p/p/19000189672/web/696d67416464318dc840189f45ac4fullhd.jpg",
-              "https://pcdn.goldapple.ru/p/p/19000189672/web/696d67416464328dc840189f3d3d2fullhd.jpg"
+              "https://picsum.photos/id/19/280/220",
+              "https://picsum.photos/id/20/280/220",
+              "https://picsum.photos/id/21/280/220"
             ]
           },
-          {
-            "id": 1,
-            "title": "Ficus jubilant gorgeous 23",
-            "price": 8749,
-            "description": "Versatile ficus plant perfect for any indoor setting.",
-            "quantity": 1,
-            "category": "houseplants",
-            "images": [
-              "https://artplants.ru/upload/resize_cache/iblock/731/900_900_13ec13241385e77c69a7d33fc4b4311ea/731c482cef6a5791f3cc68dfe764c3a7.jpg",
-              "https://artplants.ru/upload/resize_cache/iblock/a8a/900_900_13ec13241385e77c69a7d33fc4b4311ea/a8aa42efae9818871d49cc6d8c08d683.jpg",
-              "https://artplants.ru/upload/resize_cache/iblock/871/900_900_13ec13241385e77c69a7d33fc4b4311ea/87189842618f959d82f68f15145c39e6.jpg"
-            ]
-          }
-        ],
-        "Thu Jul 11 2024 07:08:13 GMT+0300 (Москва, стандартное время)": [
-          {
-            "id": 19,
-            "title": "Running Shoes apple elegant 14",
-            "price": 5380,
-            "description": "Durable running shoes with excellent support.",
-            "quantity": 1,
-            "category": "shoes",
-            "images": [
-              "https://a.lmcdn.ru/img600x866/R/T/RTLACR004802_23606321_3_v1.jpg",
-              "https://a.lmcdn.ru/img600x866/R/T/RTLACR004802_23606320_2_v1.jpg",
-              "https://a.lmcdn.ru/img600x866/R/T/RTLACR004802_23606322_4_v1.jpg"
-            ]
-          },
-          {
-            "id": 17,
-            "title": "Lip Balm chocolate jubilant 4",
-            "price": 58096,
-            "description": "Moisturizing lip balm that keeps your lips soft.",
-            "quantity": 1,
-            "category": "cosmetics",
-            "images": [
-              "https://pcdn.goldapple.ru/p/p/6051000005/web/696d674d61696e5f66646432633133333535613434616237393935613733353039373164396162348dc895df6a3a533fullhd.jpg",
-              "https://pcdn.goldapple.ru/p/p/6051000005/web/696d67416464315f31366164613966633362373534373337386664363664643233363133616134338dc895dfd9cbef3fullhd.jpg",
-              "https://pcdn.goldapple.ru/p/p/6051000005/web/696d67416464325f33346639343831353331613634643164386531376130653064666361353362328dc895e05d9f31efullhd.jpg"
-            ]
-          }
-        ],
-        "Thu Jul 11 2024 07:11:12 GMT+0300 (Москва, стандартное время)": [
-          {
-            "id": 29,
-            "title": "Boots deluxe 27",
-            "price": 81128,
-            "description": "Sturdy boots perfect for outdoor activities.",
-            "quantity": 1,
-            "category": "shoes",
-            "images": [
-              "https://a.lmcdn.ru/img600x866/R/T/RTLADH762301_22764641_1_v1.jpg",
-              "https://a.lmcdn.ru/img600x866/R/T/RTLADH762301_22764642_2_v1.jpg",
-              "https://a.lmcdn.ru/img600x866/R/T/RTLADH762301_22764643_3_v1.jpg"
-            ]
-          },
-          {
-            "id": 39,
-            "title": "Blush gorgeous 7",
-            "price": 37289,
-            "description": "Natural blush that adds a hint of color to your cheeks.",
-            "quantity": 1,
-            "category": "cosmetics",
-            "images": [
-              "https://pcdn.goldapple.ru/p/p/19760313804/web/696d674d61696e8dc83c66f6d3797fullhd.jpg",
-              "https://pcdn.goldapple.ru/p/p/19760313804/web/696d67416464318dc83c66f5aec5cfullhd.jpg",
-              "https://pcdn.goldapple.ru/p/p/19760313804/web/696d67416464328dc83c66faf4ec1fullhd.jpg"
-            ]
-          },
-          {
-            "id": 35,
-            "title": "Succulent gorgeous gorgeous gorgeous 3",
-            "price": 30954,
-            "description": "Low-maintenance succulent that thrives in sunlight.",
-            "quantity": 1,
-            "category": "houseplants",
-            "images": [
-              "https://artplants.ru/upload/resize_cache/iblock/20e/900_900_13ec13241385e77c69a7d33fc4b4311ea/20e9c420268c7e5e19e4206e1349f878.jpg",
-              "https://artplants.ru/upload/resize_cache/iblock/862/900_900_13ec13241385e77c69a7d33fc4b4311ea/862d59a8780792fb5f4e4b95a1b708fc.jpg",
-              "https://artplants.ru/upload/resize_cache/iblock/54e/900_900_13ec13241385e77c69a7d33fc4b4311ea/54ee6fe8125eaf4b8c11bbbe7537c2c1.jpg"
-            ]
-          }
-        ],
-        "Thu Jul 11 2024 07:11:19 GMT+0300 (Москва, стандартное время)": [
-          {
-            "id": 4,
-            "title": "Peace Lily jubilant iconic gorgeous 30",
-            "price": 21549,
-            "description": "Beautiful peace lily that blooms throughout the year.",
-            "quantity": 1,
-            "category": "houseplants",
-            "images": [
-              "https://artplants.ru/upload/resize_cache/iblock/39c/900_900_13ec13241385e77c69a7d33fc4b4311ea/39cbd6f359c631b6f0eb67436c397143.jpg",
-              "https://artplants.ru/upload/resize_cache/iblock/699/800_800_13ec13241385e77c69a7d33fc4b4311ea/6994b2ee5a2c89972e3c98bf47f1bf11.jpg",
-              "https://artplants.ru/upload/resize_cache/iblock/3ab/800_800_13ec13241385e77c69a7d33fc4b4311ea/3ab231d451f41cf43287262971b04526.jpg"
-            ]
-          }
-        ],
-        "Fri Jul 12 2024 08:33:42 GMT+0300 (Москва, стандартное время)": [
           {
             "id": 2,
             "title": "Coffee Maker iconic 24",
@@ -2785,22 +2673,65 @@
             "quantity": 1,
             "category": "appliances",
             "images": [
-              "https://img.mvideo.ru/Big/20084970bb.jpg",
-              "https://img.mvideo.ru/Big/20084970bb1.jpg",
-              "https://img.mvideo.ru/Big/20084970bb2.jpg"
+              "https://picsum.photos/id/4/280/220",
+              "https://picsum.photos/id/5/280/220",
+              "https://picsum.photos/id/6/280/220"
+            ]
+          }
+        ],
+        "Thu Aug 08 2024 13:45:57 GMT+0300 (Москва, стандартное время)": [
+          {
+            "id": 35,
+            "title": "Succulent gorgeous gorgeous gorgeous 3",
+            "price": 30954,
+            "description": "Low-maintenance succulent that thrives in sunlight.",
+            "quantity": 1,
+            "category": "houseplants",
+            "images": [
+              "https://picsum.photos/id/103/280/220",
+              "https://picsum.photos/id/104/280/220",
+              "https://picsum.photos/id/641/280/220"
             ]
           },
           {
-            "id": 3,
-            "title": "Bronzer fantastic 30",
-            "price": 22895,
-            "description": "Bronzer that gives your skin a sun-kissed glow.",
+            "id": 40,
+            "title": "Concealer happy apple 28",
+            "price": 52321,
+            "description": "High-coverage concealer that hides imperfections.",
             "quantity": 1,
             "category": "cosmetics",
             "images": [
-              "https://pcdn.goldapple.ru/p/p/69961300004/web/696d674d61696e8dc83b326d13b6ffullhd.jpg",
-              "https://pcdn.goldapple.ru/p/p/69961300004/web/696d67416464318dc83b326c5e91cfullhd.jpg",
-              "https://pcdn.goldapple.ru/p/p/69961300004/web/696d67416464328dc83b326e97d03fullhd.jpg"
+              "https://picsum.photos/id/118/280/220",
+              "https://picsum.photos/id/119/280/220",
+              "https://picsum.photos/id/642/280/220"
+            ]
+          }
+        ],
+        "Thu Aug 08 2024 14:39:26 GMT+0300 (Москва, стандартное время)": [
+          {
+            "id": 9,
+            "title": "Foundation happy elegant 14",
+            "price": 54476,
+            "description": "Smooth foundation that provides excellent coverage.",
+            "quantity": 1,
+            "category": "cosmetics",
+            "images": [
+              "https://picsum.photos/id/25/280/220",
+              "https://picsum.photos/id/23/280/220",
+              "https://picsum.photos/id/27/280/220"
+            ]
+          },
+          {
+            "id": 14,
+            "title": "Dishwasher iconic chocolate 17",
+            "price": 98020,
+            "description": "Energy-efficient dishwasher with multiple wash cycles.",
+            "quantity": 1,
+            "category": "appliances",
+            "images": [
+              "https://picsum.photos/id/40/280/220",
+              "https://picsum.photos/id/41/280/220",
+              "https://picsum.photos/id/42/280/220"
             ]
           }
         ]

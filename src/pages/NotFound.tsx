@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
 import cn from 'classnames';
+
+import { PathToProductsBtn } from '../components/UI/PathToProductsBtn';
 
 const mainBlock = cn(
   'h-[100vh]',
@@ -9,25 +10,12 @@ const mainBlock = cn(
   'flex-col',
   'gap-y-8'
 );
-const back = cn(
-  'text-3xl',
-  'text-white',
-  'border',
-  'p-5',
-  'rounded-main',
-  'bg-primary-blue',
-  'transition-all',
-  'hover:bg-hover-blue',
-  'active:bg-active-blue'
-);
 
 export function NotFound() {
   return (
     <main className={mainBlock}>
       <h1 className="text-7xl">Страница не найдена :(</h1>
-      <Link to="/products" className={back}>
-        Вернуться к каталогу товаров
-      </Link>
+      <PathToProductsBtn>Вернуться к каталогу товаров</PathToProductsBtn>
     </main>
   );
 }

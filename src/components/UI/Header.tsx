@@ -50,11 +50,11 @@ const logOutBtn = cn(
   'cursor-pointer',
   'flex',
   'gap-x-2.5',
-  'bg-primary-gray',
   'px-4',
   'py-2.5',
   'rounded-main',
   'text-black',
+  'bg-primary-gray',
   'transition-all',
   'hover:bg-hover-gray',
   'active:bg-active-gray'
@@ -145,7 +145,7 @@ export function Header() {
     <header className="mb-8">
       <Container>
         <div className={headerWrapper}>
-          <Link to={'/products'} className="flex items-center gap-x-3">
+          <Link to={'/'} className="flex items-center gap-x-3">
             <img src="/images/logo.svg" width={30} height={30} alt="logo" />
             <p className={logoName}>e-com</p>
           </Link>

@@ -1,5 +1,3 @@
-import React from 'react';
-import cn from 'classnames';
 import { ProductsFilters } from '../components/ProductsFilters';
 import { CardList } from '../components/CardList';
 
