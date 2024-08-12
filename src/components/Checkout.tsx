@@ -5,6 +5,7 @@ import { useAppDispatch } from '../redux/store';
 import { manageProductInCart } from '../redux/slices/usersSlice';
 import { ISingleProduct } from '../types/products';
 import { CheckoutBtn } from './UI/CheckoutBtn';
+import { UsersCartItem } from './UsersCartItem';
 
 const titleWrapper = cn(
   'flex',
@@ -14,14 +15,7 @@ const titleWrapper = cn(
   'border-b',
   'pb-4'
 );
-const checkoutItem = cn(
-  'flex',
-  'items-center',
-  'gap-x-8',
-  'pb-4',
-  'mb-4',
-  'border-b'
-);
+
 const cancelBtn = cn(
   'px-4',
   'py-[10px]',
@@ -61,21 +55,7 @@ export function Checkout({ usersCart, totalSum, setModalActive }: IProps) {
       </div>
       <ul className="mb-[14px] ">
         {usersCart.map((cartItem) => (
-          <li className={checkoutItem} key={cartItem.id}>
-            <img
-              className="rounded-main"
-              src={cartItem.images[0]}
-              width={163}
-              alt={cartItem.title}
-            />
-            <div className="w-full flex justify-between">
-              <h4 className="font-semibold">{cartItem.title}</h4>
-              <p>
-                {cartItem.price}₽ X {cartItem.quantity} шт ={' '}
-                {cartItem.quantity * cartItem.price}₽
-              </p>
-            </div>
-          </li>
+          <UsersCartItem cartItem={cartItem} />
         ))}
       </ul>
       <p className={totalPrice}>Итого: {totalSum}</p>

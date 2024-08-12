@@ -1,7 +1,3 @@
-import React from 'react'
-
 export function Footer() {
-	return (
-		<div>Footer</div>
-	)
+  return <div>By UnderwaterCosmos, Frontend Engineer, 2024</div>;
 }

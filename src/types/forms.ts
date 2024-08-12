@@ -14,7 +14,7 @@ export interface IRegistrationInputField {
   id: number;
   name: Exclude<RegistrationFieldsNames, 'type' | 'ordersHistory'>;
   placeholder: string;
-  label: 'Почта:' | 'Пароль:' | 'Логин:' | 'Аватар:' | 'Подтвердите пароль:';
+  label: string;
   type: string;
 }
 
@@ -25,7 +25,7 @@ export interface ILoginInputField {
   id: number;
   name: LoginFieldsNames;
   placeholder: string;
-  label: 'Пароль:' | 'Логин:';
+  label: string;
   type: string;
 }
 

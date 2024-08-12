@@ -1,8 +1,9 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
-import Select from 'react-select';
+import { useTranslation } from 'react-i18next';
 
 import { Container } from './Container';
+import { ChangeTranslation } from './ChangeTranslation';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import {
   useAppSelector,
@@ -93,29 +94,19 @@ const darkSwitcher = cn(
 
 const customerLinks = [
   {
-    name: 'Главная',
+    name: 'header.mainPage',
     path: '/main',
   },
   {
-    name: 'Товары',
+    name: 'header.productsPage',
     path: '/products',
   },
 ];
 const adminLinks = [
   ...customerLinks,
   {
-    name: 'Администрирование',
+    name: 'header.adminPage',
     path: '/admin',
-  },
-];
-const selectOptions = [
-  {
-    value: 'ru',
-    label: 'RU',
-  },
-  {
-    value: 'en',
-    label: 'EN',
   },
 ];
 
@@ -125,6 +116,7 @@ export function Header() {
   const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const links = fullUserInfo?.type === 'admin' ? adminLinks : customerLinks;
 
@@ -152,7 +144,7 @@ export function Header() {
           <nav>
             <ul className={navList}>
               {links.map((link) => (
-                <li className="py-1.5" key={link.name}>
+                <li className="py-1.5" key={link.path}>
                   <NavLink
                     to={link.path}
                     className={navListLink}
@@ -160,7 +152,7 @@ export function Header() {
                       backgroundColor: isActive ? 'white' : '',
                     })}
                   >
-                    {link.name}
+                    {t(link.name)}
                   </NavLink>
                 </li>
               ))}
@@ -172,12 +164,12 @@ export function Header() {
                 <li>
                   <Link to={'/cart'} className={controlsCart}>
                     <img src="/images/cart.svg" alt="cart" />
-                    <span>Корзина</span>
+                    <span>{t('header.cart')}</span>
                   </Link>
                 </li>
                 <li className={logOutBtn} onClick={logOutHandler}>
                   <img src="/images/log-out.svg" alt="log out" />
-                  <span>Выйти</span>
+                  <span>{t('header.logOut')}</span>
                 </li>
                 <li>
                   <Link to={'/user/info'}>
@@ -194,12 +186,12 @@ export function Header() {
               <>
                 <li>
                   <Link className={logInBtn} to={'/login'}>
-                    Войти
+                    {t('header.logIn')}
                   </Link>
                 </li>
                 <li>
                   <img
-                    src="images/avatar-placeholder.png"
+                    src="/images/avatar-placeholder.png"
                     width={60}
                     alt="placeholder"
                   />
@@ -213,28 +205,11 @@ export function Header() {
               </div>
               {/* <div className={darkSwitcher}>
                 <div className="w-6 h-6 rounded-full bg-white" />
-                <img src="/images/moon.svg" alt="sun" className="mr-auto" />
+                <img src="/images/moon.svg" alt="moon" className="mr-auto" />
               </div> */}
             </li>
             <li>
-              <Select
-                options={selectOptions}
-                defaultValue={selectOptions[0]}
-                styles={{
-                  control: (baseStyles) => ({
-                    ...baseStyles,
-                    backgroundColor: '#EEEEEE',
-                  }),
-                  option: (baseStyles) => ({
-                    ...baseStyles,
-                    color: '#1D1D1D',
-                  }),
-                }}
-              />
-              {/* <select className="text-black">
-                <option value="ru">RU</option>
-                <option value="en">EN</option>
-              </select> */}
+              <ChangeTranslation />
             </li>
           </ul>
         </div>

@@ -22,49 +22,49 @@ export const REGISTRATION_INITIAL_USER_DATA: RegistrationBasis = {
   avatarUrl: '',
   accType: {
     value: 'customer',
-    label: 'Покупатель',
+    label: 'regForm.typeCustomer',
   },
 };
 export const REGISTRATION_INPUT_FIELDS: IRegistrationInputField[] = [
   {
     id: 1,
     name: 'email',
-    placeholder: 'Введите Email',
-    label: 'Почта:',
+    placeholder: 'regForm.emailPlaceholder',
+    label: 'regForm.emailLabel',
     type: 'email',
   },
   {
     id: 2,
     name: 'password',
-    placeholder: 'Введите пароль',
-    label: 'Пароль:',
+    placeholder: 'regForm.passwordPlaceholder',
+    label: 'regForm.passwordLabel',
     type: 'password',
   },
   {
     id: 3,
     name: 'confirmPassword',
-    placeholder: 'Введите пароль повторно',
-    label: 'Подтвердите пароль:',
+    placeholder: 'regForm.confirmPasswordPlaceholder',
+    label: 'regForm.confirmPasswordLabel',
     type: 'password',
   },
   {
     id: 4,
     name: 'login',
-    placeholder: 'Введите логин',
-    label: 'Логин:',
+    placeholder: 'regForm.loginPlaceholder',
+    label: 'regForm.loginLabel',
     type: 'text',
   },
   {
     id: 5,
     name: 'avatarUrl',
-    placeholder: 'Добавьте URL аватара',
-    label: 'Аватар:',
+    placeholder: 'regForm.avatarPlaceholder',
+    label: 'regForm.avatarLabel',
     type: 'text',
   },
 ];
 export const REG_SELECT_OPTIONS: ISelect[] = [
-  { value: 'customer', label: 'Покупатель' },
-  { value: 'admin', label: 'Администратор' },
+  { value: 'customer', label: 'regForm.typeCustomer' },
+  { value: 'admin', label: 'regForm.typeAdmin' },
 ];
 
 // LOGIN
@@ -76,15 +76,15 @@ export const LOGIN_INPUT_FIELDS: ILoginInputField[] = [
   {
     id: 1,
     name: 'login',
-    placeholder: 'Введите логин',
-    label: 'Логин:',
+    placeholder: 'loginForm.loginPlaceholder',
+    label: 'loginForm.loginLabel',
     type: 'text',
   },
   {
     id: 2,
     name: 'password',
-    placeholder: 'Введите пароль',
-    label: 'Пароль:',
+    placeholder: 'loginForm.passwordPlaceholder',
+    label: 'loginForm.passwordLabel',
     type: 'password',
   },
 ];

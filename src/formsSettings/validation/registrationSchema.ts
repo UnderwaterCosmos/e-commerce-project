@@ -9,24 +9,24 @@ export const registrationSchema = yup.object().shape({
   email: yup
     .string()
     .trim()
-    .required('Обязательное поле!')
-    .matches(regExpEmail, 'Некорректный формат почты!'),
+    .required('formErrors.required')
+    .matches(regExpEmail, 'formErrors.incorrectEmail'),
   password: yup
     .string()
-    .required('Обязательное поле!')
-    .min(5, 'Необходимо минимум 5 символов.'),
+    .required('formErrors.required')
+    .min(5, 'formErrors.fiveSymbolsMin'),
   confirmPassword: yup
     .string()
-    .required('Обязательное поле!')
-    .oneOf([yup.ref('password')], 'Пароли не совпадают!'),
+    .required('formErrors.required')
+    .oneOf([yup.ref('password')], 'formErrors.wrongPasswordConfirm'),
   login: yup
     .string()
     .trim()
-    .required('Обязательное поле!')
-    .min(3, 'Необходимо минимум 3 символа.'),
+    .required('formErrors.required')
+    .min(3, 'formErrors.threeSymbolsMin'),
   avatarUrl: yup
     .string()
     .trim()
-    .required('Обязательное поле!')
-    .matches(regExpUrl, 'Некорректная ссылка!'),
+    .required('formErrors.required')
+    .matches(regExpUrl, 'formErrors.incorrectLink'),
 });

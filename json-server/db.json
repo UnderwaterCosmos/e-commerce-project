@@ -2637,16 +2637,16 @@
       "type": "admin",
       "cart": [
         {
-          "id": 6,
-          "title": "Peace Lily chocolate banana happy 20",
-          "price": 4835,
-          "description": "Beautiful peace lily that blooms throughout the year.",
-          "quantity": 1,
-          "category": "houseplants",
+          "id": 2,
+          "title": "Coffee Maker iconic 24",
+          "price": 3979,
+          "description": "Programmable coffee maker with brew strength control.",
+          "quantity": 5,
+          "category": "appliances",
           "images": [
-            "https://picsum.photos/id/16/280/220",
-            "https://picsum.photos/id/17/280/220",
-            "https://picsum.photos/id/18/280/220"
+            "https://picsum.photos/id/4/280/220",
+            "https://picsum.photos/id/5/280/220",
+            "https://picsum.photos/id/6/280/220"
           ]
         }
       ],

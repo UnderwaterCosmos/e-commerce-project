@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useTranslation } from 'react-i18next';
 
 import {
   REGISTRATION_INPUT_FIELDS,
@@ -63,6 +64,7 @@ export function RegistrationForm() {
   const isLoading = useAppSelector(selectUsersData).isLoading;
   const registrationBasis = useAppSelector(selectUsersData).registrationBasis;
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const {
     register,
@@ -118,7 +120,7 @@ export function RegistrationForm() {
           <Loader />
         ) : (
           <div className={formWrapper}>
-            <h1 className="text-xl font-semibold">Регистрация</h1>
+            <h1 className="text-xl font-semibold">{t('regForm.title')}</h1>
             <form
               className="flex flex-col gap-y-4"
               onSubmit={handleSubmit(submitHandler)}
@@ -146,7 +148,7 @@ export function RegistrationForm() {
                 )
               )}
               <div className="text-left">
-                <p>Тип пользователя:</p>
+                <p className='mb-1 cursor-default'>{t('regForm.userTypeLabel')}</p>
                 <CustomSelect
                   name="registration"
                   options={REG_SELECT_OPTIONS}
@@ -154,19 +156,19 @@ export function RegistrationForm() {
                   selectHandler={selectHandler}
                 />
               </div>
-              <FormBtn>Зарегистрироваться</FormBtn>
+              <FormBtn>{t('regForm.regButton')}</FormBtn>
               <button
                 type="button"
                 className={clearBtn}
                 onClick={clearFieldsHandler}
               >
-                Очистить форму
+                {t('regForm.clearForm')}
               </button>
             </form>
             <p>
-              Если Вы уже зарегистрированы -{' '}
+              {t('regForm.haveAcc')}{' '}
               <Link to={'/login'} className={loginLink}>
-                войдите
+                {t('regForm.login')}
               </Link>
             </p>
           </div>

@@ -31,8 +31,6 @@ export function Modal({ modalActive, setModalActive, children }: IProps) {
     'bg-white',
     'duration-300',
     'transition all'
-    // 'scale-50',
-    // { 'scale-100': modalActive }
   );
 
   return (

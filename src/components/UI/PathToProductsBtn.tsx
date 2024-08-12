@@ -19,10 +19,8 @@ interface IProps {
 
 export function PathToProductsBtn({ children }: IProps) {
   return (
-    <button type="button">
-      <Link to="/products" className={back}>
-        {children}
-      </Link>
-    </button>
+    <Link to="/products" className={back}>
+      {children}
+    </Link>
   );
 }

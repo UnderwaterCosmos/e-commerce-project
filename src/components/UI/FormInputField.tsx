@@ -1,6 +1,7 @@
 import cn from 'classnames';
-
+import { useTranslation } from 'react-i18next';
 import { UseFormRegister } from 'react-hook-form';
+
 import { incorrectInput } from '../../formsSettings/utilsFunctions';
 
 import {
@@ -35,6 +36,8 @@ export function FormInputField({
   fieldObj,
   fieldsHandler,
 }: IProps) {
+  const { t } = useTranslation();
+
   const inputField = cn(
     'rounded-md',
     'py-2.5',
@@ -51,20 +54,20 @@ export function FormInputField({
   return (
     <div className="flex flex-col">
       <label htmlFor={fieldObj.name} className="mb-1 text-left">
-        {fieldObj.label}
+        {t(`${fieldObj.label  ?? ''}`)}
       </label>
       <input
         {...register(fieldObj.name)}
         className={inputField}
         type={fieldObj.type}
         id={fieldObj.name}
-        placeholder={fieldObj.placeholder}
+        placeholder={t(`${fieldObj.placeholder}`)}
         value={state[fieldObj.name as keyof typeof state]}
         onChange={(event) => fieldsHandler(event, fieldObj.name)}
       />
       {errors[fieldObj.name as keyof typeof errors] && (
         <p className={errMessage}>
-          {errors[fieldObj.name as keyof typeof errors]?.message}
+          {t(`${errors[fieldObj.name as keyof typeof errors]?.message}`)}
         </p>
       )}
     </div>

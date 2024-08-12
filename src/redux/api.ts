@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { IGetProductsConfig, ISingleProduct } from '../types/products';
 import { IUser } from '../types/users';
