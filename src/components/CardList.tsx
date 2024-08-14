@@ -87,11 +87,15 @@ export function CardList() {
     <section className="mb-4 text-center">
       <Container>
         {isLoading && <Loader />}
-        <ul className={list}>
-          {productsList.map((product) => (
-            <Card product={product} key={product.id} />
-          ))}
-        </ul>
+        {productsList.length === 0 && !isLoading ? (
+          <h2 className='mt-60 text-3xl font-semibold'>Ничего не найдено :(</h2>
+        ) : (
+          <ul className={list}>
+            {productsList.map((product) => (
+              <Card product={product} key={product.id} />
+            ))}
+          </ul>
+        )}
         <UpBtn />
         <div className="h-3" ref={triggerRef} />
       </Container>

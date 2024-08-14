@@ -1,6 +1,5 @@
 import React from 'react';
 import cn from 'classnames';
-import { useTranslation } from 'react-i18next';
 
 import { Container } from './UI/Container';
 import { CustomSelect } from './UI/CustomSelect';
@@ -38,7 +37,6 @@ export function ProductsFilters() {
     selectSingleProductsData
   ).isBackBtnPressed;
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
 
   React.useEffect(() => {
     const categoriesPromise = dispatch(fetchCategories(isBackBtnPressed));
@@ -61,7 +59,7 @@ export function ProductsFilters() {
     <aside className={filtersBlock}>
       <Container>
         <div className="flex">
-          <h1 className={title}>{t('filters.title')}</h1>
+          <h1 className={title}>Каталог</h1>
           <div className={searchFieldWrapper}>
             <div className="flex w-[400px] relative">
               <input
@@ -71,7 +69,7 @@ export function ProductsFilters() {
                 onChange={(event) =>
                   dispatch(setSearchValue(event.target.value))
                 }
-                placeholder={t('filters.searchPlaceholder')}
+                placeholder='Поиск по наименованию'
               />
               {!search && (
                 <img

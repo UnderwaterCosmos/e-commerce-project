@@ -19,7 +19,7 @@ export interface IRegistrationInputField {
 }
 
 // LOGIN
-export type LoginFieldsNames = Extract<keyof IUser, 'login' | 'password'>;
+export type LoginFieldsNames = 'login' | 'password';
 export type LoginBasis = Pick<IUser, 'password' | 'login'>;
 export interface ILoginInputField {
   id: number;

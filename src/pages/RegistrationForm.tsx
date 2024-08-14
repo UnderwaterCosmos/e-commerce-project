@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useTranslation } from 'react-i18next';
 
 import {
   REGISTRATION_INPUT_FIELDS,
@@ -64,7 +63,6 @@ export function RegistrationForm() {
   const isLoading = useAppSelector(selectUsersData).isLoading;
   const registrationBasis = useAppSelector(selectUsersData).registrationBasis;
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
 
   const {
     register,
@@ -120,7 +118,7 @@ export function RegistrationForm() {
           <Loader />
         ) : (
           <div className={formWrapper}>
-            <h1 className="text-xl font-semibold">{t('regForm.title')}</h1>
+            <h1 className="text-xl font-semibold">Регистрация</h1>
             <form
               className="flex flex-col gap-y-4"
               onSubmit={handleSubmit(submitHandler)}
@@ -148,7 +146,7 @@ export function RegistrationForm() {
                 )
               )}
               <div className="text-left">
-                <p className='mb-1 cursor-default'>{t('regForm.userTypeLabel')}</p>
+                <p className="mb-1 cursor-default">Тип пользователя:</p>
                 <CustomSelect
                   name="registration"
                   options={REG_SELECT_OPTIONS}
@@ -156,19 +154,19 @@ export function RegistrationForm() {
                   selectHandler={selectHandler}
                 />
               </div>
-              <FormBtn>{t('regForm.regButton')}</FormBtn>
+              <FormBtn>Зарегистрироваться</FormBtn>
               <button
                 type="button"
                 className={clearBtn}
                 onClick={clearFieldsHandler}
               >
-                {t('regForm.clearForm')}
+                Очистить форму
               </button>
             </form>
             <p>
-              {t('regForm.haveAcc')}{' '}
+              Если Вы уже зарегистрированы -{' '}
               <Link to={'/login'} className={loginLink}>
-                {t('regForm.login')}
+                войдите
               </Link>
             </p>
           </div>

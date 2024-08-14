@@ -24,6 +24,28 @@ import { setNotification } from './notificationSlice';
 
 const token = useLocalStorage('token');
 
+export const fetchUsersList = createAsyncThunk.withTypes<{
+  dispatch: AppDispatch;
+  extra: {
+    api: { getUsers: () => Promise<IUser[]> };
+  };
+}>()(
+  'users/fetchUsersList',
+  async (_, { dispatch, rejectWithValue, extra }) => {
+    try {
+      return extra.api.getUsers();
+    } catch (error) {
+      dispatch(
+        setNotification({
+          type: 'error',
+          message: 'Ошибка при загрузке списка пользователей!',
+        })
+      );
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const addNewUser = createAsyncThunk.withTypes<{
   dispatch: AppDispatch;
   extra: {
@@ -210,6 +232,7 @@ const initialState: IUserState = {
   fullUserInfo: null,
   registrationBasis: REGISTRATION_INITIAL_USER_DATA,
   loginBasis: LOGIN_INITIAL_USER_DATA,
+  usersList: [],
 };
 
 const usersSlice = createSlice({
@@ -231,6 +254,9 @@ const usersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchUsersList.fulfilled, (state, action) => {
+        state.usersList = action.payload;
+      })
       .addCase(logInUser.fulfilled, (state, action) => {
         token.setItem(Math.ceil(Math.random() * 100000000));
         state.fullUserInfo = action.payload;

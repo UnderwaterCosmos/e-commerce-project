@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useTranslation } from 'react-i18next';
 
 import {
   LOGIN_INPUT_FIELDS,
@@ -47,7 +46,6 @@ export function LoginForm() {
   const isLoading = useAppSelector(selectUsersData).isLoading;
   const loginBasis = useAppSelector(selectUsersData).loginBasis;
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
 
   const {
     register,
@@ -78,7 +76,7 @@ export function LoginForm() {
           <Loader />
         ) : (
           <div className={formWrapper}>
-            <h1 className="text-xl font-semibold">{t('loginForm.title')}</h1>
+            <h1 className="text-xl font-semibold">Войти</h1>
             <form
               className="flex flex-col gap-y-5"
               onSubmit={handleSubmit(submitHandler)}
@@ -105,12 +103,12 @@ export function LoginForm() {
                   />
                 )
               )}
-              <FormBtn>{t('loginForm.title')}</FormBtn>
+              <FormBtn>Войти</FormBtn>
             </form>
             <p>
-						{t('loginForm.noAcc')}{' '}
+              Нет аккаунта?{' '}
               <Link to={'/registration'} className={regLink}>
-							{t('loginForm.reg')}
+                Зарегистрироваться
               </Link>
             </p>
           </div>

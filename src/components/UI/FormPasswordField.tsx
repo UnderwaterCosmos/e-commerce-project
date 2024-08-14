@@ -1,7 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 
 import { incorrectInput } from '../../formsSettings/utilsFunctions';
 import {
@@ -38,7 +37,6 @@ export function FormPasswordField({
   fieldsHandler,
 }: IProps) {
   const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
-  const { t } = useTranslation();
 
   const inputField = cn(
     'rounded-md',
@@ -57,14 +55,14 @@ export function FormPasswordField({
     <div>
       <div className="flex flex-col relative">
         <label htmlFor={fieldObj.name} className=" text-left mb-1">
-          {t(`${fieldObj.label}`)}
+          {fieldObj.label}
         </label>
         <input
           {...register(fieldObj.name)}
           className={inputField}
           type={isPasswordVisible ? 'text' : 'password'}
           id={fieldObj.name}
-          placeholder={t(`${fieldObj.placeholder}`)}
+          placeholder={fieldObj.placeholder}
           value={state[fieldObj.name as keyof typeof state]}
           onChange={(event) => fieldsHandler(event, fieldObj.name)}
         />
@@ -90,7 +88,7 @@ export function FormPasswordField({
       </div>
       {errors[fieldObj.name as keyof typeof errors] && (
         <p className="text-rose-500 font-semibold">
-          {t(`${errors[fieldObj.name as keyof typeof errors]?.message}`)}
+          {errors[fieldObj.name as keyof typeof errors]?.message}
         </p>
       )}
     </div>

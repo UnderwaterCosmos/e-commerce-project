@@ -2630,9 +2630,9 @@
   ],
   "users": [
     {
-      "email": "bogdanivliev@mail.ru",
+      "email": "admin@email.com",
       "password": "123123",
-      "login": "UnderwaterCosmos",
+      "login": "Admin Account",
       "avatarUrl": "https://uznayvse.ru/person/winnie-harlow/Winnie_Harlow01.jpg",
       "type": "admin",
       "cart": [
@@ -2739,24 +2739,14 @@
       "id": 1
     },
     {
-      "email": "rossia112@rambler.ru",
-      "password": "asdsa",
-      "login": "Mnu_lapkami",
+      "email": "customer@email.com",
+      "password": "321321",
+      "login": "Customer Account",
       "avatarUrl": "https://img0.liveinternet.ru/images/attach/b/3/30/172/30172285_ipvpp.jpg",
       "type": "customer",
       "cart": [],
       "ordersHistory": {},
       "id": 2
-    },
-    {
-      "email": "shamilkus1197@gmail.com",
-      "password": "qwaaaa",
-      "login": "dsaasdsad",
-      "avatarUrl": "https://cdn.fifi.ru/person/240x253/anne-hathaway.jpg",
-      "type": "customer",
-      "cart": [],
-      "ordersHistory": {},
-      "id": 3
     }
   ]
 }

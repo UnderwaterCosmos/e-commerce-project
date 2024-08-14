@@ -29,42 +29,42 @@ export const REGISTRATION_INPUT_FIELDS: IRegistrationInputField[] = [
   {
     id: 1,
     name: 'email',
-    placeholder: 'regForm.emailPlaceholder',
-    label: 'regForm.emailLabel',
+    placeholder: 'Введите email',
+    label: 'Почта:',
     type: 'email',
   },
   {
     id: 2,
     name: 'password',
-    placeholder: 'regForm.passwordPlaceholder',
-    label: 'regForm.passwordLabel',
+    placeholder: 'Введите пароль',
+    label: 'Пароль:',
     type: 'password',
   },
   {
     id: 3,
     name: 'confirmPassword',
-    placeholder: 'regForm.confirmPasswordPlaceholder',
-    label: 'regForm.confirmPasswordLabel',
+    placeholder: 'Введите пароль повторно',
+    label: 'Подтвердите пароль:',
     type: 'password',
   },
   {
     id: 4,
     name: 'login',
-    placeholder: 'regForm.loginPlaceholder',
-    label: 'regForm.loginLabel',
+    placeholder: 'Введите логин',
+    label: 'Логин:',
     type: 'text',
   },
   {
     id: 5,
     name: 'avatarUrl',
-    placeholder: 'regForm.avatarPlaceholder',
-    label: 'regForm.avatarLabel',
+    placeholder: 'Добавьте URL аватара',
+    label: 'Аватар:',
     type: 'text',
   },
 ];
 export const REG_SELECT_OPTIONS: ISelect[] = [
-  { value: 'customer', label: 'regForm.typeCustomer' },
-  { value: 'admin', label: 'regForm.typeAdmin' },
+  { value: 'customer', label: 'Покупатель' },
+  { value: 'admin', label: 'Администратор' },
 ];
 
 // LOGIN
@@ -76,15 +76,15 @@ export const LOGIN_INPUT_FIELDS: ILoginInputField[] = [
   {
     id: 1,
     name: 'login',
-    placeholder: 'loginForm.loginPlaceholder',
-    label: 'loginForm.loginLabel',
+    placeholder: 'Введите логин',
+    label: 'Логин:',
     type: 'text',
   },
   {
     id: 2,
     name: 'password',
-    placeholder: 'loginForm.passwordPlaceholder',
-    label: 'loginForm.passwordLabel',
+    placeholder: 'Введите пароль',
+    label: 'Пароль:',
     type: 'password',
   },
 ];

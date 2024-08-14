@@ -6,13 +6,10 @@ import { selectUsersData, useAppSelector } from '../redux/store';
 
 const ordersListItem = cn(
   'bg-primary-gray',
-  // 'border-[1px]',
   'px-3',
   'p-4',
   'flex',
   'flex-col',
-  // 'items-center',
-  // 'gap-x-1.5',
   'rounded-main',
   'cursor-pointer'
 );
@@ -40,7 +37,7 @@ export function OrdersHistoryInnerItem({ orderName }: { orderName: string }) {
           <img
             className={triangleIcon}
             src="/images/history-arrow.svg"
-						width={10}
+            width={10}
             alt=""
           />
           {orderName}
@@ -54,7 +51,7 @@ export function OrdersHistoryInnerItem({ orderName }: { orderName: string }) {
               <li className={orderItem} key={order.id}>
                 <Link to={`/products/${order.id}`}>
                   <img
-                    className="rounded-main "
+                    className="rounded-main"
                     src={order.images[0]}
                     width={163}
                     alt={order.title}

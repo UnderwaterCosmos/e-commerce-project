@@ -27,7 +27,7 @@ export function Notification() {
   return (
     <ToastContainer
       position="top-right"
-      theme="colored"
+      theme="light"
       closeOnClick
       draggable
       autoClose={2000}

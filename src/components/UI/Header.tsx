@@ -1,9 +1,7 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
-import { useTranslation } from 'react-i18next';
 
 import { Container } from './Container';
-import { ChangeTranslation } from './ChangeTranslation';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import {
   useAppSelector,
@@ -94,18 +92,18 @@ const darkSwitcher = cn(
 
 const customerLinks = [
   {
-    name: 'header.mainPage',
+    name: 'Главная',
     path: '/main',
   },
   {
-    name: 'header.productsPage',
+    name: 'Товары',
     path: '/products',
   },
 ];
 const adminLinks = [
   ...customerLinks,
   {
-    name: 'header.adminPage',
+    name: 'Администрирование',
     path: '/admin',
   },
 ];
@@ -116,7 +114,6 @@ export function Header() {
   const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { t } = useTranslation();
 
   const links = fullUserInfo?.type === 'admin' ? adminLinks : customerLinks;
 
@@ -137,11 +134,11 @@ export function Header() {
     <header className="mb-8">
       <Container>
         <div className={headerWrapper}>
-          <Link to={'/'} className="flex items-center gap-x-3">
+          <Link to={'/'} className="flex items-center gap-x-3 mr-16">
             <img src="/images/logo.svg" width={30} height={30} alt="logo" />
             <p className={logoName}>e-com</p>
           </Link>
-          <nav>
+          <nav className="mr-auto">
             <ul className={navList}>
               {links.map((link) => (
                 <li className="py-1.5" key={link.path}>
@@ -152,7 +149,7 @@ export function Header() {
                       backgroundColor: isActive ? 'white' : '',
                     })}
                   >
-                    {t(link.name)}
+                    {link.name}
                   </NavLink>
                 </li>
               ))}
@@ -164,12 +161,12 @@ export function Header() {
                 <li>
                   <Link to={'/cart'} className={controlsCart}>
                     <img src="/images/cart.svg" alt="cart" />
-                    <span>{t('header.cart')}</span>
+                    <span>Корзина</span>
                   </Link>
                 </li>
                 <li className={logOutBtn} onClick={logOutHandler}>
                   <img src="/images/log-out.svg" alt="log out" />
-                  <span>{t('header.logOut')}</span>
+                  <span>Выйти</span>
                 </li>
                 <li>
                   <Link to={'/user/info'}>
@@ -186,7 +183,7 @@ export function Header() {
               <>
                 <li>
                   <Link className={logInBtn} to={'/login'}>
-                    {t('header.logIn')}
+                    Войти
                   </Link>
                 </li>
                 <li>
@@ -207,9 +204,6 @@ export function Header() {
                 <div className="w-6 h-6 rounded-full bg-white" />
                 <img src="/images/moon.svg" alt="moon" className="mr-auto" />
               </div> */}
-            </li>
-            <li>
-              <ChangeTranslation />
             </li>
           </ul>
         </div>
