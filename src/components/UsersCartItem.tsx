@@ -29,7 +29,7 @@ export function UsersCartItem({ cartItem }: IProps) {
         <p>
           {cartItem.price}₽ X {cartItem.quantity} шт ={' '}
           {cartItem.quantity * cartItem.price}₽
-        </p>
+        </p> 
       </div>
     </li>
   );

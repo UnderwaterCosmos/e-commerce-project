@@ -1,3 +1,4 @@
+import React from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 
@@ -108,7 +109,7 @@ const adminLinks = [
   },
 ];
 
-export function Header() {
+export default React.memo(function Header() {
   const token = useLocalStorage('token');
   const fullUserInfoStorage = useLocalStorage('persist:usersData');
   const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
@@ -210,4 +211,4 @@ export function Header() {
       </Container>
     </header>
   );
-}
+})

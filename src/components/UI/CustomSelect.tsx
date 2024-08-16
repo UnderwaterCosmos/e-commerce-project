@@ -1,5 +1,4 @@
 import Select from 'react-select';
-import { useTranslation } from 'react-i18next';
 
 import { ISelect } from '../../types/filters';
 
@@ -11,18 +10,10 @@ interface IProps {
 }
 
 export function CustomSelect({ name, options, value, selectHandler }: IProps) {
-  const { t } = useTranslation();
-
-  const translatedOptions = options.map((option) => ({
-    ...option,
-    label: t(`${option.label}`),
-  }));
-  const translatedValue = { ...value, label: t(`${value?.label}`) };
-
   return (
     <Select
-      options={translatedOptions}
-      value={translatedValue}
+      options={options}
+      value={value}
       onChange={(option) => selectHandler(option as ISelect)}
       styles={{
         control: (baseStyles) => ({

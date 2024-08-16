@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import cn from 'classnames';
 
 import { Container } from './UI/Container';
-import { Card } from './Card';
+import Card from './Card';
 import { Loader } from './UI/Loader';
 import { UpBtn } from './UI/UpBtn';
 import {
