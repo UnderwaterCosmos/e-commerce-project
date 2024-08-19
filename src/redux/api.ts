@@ -34,11 +34,6 @@ export const getCategories = async () => {
   return data;
 };
 
-export const getUsers = async () => {
-  const { data } = await axios.get(`${BASE_URL}/users`);
-  return data;
-};
-
 export const createUser = async (registrationData: IUser) => {
   const { data } = await axios.post(`${BASE_URL}/users`, registrationData);
   return data;

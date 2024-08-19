@@ -22,5 +22,4 @@ export interface IUserState {
   fullUserInfo: IUser | null;
   registrationBasis: RegistrationBasis;
   loginBasis: LoginBasis;
-  usersList: IUser[];
 }

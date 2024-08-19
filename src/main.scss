@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply h-full bg-light-background font-['InterTightRegular'];
+  @apply h-full bg-[#F6F6F6] dark:bg-primary-black font-['InterTightRegular'];
 
   input:focus {
     @apply outline-none;

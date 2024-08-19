@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -8,7 +9,6 @@ export default {
           'InterTightRegular, InterTightMedium, InterTightSemiBold, sans-serif',
       },
       colors: {
-        'light-background': 'rgba(246, 246, 246, 1)',
         'primary-black': 'rgba(29, 29, 29, 1)',
         'hover-black': 'rgba(55, 55, 55, 1)',
         'active-black': 'rgba(84, 84, 84, 1)',

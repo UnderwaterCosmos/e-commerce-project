@@ -8,17 +8,17 @@ import {
   selectUsersData,
   useAppDispatch,
 } from '../redux/store';
-import { fetchUsersList, logInUser } from '../redux/slices/usersSlice';
-import { IUser } from '../types/users';
+import { logInUser } from '../redux/slices/usersSlice';
 
 const mainWrapper = cn('mt-16', 'px-6', 'flex', 'gap-x-28');
 const greeting = cn(
   'max-w-[500px]',
   'text-primary-h1',
   'font-semibold',
-  'mb-14'
+  'mb-14',
+  'dark:text-white'
 );
-const accountsListItem = cn(
+const demoData = cn(
   'bg-primary-gray',
   'px-3',
   'p-4',
@@ -27,7 +27,19 @@ const accountsListItem = cn(
   'rounded-main',
   'cursor-pointer',
   'max-w-2xl',
-  'mx-auto'
+  'mx-auto',
+  'mb-2'
+);
+const demoListItem = cn('mb-2', 'bg-hover-gray', 'rounded-main', ' text-lg');
+const demoLoginDataItem = cn(
+  'mb-2',
+  'bg-hover-gray',
+  'rounded-main',
+  'text-lg',
+  'flex',
+  'items-center',
+  'gap-x-8',
+  'justify-center'
 );
 
 const infoList = [
@@ -44,42 +56,163 @@ const infoList = [
     text: 'Корзина и оформление заказа: Добавляйте товары в корзину, оформляйте заказы и проверяйте их историю.',
   },
 ];
+const usersDemo = [
+  {
+    email: 'admin@email.com',
+    password: '123123',
+    login: 'Admin Account',
+    avatarUrl: 'https://uznayvse.ru/person/winnie-harlow/Winnie_Harlow01.jpg',
+    type: 'admin',
+    cart: [
+      {
+        id: 2,
+        title: 'Coffee Maker iconic 24',
+        price: 3979,
+        description: 'Programmable coffee maker with brew strength control.',
+        quantity: 5,
+        category: 'appliances',
+        images: [
+          'https://picsum.photos/id/4/280/220',
+          'https://picsum.photos/id/5/280/220',
+          'https://picsum.photos/id/6/280/220',
+        ],
+      },
+    ],
+    ordersHistory: {
+      'Thu Aug 08 2024 13:45:29 GMT+0300 (Москва, стандартное время)': [
+        {
+          id: 7,
+          title: 'Eyeliner elegant deluxe 21',
+          price: 92697,
+          description: 'Precision eyeliner for defined, dramatic eyes.',
+          quantity: 1,
+          category: 'cosmetics',
+          images: [
+            'https://picsum.photos/id/19/280/220',
+            'https://picsum.photos/id/20/280/220',
+            'https://picsum.photos/id/21/280/220',
+          ],
+        },
+        {
+          id: 2,
+          title: 'Coffee Maker iconic 24',
+          price: 3979,
+          description: 'Programmable coffee maker with brew strength control.',
+          quantity: 1,
+          category: 'appliances',
+          images: [
+            'https://picsum.photos/id/4/280/220',
+            'https://picsum.photos/id/5/280/220',
+            'https://picsum.photos/id/6/280/220',
+          ],
+        },
+      ],
+      'Thu Aug 08 2024 13:45:57 GMT+0300 (Москва, стандартное время)': [
+        {
+          id: 35,
+          title: 'Succulent gorgeous gorgeous gorgeous 3',
+          price: 30954,
+          description: 'Low-maintenance succulent that thrives in sunlight.',
+          quantity: 1,
+          category: 'houseplants',
+          images: [
+            'https://picsum.photos/id/103/280/220',
+            'https://picsum.photos/id/104/280/220',
+            'https://picsum.photos/id/641/280/220',
+          ],
+        },
+        {
+          id: 40,
+          title: 'Concealer happy apple 28',
+          price: 52321,
+          description: 'High-coverage concealer that hides imperfections.',
+          quantity: 1,
+          category: 'cosmetics',
+          images: [
+            'https://picsum.photos/id/118/280/220',
+            'https://picsum.photos/id/119/280/220',
+            'https://picsum.photos/id/642/280/220',
+          ],
+        },
+      ],
+      'Thu Aug 08 2024 14:39:26 GMT+0300 (Москва, стандартное время)': [
+        {
+          id: 9,
+          title: 'Foundation happy elegant 14',
+          price: 54476,
+          description: 'Smooth foundation that provides excellent coverage.',
+          quantity: 1,
+          category: 'cosmetics',
+          images: [
+            'https://picsum.photos/id/25/280/220',
+            'https://picsum.photos/id/23/280/220',
+            'https://picsum.photos/id/27/280/220',
+          ],
+        },
+        {
+          id: 14,
+          title: 'Dishwasher iconic chocolate 17',
+          price: 98020,
+          description: 'Energy-efficient dishwasher with multiple wash cycles.',
+          quantity: 1,
+          category: 'appliances',
+          images: [
+            'https://picsum.photos/id/40/280/220',
+            'https://picsum.photos/id/41/280/220',
+            'https://picsum.photos/id/42/280/220',
+          ],
+        },
+      ],
+    },
+    id: 1,
+  },
+  {
+    email: 'customer@email.com',
+    password: '321321',
+    login: 'Customer Account',
+    avatarUrl:
+      'https://img0.liveinternet.ru/images/attach/b/3/30/172/30172285_ipvpp.jpg',
+    type: 'customer',
+    cart: [],
+    ordersHistory: {},
+    id: 2,
+  },
+];
 
 export function Main() {
   const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
-  const usersList = useAppSelector(selectUsersData).usersList;
-  const [openList, setOpenList] = React.useState(false);
+  const [openDemo, setOpenDemo] = React.useState<{
+    list: boolean;
+    loginData: boolean;
+  }>({
+    list: false,
+    loginData: false,
+  });
   const dispatch = useAppDispatch();
 
   const accountsListOpener = cn('flex', 'items-center', 'gap-x-2', {
-    'mb-4 pb-3 border-b border-b-active-gray': openList,
+    'mb-4 pb-3 border-b border-b-active-gray':
+      openDemo.list,
   });
-  const triangleIcon = cn({ 'transition-all rotate-90': openList });
-  const accountsList = cn({ 'cursor-default': openList });
+  const loginDataOpener = cn('flex', 'items-center', 'gap-x-2', {
+    'mb-4 pb-3 border-b border-b-active-gray': openDemo.loginData,
+  });
+  const triangleIcon = cn({ 'transition-all rotate-90': openDemo });
+  const accountsList = cn({ 'cursor-default': openDemo });
 
-  React.useEffect(() => {
-    const usersListPromise = dispatch(fetchUsersList());
-
-    return () => {
-      usersListPromise.abort();
-    };
-  }, [dispatch]);
-
-  const accountsListToggler = () => {
-    setOpenList((prev) => !prev);
+  const demoUsersDataToggler = (name: 'list' | 'loginData') => {
+    setOpenDemo((prev) => ({ ...prev, [name]: !prev[name] }));
   };
 
   const submitHandler = (
     event: React.FormEvent<HTMLFormElement>,
-    user: IUser
+    loginData: {
+      login: string;
+      password: string;
+    }
   ) => {
     event.preventDefault();
-    dispatch(
-      logInUser({
-        login: user.login,
-        password: user.password,
-      })
-    );
+    dispatch(logInUser(loginData));
   };
 
   return (
@@ -117,7 +250,10 @@ export function Main() {
                 создать собственный
               </Link>
             </h2>
-            <div className={accountsListItem} onClick={accountsListToggler}>
+            <div
+              className={demoData}
+              onClick={() => demoUsersDataToggler('list')}
+            >
               <div className={accountsListOpener}>
                 <img
                   className={triangleIcon}
@@ -125,23 +261,57 @@ export function Main() {
                   width={10}
                   alt=""
                 />
-                Список готовых профилей
+                Список готовых профилей для автоматического входа
               </div>
-              {openList && (
+              {openDemo.list && (
                 <ul
                   className={accountsList}
                   onClick={(event) => event.stopPropagation()}
                 >
-                  {usersList.map((user) => (
-                    <li
-                      className="mb-2 bg-hover-gray rounded-main text-lg"
-                      key={user.id}
-                    >
-                      <form onSubmit={(event) => submitHandler(event, user)}>
+                  {usersDemo.map((user) => (
+                    <li className={demoListItem} key={user.id}>
+                      <form
+                        onSubmit={(event) =>
+                          submitHandler(event, {
+                            login: user.login,
+                            password: user.password,
+                          })
+                        }
+                      >
                         <button className="w-full text-center p-1.5">
                           {user.login}
                         </button>
                       </form>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div
+              className={demoData}
+              onClick={() => demoUsersDataToggler('loginData')}
+            >
+              <div className={loginDataOpener}>
+                <img
+                  className={triangleIcon}
+                  src="/images/history-arrow.svg"
+                  width={10}
+                  alt=""
+                />
+                Данные готовых профилей для ручного входа
+              </div>
+              {openDemo.loginData && (
+                <ul
+                  className={accountsList}
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  {usersDemo.map((user) => (
+                    <li className={demoLoginDataItem} key={user.id}>
+                      <p>{user.type.toUpperCase()}:</p>
+                      <div className="flex flex-col">
+                        <span>login - {user.login}</span>
+                        <span>password - {user.password}</span>
+                      </div>
                     </li>
                   ))}
                 </ul>
