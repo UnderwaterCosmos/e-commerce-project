@@ -44,7 +44,9 @@ const formWrapper = cn(
   'px-6',
   'flex',
   'flex-col',
-  'gap-y-5'
+  'gap-y-5',
+	'dark:bg-dark-background',
+	'dark:border-hover-black'
 );
 
 export function AdminNewProduct() {
@@ -135,7 +137,7 @@ export function AdminNewProduct() {
                 />
               ))}
               <div className="flex justify-center flex-col">
-                <p className="text-left mb-1">Категория товара</p>
+                <p className="text-left mb-1 dark:text-white">Категория товара</p>
                 <CustomSelect
                   name="newProduct"
                   options={modifiedCategoriesList}

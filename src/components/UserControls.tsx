@@ -7,6 +7,12 @@ import { Loader } from './UI/Loader';
 import { useAppSelector, selectUsersData } from '../redux/store';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
+const welcome = cn(
+  'text-[40px]/[60px]',
+  'mb-7',
+  'font-semibold',
+  'dark:text-white'
+);
 const btnList = cn('flex', ' gap-x-3', ' mb-8', ' justify-center');
 const btn = cn(
   'px-4',
@@ -16,7 +22,11 @@ const btn = cn(
   'bg-primary-gray',
   'transition-all',
   'hover:bg-hover-gray',
-  'active:bg-active-gray'
+  'active:bg-active-gray',
+  'dark:bg-hover-black',
+  'dark:hover:bg-active-black',
+  'dark:active:bg-dark-active-black',
+  'dark:text-white'
 );
 
 const buttonsData = [
@@ -24,7 +34,7 @@ const buttonsData = [
   { path: '/user/info', name: 'Информация о пользователе' },
 ];
 
-export function User() {
+export function UserControls() {
   const isLoading = useAppSelector(selectUsersData).isLoading;
   const navigate = useNavigate();
   const token = useLocalStorage('token');
@@ -42,9 +52,7 @@ export function User() {
           <Loader />
         ) : (
           <>
-            <h1 className="text-[40px]/[60px] mb-7 font-semibold">
-              Добро пожаловать! 👋
-            </h1>
+            <h1 className={welcome}>Добро пожаловать! 👋</h1>
             <ul className={btnList}>
               {buttonsData.map((data) => (
                 <li key={data.name}>

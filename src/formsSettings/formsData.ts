@@ -22,7 +22,7 @@ export const REGISTRATION_INITIAL_USER_DATA: RegistrationBasis = {
   avatarUrl: '',
   accType: {
     value: 'customer',
-    label: 'regForm.typeCustomer',
+    label: 'Покупатель',
   },
 };
 export const REGISTRATION_INPUT_FIELDS: IRegistrationInputField[] = [

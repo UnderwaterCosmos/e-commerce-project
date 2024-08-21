@@ -8,7 +8,8 @@ const checkoutItem = cn(
   'gap-x-8',
   'pb-4',
   'mb-4',
-  'border-b'
+  'border-b',
+	'dark:border-b-hover-black',
 );
 
 interface IProps {
@@ -25,8 +26,8 @@ export function UsersCartItem({ cartItem }: IProps) {
         alt={cartItem.title}
       />
       <div className="w-full flex justify-between">
-        <h4 className="font-semibold">{cartItem.title}</h4>
-        <p>
+        <h4 className="font-semibold dark:text-white">{cartItem.title}</h4>
+        <p className='dark:text-white'>
           {cartItem.price}₽ X {cartItem.quantity} шт ={' '}
           {cartItem.quantity * cartItem.price}₽
         </p> 

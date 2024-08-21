@@ -36,9 +36,10 @@ const editTitle = cn(
   'font-semibold',
   'text-center',
   'mt-[-45px]',
-  'mb-3'
+  'mb-3',
+	'dark:text-white'
 );
-const nonEditableInfo = cn('text-center', 'text-lg', 'mb-3.5');
+const nonEditableInfo = cn('text-center', 'text-lg', 'mb-3.5', 'dark:text-white');
 const editProductForm = cn(
   'text-center',
   'border',
@@ -50,7 +51,9 @@ const editProductForm = cn(
   'px-6',
   'flex',
   'flex-col',
-  'gap-y-4'
+  'gap-y-4',
+	'dark:bg-dark-background',
+	'dark:border-hover-black'
 );
 
 export function AdminEditProduct() {

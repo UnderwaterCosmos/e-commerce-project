@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply h-full bg-[#F6F6F6] dark:bg-primary-black font-['InterTightRegular'];
+  @apply h-full font-['InterTightRegular'];
 
   input:focus {
     @apply outline-none;
@@ -12,7 +12,7 @@ body {
 }
 
 #root {
-  @apply min-h-full flex flex-col overflow-hidden;
+  @apply min-h-full flex flex-col overflow-hidden bg-[#F6F6F6] dark:bg-primary-black;
 }
 
 .loader {

@@ -4,6 +4,7 @@ import cn from 'classnames';
 import { Container } from './UI/Container';
 import { Loader } from './UI/Loader';
 import { useAppSelector, selectUsersData } from '../redux/store';
+import { useTheme } from '../hooks/useTheme';
 
 const list = cn('flex', 'gap-x-3', 'mb-8', 'justify-center', 'mt-2');
 const btn = cn(
@@ -15,7 +16,11 @@ const btn = cn(
   'transition-all',
   'hover:bg-hover-gray',
   'active:bg-active-gray',
-  'flex'
+  'flex',
+  'dark:bg-hover-black',
+  'dark:hover:bg-active-black',
+  'dark:active:bg-dark-active-black',
+  'dark:text-white'
 );
 
 const links = [
@@ -31,6 +36,7 @@ const links = [
 
 export function AdminControls() {
   const isLoading = useAppSelector(selectUsersData).isLoading;
+  const { theme } = useTheme();
 
   return (
     <section>
@@ -46,8 +52,16 @@ export function AdminControls() {
                     to={link.path}
                     className={btn}
                     style={({ isActive }) => ({
-                      backgroundColor: isActive ? 'rgba(29, 29, 29, 1)' : '',
-                      color: isActive ? 'white' : '',
+                      backgroundColor: isActive
+                        ? theme === 'light'
+                          ? '#1D1D1D'
+                          : '#fff'
+                        : '',
+                      color: isActive
+                        ? theme === 'light'
+                          ? '#fff'
+                          : '#1D1D1D'
+                        : '',
                     })}
                   >
                     {link.name}

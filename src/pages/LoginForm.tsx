@@ -33,7 +33,9 @@ const formWrapper = cn(
   'px-6',
   'flex',
   'flex-col',
-  'gap-y-5'
+  'gap-y-5',
+  'dark:bg-dark-background',
+  'dark:border-hover-black'
 );
 const regLink = cn(
   'text-primary-blue',
@@ -76,7 +78,7 @@ export function LoginForm() {
           <Loader />
         ) : (
           <div className={formWrapper}>
-            <h1 className="text-xl font-semibold">Войти</h1>
+            <h1 className="text-xl font-semibold dark:text-white">Войти</h1>
             <form
               className="flex flex-col gap-y-5"
               onSubmit={handleSubmit(submitHandler)}
@@ -105,7 +107,7 @@ export function LoginForm() {
               )}
               <FormBtn>Войти</FormBtn>
             </form>
-            <p>
+            <p className="dark:text-white">
               Нет аккаунта?{' '}
               <Link to={'/registration'} className={regLink}>
                 Зарегистрироваться

@@ -11,7 +11,8 @@ import { CheckoutBtn } from '../components/UI/CheckoutBtn';
 import { PathToProductsBtn } from '../components/UI/PathToProductsBtn';
 import { selectUsersData, useAppSelector } from '../redux/store';
 
-const cartTitle = cn('text-[40px]/[60px]', 'mb-8', 'mt-10', 'font-semibold');
+const emptyCartTitle = cn('mb-8', 'mt-32','text-6xl', 'dark:text-white')
+const cartTitle = cn('text-[40px]/[60px]', 'mb-8', 'mt-10', 'font-semibold', 'dark:text-white');
 const checkoutWrapper = cn('flex', 'justify-center', 'items-center', 'gap-x-6');
 
 export function Cart() {
@@ -28,8 +29,8 @@ export function Cart() {
     <main className="grow">
       <Container>
         {usersCart.length === 0 ? (
-          <div className='text-center'>
-            <h1 className="text-4xl mt-32 mb-6">Корзина пуста ;(</h1>
+          <div className="text-center">
+            <h1 className={emptyCartTitle}>Корзина пуста ;(</h1>
             <PathToProductsBtn>Перейти к каталогу товаров</PathToProductsBtn>
           </div>
         ) : (
@@ -42,7 +43,7 @@ export function Cart() {
               ))}
             </ul>
             <div className={checkoutWrapper}>
-              <h3 className="font-semibold">Итого: {totalSum}₽</h3>
+              <h3 className="font-semibold dark:text-white">Итого: {totalSum}₽</h3>
               <CheckoutBtn onClick={() => setModalActive(true)} />
             </div>
             <Modal modalActive={modalActive} setModalActive={setModalActive}>

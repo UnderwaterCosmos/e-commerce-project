@@ -41,7 +41,9 @@ const formWrapper = cn(
   'px-6',
   'flex',
   'flex-col',
-  'gap-y-5'
+  'gap-y-5',
+	'dark:bg-dark-background',
+	'dark:border-hover-black'
 );
 const clearBtn = cn(
   'bg-primary-blue',
@@ -118,7 +120,7 @@ export function RegistrationForm() {
           <Loader />
         ) : (
           <div className={formWrapper}>
-            <h1 className="text-xl font-semibold">Регистрация</h1>
+            <h1 className="text-xl font-semibold dark:text-white">Регистрация</h1>
             <form
               className="flex flex-col gap-y-4"
               onSubmit={handleSubmit(submitHandler)}
@@ -146,7 +148,7 @@ export function RegistrationForm() {
                 )
               )}
               <div className="text-left">
-                <p className="mb-1 cursor-default">Тип пользователя:</p>
+                <p className="mb-1 cursor-default dark:text-white">Тип пользователя:</p>
                 <CustomSelect
                   name="registration"
                   options={REG_SELECT_OPTIONS}
@@ -163,7 +165,7 @@ export function RegistrationForm() {
                 Очистить форму
               </button>
             </form>
-            <p>
+            <p className='dark:text-white'>
               Если Вы уже зарегистрированы -{' '}
               <Link to={'/login'} className={loginLink}>
                 войдите

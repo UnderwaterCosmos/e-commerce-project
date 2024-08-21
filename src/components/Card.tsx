@@ -7,7 +7,7 @@ import { ISingleProduct } from '../types/products';
 import { useAppDispatch } from '../redux/store';
 import { manageProductInCart } from '../redux/slices/usersSlice';
 
-const singleCard = cn('p-4', 'rounded-main', 'bg-primary-gray', 'h-full');
+const singleCard = cn('p-4', 'rounded-main', 'bg-primary-gray', 'h-full', 'dark:bg-dark-background');
 const cardWrapper = cn('min-h-full', 'flex', 'flex-col', 'overflow-hidden');
 const image = cn(
   'max-w-full',
@@ -17,7 +17,7 @@ const image = cn(
   'mb-4'
 );
 const productCategory = cn('text-sm', 'text-left', 'text-[#9A9A9A]', 'mb-1.5');
-const productTitle = cn('text-left', 'font-semibold', 'mb-4');
+const productTitle = cn('text-left', 'font-semibold', 'mb-4', 'dark:text-white');
 
 interface IProduct {
   product: ISingleProduct;
@@ -40,7 +40,7 @@ export default React.memo(function Card({ product }: IProduct) {
           <h3 className={productTitle}>{product.title}</h3>
         </Link>
         <div className="flex justify-between items-center">
-          <p>{product.price} ₽</p>
+          <p className='dark:text-white'>{product.price} ₽</p>
           <CartBtn
             productId={product.id}
             onClick={() => dispatch(manageProductInCart(product))}

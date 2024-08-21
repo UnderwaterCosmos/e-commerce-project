@@ -9,6 +9,7 @@ import {
   useAppDispatch,
 } from '../redux/store';
 import { logInUser } from '../redux/slices/usersSlice';
+import { useTheme } from '../hooks/useTheme';
 
 const mainWrapper = cn('mt-16', 'px-6', 'flex', 'gap-x-28');
 const greeting = cn(
@@ -18,8 +19,11 @@ const greeting = cn(
   'mb-14',
   'dark:text-white'
 );
+const infoListItem = cn('flex', 'gap-x-6', 'mb-4', 'dark:text-white');
 const demoData = cn(
   'bg-primary-gray',
+  'dark:bg-dark-background',
+  'dark:text-white',
   'px-3',
   'p-4',
   'flex',
@@ -30,10 +34,19 @@ const demoData = cn(
   'mx-auto',
   'mb-2'
 );
-const demoListItem = cn('mb-2', 'bg-hover-gray', 'rounded-main', ' text-lg');
+const demoListItem = cn(
+  'mb-2',
+  'bg-hover-gray',
+  'hover:bg-active-gray',
+  'rounded-main',
+  'text-lg',
+  'dark:bg-hover-black',
+  'dark:hover:bg-active-black'
+);
 const demoLoginDataItem = cn(
   'mb-2',
   'bg-hover-gray',
+  'dark:bg-hover-black',
   'rounded-main',
   'text-lg',
   'flex',
@@ -41,6 +54,7 @@ const demoLoginDataItem = cn(
   'gap-x-8',
   'justify-center'
 );
+const enterAccTitle = cn('text-center', 'text-xl', 'mb-4', 'dark:text-white');
 
 const infoList = [
   {
@@ -60,7 +74,7 @@ const usersDemo = [
   {
     email: 'admin@email.com',
     password: '123123',
-    login: 'Admin Account',
+    login: 'Admin',
     avatarUrl: 'https://uznayvse.ru/person/winnie-harlow/Winnie_Harlow01.jpg',
     type: 'admin',
     cart: [
@@ -169,7 +183,7 @@ const usersDemo = [
   {
     email: 'customer@email.com',
     password: '321321',
-    login: 'Customer Account',
+    login: 'Customer',
     avatarUrl:
       'https://img0.liveinternet.ru/images/attach/b/3/30/172/30172285_ipvpp.jpg',
     type: 'customer',
@@ -189,15 +203,18 @@ export function Main() {
     loginData: false,
   });
   const dispatch = useAppDispatch();
+  const { theme } = useTheme();
 
   const accountsListOpener = cn('flex', 'items-center', 'gap-x-2', {
-    'mb-4 pb-3 border-b border-b-active-gray':
-      openDemo.list,
+    'mb-4 pb-3 border-b border-b-active-gray': openDemo.list,
   });
   const loginDataOpener = cn('flex', 'items-center', 'gap-x-2', {
     'mb-4 pb-3 border-b border-b-active-gray': openDemo.loginData,
   });
-  const triangleIcon = cn({ 'transition-all rotate-90': openDemo });
+  const triangleIconList = cn({ 'transition-all rotate-90': openDemo.list });
+  const triangleIconData = cn({
+    'transition-all rotate-90': openDemo.loginData,
+  });
   const accountsList = cn({ 'cursor-default': openDemo });
 
   const demoUsersDataToggler = (name: 'list' | 'loginData') => {
@@ -227,16 +244,16 @@ export function Main() {
             </h2>
           </div>
           <div>
-            <p className="font-semibold mb-6">Что вас ждет:</p>
+            <p className="font-semibold mb-6 dark:text-white">Что вас ждет:</p>
             <ul className="mb-16">
               {infoList.map((listItem) => (
-                <li className="flex gap-x-6 mb-4" key={listItem.path}>
+                <li className={infoListItem} key={listItem.path}>
                   <img src={listItem.path} width={18} alt="" />
                   <p>{listItem.text}</p>
                 </li>
               ))}
             </ul>
-            <p>
+            <p className="dark:text-white">
               При регистрации в качестве Администратора, вы получите возможность
               создавать как категории товаров, так и сами товары.
             </p>
@@ -244,9 +261,12 @@ export function Main() {
         </section>
         {!fullUserInfo && (
           <section>
-            <h2 className="text-center text-xl mb-4">
+            <h2 className={enterAccTitle}>
               Вы можете войти в аккаунт с помощью готового профиля или{' '}
-              <Link to="/registration" className="text-primary-blue">
+              <Link
+                to="/registration"
+                className="text-primary-blue hover:text-hover-blue active:text-active-blue"
+              >
                 создать собственный
               </Link>
             </h2>
@@ -255,12 +275,19 @@ export function Main() {
               onClick={() => demoUsersDataToggler('list')}
             >
               <div className={accountsListOpener}>
-                <img
-                  className={triangleIcon}
-                  src="/images/history-arrow.svg"
-                  width={10}
-                  alt=""
-                />
+                <svg
+                  className={triangleIconList}
+                  width="16"
+                  height="16"
+                  viewBox="0 0 6 10"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0.91683 9.16675L5.0835 5.00008L0.916831 0.833414L0.91683 9.16675Z"
+                    fill={theme === 'light' ? '#1D1D1D' : 'white'}
+                  />
+                </svg>
                 Список готовых профилей для автоматического входа
               </div>
               {openDemo.list && (
@@ -292,12 +319,19 @@ export function Main() {
               onClick={() => demoUsersDataToggler('loginData')}
             >
               <div className={loginDataOpener}>
-                <img
-                  className={triangleIcon}
-                  src="/images/history-arrow.svg"
-                  width={10}
-                  alt=""
-                />
+                <svg
+                  className={triangleIconData}
+                  width="16"
+                  height="16"
+                  viewBox="0 0 6 10"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0.91683 9.16675L5.0835 5.00008L0.916831 0.833414L0.91683 9.16675Z"
+                    fill={theme === 'light' ? '#1D1D1D' : 'white'}
+                  />
+                </svg>
                 Данные готовых профилей для ручного входа
               </div>
               {openDemo.loginData && (

@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom';
 
-import { User } from '../components/User';
+import { UserControls } from '../components/UserControls';
 
 export function UserPage() {
   return (
     <div className="grow text-center">
-      <User />
+      <UserControls />
       <Outlet />
     </div>
   );

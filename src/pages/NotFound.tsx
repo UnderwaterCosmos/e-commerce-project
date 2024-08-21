@@ -8,7 +8,8 @@ const mainBlock = cn(
   'justify-center',
   'items-center',
   'flex-col',
-  'gap-y-8'
+  'gap-y-8',
+  'dark:text-white'
 );
 
 export function NotFound() {

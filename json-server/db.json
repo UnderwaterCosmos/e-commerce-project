@@ -2632,21 +2632,21 @@
     {
       "email": "admin@email.com",
       "password": "123123",
-      "login": "Admin Account",
+      "login": "Admin",
       "avatarUrl": "https://uznayvse.ru/person/winnie-harlow/Winnie_Harlow01.jpg",
       "type": "admin",
       "cart": [
         {
-          "id": 2,
-          "title": "Coffee Maker iconic 24",
-          "price": 3979,
-          "description": "Programmable coffee maker with brew strength control.",
-          "quantity": 5,
-          "category": "appliances",
+          "id": 4,
+          "title": "Peace Lily jubilant iconic gorgeous 30",
+          "price": 21549,
+          "description": "Beautiful peace lily that blooms throughout the year.",
+          "quantity": 1,
+          "category": "houseplants",
           "images": [
-            "https://picsum.photos/id/4/280/220",
-            "https://picsum.photos/id/5/280/220",
-            "https://picsum.photos/id/6/280/220"
+            "https://picsum.photos/id/10/280/220",
+            "https://picsum.photos/id/11/280/220",
+            "https://picsum.photos/id/12/280/220"
           ]
         }
       ],
@@ -2741,7 +2741,7 @@
     {
       "email": "customer@email.com",
       "password": "321321",
-      "login": "Customer Account",
+      "login": "Customer",
       "avatarUrl": "https://img0.liveinternet.ru/images/attach/b/3/30/172/30172285_ipvpp.jpg",
       "type": "customer",
       "cart": [],

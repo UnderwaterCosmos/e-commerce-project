@@ -13,6 +13,7 @@ export function ThemeSwitcher() {
     'items-center',
     'p-0.5',
     'rounded-full',
+		'cursor-pointer',
     {
       'bg-[#FFDB4D]': theme === 'light',
       'bg-primary-blue': theme === 'dark',

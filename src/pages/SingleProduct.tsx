@@ -24,6 +24,14 @@ import { fetchCategories } from '../redux/slices/filtersSlice';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const mainImage = cn('max-w-full', 'h-auto', 'object-cover', 'rounded-main');
+const editProductLink = cn(
+  'text-primary-blue',
+  'font-medium',
+  'flex gap-x-2.5',
+  'transition-all',
+  'hover:text-hover-blue',
+  'active:text-active-blue'
+);
 
 export function SingleProduct() {
   const isLoading = useAppSelector(selectSingleProductsData).isLoading;
@@ -88,23 +96,20 @@ export function SingleProduct() {
                   />
                 ))}
               </div>
-              <div>
-                <img
-                  src={mainImageUrl ? mainImageUrl : singleProduct?.images[0]}
-                  className={mainImage}
-                  width={602}
-                  height={602}
-                  alt={singleProduct?.description}
-                />
-              </div>
+              <img
+                src={mainImageUrl ? mainImageUrl : singleProduct?.images[0]}
+                className={mainImage}
+                width={602}
+                alt={singleProduct?.description}
+              />
             </article>
             <div className="flex items-center">
               <article className="flex flex-col gap-y-8">
-                <h1 className="text-primary-h1 font-semibold">
+                <h1 className="text-primary-h1 font-semibold dark:text-white">
                   {singleProduct?.title}
                 </h1>
-                <h2>{singleProduct?.description}</h2>
-                <p className="text-primary-h1 font-medium">
+                <h2 className='dark:text-white'>{singleProduct?.description}</h2>
+                <p className="text-primary-h1 font-medium dark:text-white">
                   {singleProduct?.price} ₽
                 </p>
                 <CartBtn
@@ -118,10 +123,7 @@ export function SingleProduct() {
                   Добавить в корзину
                 </CartBtn>
                 {fullUserInfo?.type === 'admin' && (
-                  <Link
-                    to={`/products/${id}/edit`}
-                    className="text-primary-blue font-medium flex gap-x-2.5"
-                  >
+                  <Link to={`/products/${id}/edit`} className={editProductLink}>
                     <img src="/images/edit.svg" width={20} alt="edit" />
                     Редактировать товар
                   </Link>

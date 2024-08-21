@@ -10,9 +10,6 @@ import {
   Errors,
   FieldObj,
 } from '../../types/forms';
-
-const errMessage = cn('text-rose-500', 'font-semibold');
-
 interface IProps {
   state: State;
   register: UseFormRegister<any>;
@@ -40,18 +37,23 @@ export function FormInputField({
     'rounded-md',
     'py-2.5',
     'px-3',
-    'placeholder:text-[#CACACA]',
+    'placeholder:text-active-gray',
     'border',
     'transition-all',
     'hover:border-active-gray',
+		'dark:placeholder:text-active-black',
+		'dark:bg-dark-background',
+		'dark:border-hover-black',
+		'dark:text-white',
+		'dark:hover:border-active-black',
     {
-      'border-2 border-rose-500': incorrectInput(errors, fieldObj),
+      'border-2 !border-rose-500': incorrectInput(errors, fieldObj),
     }
   );
 
   return (
     <div className="flex flex-col">
-      <label htmlFor={fieldObj.name} className="mb-1 text-left">
+      <label htmlFor={fieldObj.name} className="mb-1 text-left dark:text-white">
         {fieldObj.label}
       </label>
       <input
@@ -64,7 +66,7 @@ export function FormInputField({
         onChange={(event) => fieldsHandler(event, fieldObj.name)}
       />
       {errors[fieldObj.name as keyof typeof errors] && (
-        <p className={errMessage}>
+        <p className='text-rose-500 font-semibold'>
           {errors[fieldObj.name as keyof typeof errors]?.message}
         </p>
       )}

@@ -9,9 +9,11 @@ export default {
           'InterTightRegular, InterTightMedium, InterTightSemiBold, sans-serif',
       },
       colors: {
+        'dark-background': 'rgba(40, 40, 40, 1)',
         'primary-black': 'rgba(29, 29, 29, 1)',
         'hover-black': 'rgba(55, 55, 55, 1)',
         'active-black': 'rgba(84, 84, 84, 1)',
+        'dark-active-black': 'rgba(154, 154, 154, 1)',
         'primary-gray': 'rgba(238, 238, 238, 1)',
         'hover-gray': 'rgba(222, 222, 222, 1)',
         'active-gray': 'rgba(202, 202, 202, 1)',

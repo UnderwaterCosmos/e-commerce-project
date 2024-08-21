@@ -21,6 +21,7 @@ const headerWrapper = cn(
   'py-5',
   'text-white'
 );
+const logoLink = cn('flex', 'items-center', 'gap-x-3', 'mr-16');
 const logoName = cn(
   'text-primary-black',
   'font-[InterTightSemiBold]',
@@ -33,7 +34,7 @@ const navList = cn(
   'bg-primary-gray',
   'p-1',
   'rounded-main',
-  'dark:bg-[#282828]'
+  'dark:bg-dark-background'
 );
 const controls = cn('flex', 'gap-x-4', 'items-center');
 const controlsCart = cn(
@@ -49,8 +50,8 @@ const controlsCart = cn(
   'active:bg-active-black',
   'dark:bg-white',
   'dark:text-primary-black',
-	'dark:hover:bg-hover-gray',
-  'dark:active:bg-active-gray',
+  'dark:hover:bg-hover-gray',
+  'dark:active:bg-active-gray'
 );
 const navListLink = cn(
   'text-primary-black',
@@ -61,12 +62,13 @@ const navListLink = cn(
   'hover:bg-hover-gray',
   'active:bg-active-gray',
   'dark:text-white',
-  'dark:hover:bg-hover-black'
+  'dark:hover:bg-hover-black',
+	'dark:active:bg-dark-active-black'
 );
 const logOutBtn = cn(
   'cursor-pointer',
   'flex',
-	'items-center',
+  'items-center',
   'gap-x-2.5',
   'px-4',
   'py-2.5',
@@ -78,7 +80,7 @@ const logOutBtn = cn(
   'active:bg-active-gray',
   'dark:bg-hover-black',
   'dark:text-white',
-	'dark:hover:bg-active-black'
+  'dark:hover:bg-active-black'
 );
 const logInBtn = cn(
   'cursor-pointer',
@@ -90,8 +92,8 @@ const logInBtn = cn(
   'transition-all',
   'hover:bg-hover-black',
   'active:bg-active-black',
-	'dark:bg-white',
-	'dark:text-primary-black',
+  'dark:bg-white',
+  'dark:text-primary-black'
 );
 
 const customerLinks = [
@@ -139,7 +141,7 @@ export default React.memo(function Header() {
     <header className="mb-8">
       <Container>
         <div className={headerWrapper}>
-          <Link to={'/'} className="flex items-center gap-x-3 mr-16">
+          <Link to={'/'} className={logoLink}>
             <svg
               width="29"
               height="30"

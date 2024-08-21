@@ -8,10 +8,12 @@ import {
   useAppDispatch,
 } from '../../redux/store';
 import { clearNotification } from '../../redux/slices/notificationSlice';
+import { useTheme } from '../../hooks/useTheme';
 
 export function Notification() {
   const { type, message } = useAppSelector(selectNotificationData);
   const dispatch = useAppDispatch();
+	const {theme} = useTheme()
 
   React.useEffect(() => {
     if (type === 'success') {
@@ -27,7 +29,7 @@ export function Notification() {
   return (
     <ToastContainer
       position="top-right"
-      theme="light"
+      theme={theme === 'light' ? 'light' : 'dark'}
       closeOnClick
       draggable
       autoClose={2000}

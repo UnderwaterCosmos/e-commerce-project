@@ -31,7 +31,9 @@ const formWrapper = cn(
   'px-6',
   'flex',
   'flex-col',
-  'gap-y-5'
+  'gap-y-5',
+	'dark:bg-dark-background',
+	'dark:border-hover-black'
 );
 
 export function AdminNewCategory() {

@@ -30,7 +30,10 @@ export function Modal({ modalActive, setModalActive, children }: IProps) {
     'rounded-main',
     'bg-white',
     'duration-300',
-    'transition all'
+    'transition all',
+    'dark:bg-dark-background',
+    'dark:border',
+    'dark:border-hover-black'
   );
 
   return (
