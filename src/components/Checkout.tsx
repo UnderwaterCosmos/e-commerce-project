@@ -5,7 +5,7 @@ import { useAppDispatch } from '../redux/store';
 import { manageProductInCart } from '../redux/slices/usersSlice';
 import { ISingleProduct } from '../types/products';
 import { CheckoutBtn } from './UI/CheckoutBtn';
-import { UsersCartItem } from './UsersCartItem';
+import UsersCartItem from './UsersCartItem';
 import { useTheme } from '../hooks/useTheme';
 
 const titleWrapper = cn(

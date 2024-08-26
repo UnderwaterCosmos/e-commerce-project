@@ -49,8 +49,7 @@ export function CustomSelect({ name, options, value, selectHandler }: IProps) {
           backgroundColor: isSelected
             ? '#0147FF'
             : isFocused
-            ? 'rgba(202, 202, 202, 1)'
-            // ? 'rgba(163, 179, 217, 0.6)'
+            ? 'rgba(163, 179, 217, 0.6)'
             : '',
           color: theme === 'light' ? '#1D1D1D' : '#fff',
         }),

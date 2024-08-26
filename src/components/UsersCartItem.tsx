@@ -1,3 +1,4 @@
+import React from 'react';
 import cn from 'classnames';
 
 import { ISingleProduct } from '../types/products';
@@ -9,14 +10,14 @@ const checkoutItem = cn(
   'pb-4',
   'mb-4',
   'border-b',
-	'dark:border-b-hover-black',
+  'dark:border-b-hover-black'
 );
 
 interface IProps {
   cartItem: ISingleProduct;
 }
 
-export function UsersCartItem({ cartItem }: IProps) {
+export default React.memo(function UsersCartItem({ cartItem }: IProps) {
   return (
     <li className={checkoutItem} key={cartItem.id}>
       <img
@@ -27,11 +28,11 @@ export function UsersCartItem({ cartItem }: IProps) {
       />
       <div className="w-full flex justify-between">
         <h4 className="font-semibold dark:text-white">{cartItem.title}</h4>
-        <p className='dark:text-white'>
+        <p className="dark:text-white">
           {cartItem.price}₽ X {cartItem.quantity} шт ={' '}
           {cartItem.quantity * cartItem.price}₽
-        </p> 
+        </p>
       </div>
     </li>
   );
-}
+});

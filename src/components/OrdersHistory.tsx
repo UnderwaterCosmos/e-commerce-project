@@ -2,7 +2,7 @@ import cn from 'classnames';
 
 import { Container } from './UI/Container';
 import { PathToProductsBtn } from './UI/PathToProductsBtn';
-import { OrdersHistoryInnerItem } from './OrdersHistoryInnerItem';
+import OrdersHistoryInnerItem from './OrdersHistoryInnerItem';
 import { selectUsersData, useAppSelector } from '../redux/store';
 
 const noOrders = cn('text-4xl', 'mt-36', 'mb-6', 'dark:text-white');

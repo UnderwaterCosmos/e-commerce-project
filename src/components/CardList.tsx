@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import { useSearchParams } from 'react-router-dom';
 
 import { Container } from './UI/Container';
@@ -15,6 +16,13 @@ import {
 import { fetchProducts } from '../redux/slices/productsSlice';
 import { useDebounce } from '../hooks/useDebounce';
 import { useInfiniteScroll } from '../hooks/useInfiniteScroll';
+
+const nothingFound = cn(
+  'mt-60',
+  'text-3xl',
+  'font-semibold',
+  'dark:text-white'
+);
 
 export function CardList() {
   const isLoading = useAppSelector(selectProductsData).isLoading;
@@ -85,7 +93,7 @@ export function CardList() {
       <Container>
         {isLoading && <Loader />}
         {productsList.length === 0 && !isLoading ? (
-          <h2 className="mt-60 text-3xl font-semibold">Ничего не найдено :(</h2>
+          <h2 className={nothingFound}>Ничего не найдено :(</h2>
         ) : (
           <ul className="grid gap-4 grid-cols-4">
             {productsList.map((product) => (
