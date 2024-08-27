@@ -11,15 +11,32 @@ import {
 import { logInUser } from '../redux/slices/usersSlice';
 import { useTheme } from '../hooks/useTheme';
 
-const mainWrapper = cn('mt-16', 'px-6', 'flex', 'gap-x-28');
+const mainWrapper = cn(
+  'mt-16',
+  'px-6',
+  'flex',
+  'gap-x-28',
+  'mobile:flex-col',
+  'mobile:gap-x-0',
+	'mobile:mt-20'
+);
 const greeting = cn(
   'max-w-[500px]',
   'text-primary-h1',
   'font-semibold',
   'mb-14',
-  'dark:text-white'
+  'dark:text-white',
+  'mobile:text-xl',
+  'mobile:mb-8'
 );
-const infoListItem = cn('flex', 'gap-x-6', 'mb-4', 'dark:text-white');
+const infoListItem = cn(
+  'flex',
+  'gap-x-6',
+  'mb-4',
+  'dark:text-white',
+  'mobile:gap-x-4',
+  'mobile:text-sm/[21px]'
+);
 const demoData = cn(
   'bg-primary-gray',
   'dark:bg-dark-background',
@@ -51,10 +68,19 @@ const demoLoginDataItem = cn(
   'text-lg',
   'flex',
   'items-center',
-  'gap-x-8',
-  'justify-center'
+  'justify-between',
+  'px-[155px]',
+	'gap-x-4',
+	'mobile:px-3'
 );
-const enterAccTitle = cn('text-center', 'text-xl', 'mb-4', 'dark:text-white');
+const enterAccTitle = cn(
+  'text-center',
+  'text-xl',
+  'mb-4',
+  'dark:text-white',
+  'mobile:text-lg',
+  'mobile:mb-2'
+);
 
 const infoList = [
   {
@@ -237,15 +263,19 @@ export function Main() {
       <Container>
         <section className={mainWrapper}>
           <div>
-            <img src="/images/eyes.png" className="mb-4" alt="eyes" />
+            <img
+              src="/images/eyes.png"
+              className="mb-4 mobile:w-6"
+              alt="eyes"
+            />
             <h2 className={greeting}>
               Привет! Я рад приветствовать вас на моем небольшом проекте
               маркетплейса для портфолио.
             </h2>
           </div>
-          <div>
+          <div className="mobile:mb-4">
             <p className="font-semibold mb-6 dark:text-white">Что вас ждет:</p>
-            <ul className="mb-16">
+            <ul className="mb-16 mobile:mb-8">
               {infoList.map((listItem) => (
                 <li className={infoListItem} key={listItem.path}>
                   <img src={listItem.path} width={18} alt="" />
@@ -253,7 +283,7 @@ export function Main() {
                 </li>
               ))}
             </ul>
-            <p className="dark:text-white">
+            <p className="dark:text-white mobile:text-sm/[21px] mobile:mb-5">
               При регистрации в качестве Администратора, вы получите возможность
               создавать как категории товаров, так и сами товары.
             </p>

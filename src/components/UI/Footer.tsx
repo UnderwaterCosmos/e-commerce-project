@@ -1,9 +1,12 @@
 import React from 'react';
+import cn from 'classnames';
+
+const footer = cn('text-center', 'text-[#9A9A9A]', 'my-10', 'text-sm/[18px]');
 
 export default React.memo(function Footer() {
   return (
-    <div className="text-center text-[#9A9A9A] my-10">
+    <footer className={footer}>
       By UnderwaterCosmos, Frontend Engineer, 2024
-    </div>
+    </footer>
   );
 });

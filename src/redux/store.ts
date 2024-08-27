@@ -18,6 +18,7 @@ import { filtersReducer } from './slices/filtersSlice';
 import { singleProductReducer } from './slices/singleProductSlice';
 import { usersReducer } from './slices/usersSlice';
 import { notificationReducer } from './slices/notificationSlice';
+import { mobileMenuReducer } from './slices/mobileMenuSlice';
 import { router } from '../router';
 import * as api from './api';
 
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   singleProductData: singleProductReducer,
   usersData: persistReducer(usersDataPersistConfig, usersReducer),
   notificationData: notificationReducer,
+  mobileMenuData: mobileMenuReducer,
 });
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 
@@ -64,6 +66,7 @@ export const selectSingleProductsData = (state: RootState) =>
 export const selectUsersData = (state: RootState) => state.usersData;
 export const selectNotificationData = (state: RootState) =>
   state.notificationData;
+export const selectMobileMenuData = (state: RootState) => state.mobileMenuData;
 
 export const persistor = persistStore(store);
 

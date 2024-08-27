@@ -4,6 +4,10 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      screens: {
+        mobile: { min: '320px', max: '480px' },
+        descTop: '481px',
+      },
       fontFamily: {
         serif:
           'InterTightRegular, InterTightMedium, InterTightSemiBold, sans-serif',
