@@ -6,7 +6,15 @@ import { Loader } from './UI/Loader';
 import { useAppSelector, selectUsersData } from '../redux/store';
 import { useTheme } from '../hooks/useTheme';
 
-const list = cn('flex', 'gap-x-3', 'mb-8', 'justify-center', 'mt-2');
+const list = cn(
+  'flex',
+  'gap-x-3',
+  'mb-8',
+  'justify-center',
+  'mt-2',
+  'max-904:mt-20',
+  'max-904:mb-5',
+);
 const btn = cn(
   'text-primary-black',
   'px-4',
@@ -20,7 +28,10 @@ const btn = cn(
   'dark:bg-hover-black',
   'dark:hover:bg-active-black',
   'dark:active:bg-dark-active-black',
-  'dark:text-white'
+  'dark:text-white',
+  'min-365-max-640:p-1.5',
+  'min-365-max-640:px-1',
+	'min-641-max-904:mt-10',
 );
 
 const links = [

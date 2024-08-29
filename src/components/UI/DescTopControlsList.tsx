@@ -7,7 +7,7 @@ import { LogInBtn } from './LogInBtn';
 import { selectUsersData, useAppSelector } from '../../redux/store';
 import { useTheme } from '../../hooks/useTheme';
 
-const controls = cn('flex', 'gap-x-4', 'items-center', 'mobile:hidden');
+const controls = cn('flex', 'gap-x-4', 'items-center', 'max-904:hidden');
 const controlsCart = cn(
   'px-4',
   'py-2.5',

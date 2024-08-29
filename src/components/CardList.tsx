@@ -23,6 +23,13 @@ const nothingFound = cn(
   'font-semibold',
   'dark:text-white'
 );
+const allProducts = cn(
+  'grid',
+  'gap-4',
+  'grid-cols-4',
+  'min-365-max-640:grid-cols-2',
+  'min-641-max-904:grid-cols-3'
+);
 
 export function CardList() {
   const isLoading = useAppSelector(selectProductsData).isLoading;
@@ -95,7 +102,7 @@ export function CardList() {
         {productsList.length === 0 && !isLoading ? (
           <h2 className={nothingFound}>Ничего не найдено :(</h2>
         ) : (
-          <ul className="grid gap-4 grid-cols-4">
+          <ul className={allProducts}>
             {productsList.map((product) => (
               <Card product={product} key={product.id} />
             ))}

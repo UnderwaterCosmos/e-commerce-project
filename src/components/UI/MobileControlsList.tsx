@@ -4,11 +4,14 @@ import cn from 'classnames';
 import { selectUsersData, useAppSelector } from '../../redux/store';
 import { useTheme } from '../../hooks/useTheme';
 
-const mobileList = cn('descTop:hidden', 'flex', 'items-center', 'gap-x-7');
+const mobileList = cn('min-905:hidden', 'flex', 'items-center', 'gap-x-5', 'min-641-max-904:gap-x-10');
 
 export function MobileControlsList() {
   const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
   const { theme } = useTheme();
+
+	const screenWidth = document.documentElement.clientWidth;
+	const isMobileScreen = screenWidth > 640 && screenWidth < 905
 
   return (
     <ul className={mobileList}>
@@ -16,7 +19,7 @@ export function MobileControlsList() {
         <li>
           <img
             src="/images/avatar-placeholder.png"
-            width={32}
+            width={ isMobileScreen ? 50 : 32}
             alt="placeholder"
           />
         </li>
@@ -25,8 +28,8 @@ export function MobileControlsList() {
           <li>
             <Link to={'/cart'}>
               <svg
-                width="22"
-                height="22"
+                width={isMobileScreen ? 35 : 22}
+                height={isMobileScreen ? 35 : 22}
                 viewBox="0 0 18 18"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +52,7 @@ export function MobileControlsList() {
               <img
                 src={fullUserInfo?.avatarUrl}
                 className="rounded-full"
-                width={32}
+                width={isMobileScreen ? 35 : 24}
                 alt="Your's avatar"
               />
             </Link>

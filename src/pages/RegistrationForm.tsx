@@ -42,14 +42,21 @@ const formWrapper = cn(
   'flex',
   'flex-col',
   'gap-y-5',
-	'dark:bg-dark-background',
-	'dark:border-hover-black'
+  'mt-16',
+  'dark:bg-dark-background',
+  'dark:border-hover-black',
+  'min-365-max-640:bg-transparent',
+  'min-365-max-640:border-none',
+  'min-365-max-640:px-1.5',
+  'min-365-max-640:py-3',
+  'min-500-max-640:max-w-full',
+  'min-641-max-904:mt-20'
 );
 const clearBtn = cn(
   'bg-primary-blue',
-  ' transition-all',
-  ' hover:bg-hover-blue',
-  ' active:bg-active-blue',
+  'transition-all',
+  'hover:bg-hover-blue',
+  'active:bg-active-blue',
   'text-white',
   'py-2.5',
   'rounded-main'
@@ -120,7 +127,9 @@ export function RegistrationForm() {
           <Loader />
         ) : (
           <div className={formWrapper}>
-            <h1 className="text-xl font-semibold dark:text-white">Регистрация</h1>
+            <h1 className="text-xl font-semibold dark:text-white">
+              Регистрация
+            </h1>
             <form
               className="flex flex-col gap-y-4"
               onSubmit={handleSubmit(submitHandler)}
@@ -148,7 +157,9 @@ export function RegistrationForm() {
                 )
               )}
               <div className="text-left">
-                <p className="mb-1 cursor-default dark:text-white">Тип пользователя:</p>
+                <p className="mb-1 cursor-default dark:text-white">
+                  Тип пользователя:
+                </p>
                 <CustomSelect
                   name="registration"
                   options={REG_SELECT_OPTIONS}
@@ -165,7 +176,7 @@ export function RegistrationForm() {
                 Очистить форму
               </button>
             </form>
-            <p className='dark:text-white'>
+            <p className="dark:text-white">
               Если Вы уже зарегистрированы -{' '}
               <Link to={'/login'} className={loginLink}>
                 войдите

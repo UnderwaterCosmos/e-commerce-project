@@ -46,6 +46,8 @@ export function CartBtn({
       'px-[11px] !py-0.5 text-2xl': children === '+',
       'opacity-50 hover:bg-primary-blue active:bg-primary-blue transition-none cursor-default':
         isProductInCart || !Boolean(fullUserInfo),
+      'min-365-max-640:max-w-full min-365-max-640:text-sm min-641-max-904:min-w-[602px] min-641-max-904:mx-auto':
+        children === 'Добавить в корзину',
     }
   );
 

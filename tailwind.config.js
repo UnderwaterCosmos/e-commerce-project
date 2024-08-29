@@ -5,8 +5,14 @@ export default {
   theme: {
     extend: {
       screens: {
-        mobile: { min: '320px', max: '480px' },
-        descTop: '481px',
+        'min-365-max-640': { min: '365px', max: '640px' },
+        'min-500-max-640': { min: '500px', max: '640px' },
+        'min-641-max-904': { min: '641px', max: '904px' },
+        'min-641': '641px',
+        'max-640': {max: '640px'},
+        'min-762': '762px',
+        'max-904': { max: '904px' },
+        'min-905': '905px',
       },
       fontFamily: {
         serif:

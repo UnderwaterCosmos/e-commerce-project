@@ -59,7 +59,7 @@ export function FormPasswordField({
   );
 
   return (
-    <div>
+    <>
       <div className="flex flex-col relative">
         <label
           htmlFor={fieldObj.name}
@@ -114,8 +114,8 @@ export function FormPasswordField({
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M2.67707 0.501465L16.8178 14.6422L16.8192 14.6407L16.8207 14.6421L15.6422 15.8207L12.8448 13.0233C11.7974 13.5118 10.5277 13.8333 9.00002 13.8333C2.67335 13.8333 0.771952 8.31917 0.753717 8.26334L0.666687 8L0.754546 7.73667C0.765542 7.7014 1.52839 5.48786 3.68375 3.86224L1.50002 1.67852L2.67707 0.501465ZM11.5723 11.7508L10.0746 10.2531C9.74802 10.4111 9.38325 10.5 9.00002 10.5C7.63169 10.5 6.50002 9.36834 6.50002 8C6.50002 7.61678 6.5889 7.252 6.74695 6.92544L4.86362 5.04211C3.39084 6.05494 2.6795 7.4248 2.4305 8C2.84658 8.96167 4.5648 12.1667 9.00002 12.1667C9.98669 12.1667 10.8389 12.008 11.5723 11.7508Z"
                   fill={theme === 'light' ? '#1D1D1D' : '#fff'}
                 />
@@ -133,6 +133,6 @@ export function FormPasswordField({
           {errors[fieldObj.name as keyof typeof errors]?.message}
         </p>
       )}
-    </div>
+    </>
   );
 }

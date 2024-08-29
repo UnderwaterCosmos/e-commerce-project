@@ -5,19 +5,25 @@ import cn from 'classnames';
 import { Container } from './Container';
 import { BurgerBtn } from './BurgerBtn';
 import { MobileMenu } from './MobileMenu';
-import { useTheme } from '../../hooks/useTheme';
-import { useAppSelector, selectUsersData } from '../../redux/store';
 import { MobileControlsList } from './MobileControlsList';
 import { DescTopControlsList } from './DescTopControlsList';
+import {
+  useAppSelector,
+  selectUsersData,
+  useAppDispatch,
+} from '../../redux/store';
+import { setMobileMenuActive } from '../../redux/slices/mobileMenuSlice';
+import { useTheme } from '../../hooks/useTheme';
 
 const parentHeader = cn(
   'mb-8',
-  'mobile:fixed',
-  'mobile:bg-primary-gray',
-  'mobile:w-full',
-  'mobile:border-b',
-  'dark:mobile:border-b-active-black',
-  'dark:mobile:bg-hover-black'
+  'max-904:fixed',
+  'max-904:bg-primary-gray',
+  'max-904:w-full',
+  'max-904:border-b',
+  'dark:min-365-max-640:border-b-active-black',
+  'dark:min-365-max-640:bg-hover-black',
+  'max-904:z-[10]'
 );
 const headerWrapper = cn(
   'flex',
@@ -25,13 +31,15 @@ const headerWrapper = cn(
   'items-center',
   'py-5',
   'text-white',
-  'mobile:py-3'
+  'max-904:py-3',
+  'min-641-max-904:!py-1'
 );
 const logoName = cn(
   'text-primary-black',
   'font-[InterTightSemiBold]',
   'text-2xl',
-  'dark:text-white'
+  'dark:text-white',
+  'whitespace-nowrap'
 );
 const navList = cn(
   'flex',
@@ -74,6 +82,7 @@ const adminLinks = [
 
 export default React.memo(function Header() {
   const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
+  const dispatch = useAppDispatch();
   const { theme } = useTheme();
 
   const logoLink = cn(
@@ -81,8 +90,9 @@ export default React.memo(function Header() {
     'items-center',
     'gap-x-3',
     'mr-16',
-    'mobile:ml-20',
-    { 'mobile:mr-10': fullUserInfo }
+    'max-904:ml-20',
+    'min-905:mr-auto',
+    { 'min-365-max-640:mr-10': fullUserInfo }
   );
 
   const links = fullUserInfo?.type === 'admin' ? adminLinks : customerLinks;
@@ -92,7 +102,11 @@ export default React.memo(function Header() {
       <Container>
         <div className={headerWrapper}>
           <BurgerBtn />
-          <Link to={'/'} className={logoLink}>
+          <Link
+            to={'/'}
+            className={logoLink}
+            onClick={() => dispatch(setMobileMenuActive(false))}
+          >
             <svg
               width="29"
               height="30"
@@ -109,7 +123,7 @@ export default React.memo(function Header() {
             </svg>
             <p className={logoName}>e-com</p>
           </Link>
-          <nav className="mr-auto mobile:hidden">
+          <nav className="mr-auto max-904:hidden">
             <ul className={navList}>
               {links.map((link) => (
                 <li className="py-1.5" key={link.path}>

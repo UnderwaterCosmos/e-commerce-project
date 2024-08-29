@@ -33,7 +33,17 @@ const formWrapper = cn(
   'flex-col',
   'gap-y-5',
 	'dark:bg-dark-background',
-	'dark:border-hover-black'
+	'dark:border-hover-black',
+	'mobile:bg-transparent',
+  'mobile:border-none',
+  'mobile:px-1.5',
+  'mobile:py-3',
+  'min-500-max-640:max-w-full',
+  'min-641-max-904:mt-14',
+	'min-365-max-640:bg-transparent',
+  'min-365-max-640:border-none',
+  'min-365-max-640:px-1.5',
+  'min-365-max-640:py-3',
 );
 
 export function AdminNewCategory() {

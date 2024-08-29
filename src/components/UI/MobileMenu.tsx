@@ -1,3 +1,4 @@
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
@@ -60,6 +61,14 @@ export function MobileMenu({ links }: IProps) {
     'transition-all',
     { '!translate-x-0': mobileIsActive }
   );
+
+  React.useEffect(() => {
+    if (mobileIsActive) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+  }, [mobileIsActive]);
 
   return (
     <div className={menu}>

@@ -16,9 +16,12 @@ const mainWrapper = cn(
   'px-6',
   'flex',
   'gap-x-28',
-  'mobile:flex-col',
-  'mobile:gap-x-0',
-	'mobile:mt-20'
+  'min-365-max-640:flex-col',
+  'min-365-max-640:gap-x-0',
+  'min-365-max-640:mt-20',
+  'min-641:mb-8',
+  'min-762:mb-0',
+  'min-641-max-904:mt-24'
 );
 const greeting = cn(
   'max-w-[500px]',
@@ -26,16 +29,16 @@ const greeting = cn(
   'font-semibold',
   'mb-14',
   'dark:text-white',
-  'mobile:text-xl',
-  'mobile:mb-8'
+  'min-365-max-640:text-xl',
+  'min-365-max-640:mb-8'
 );
 const infoListItem = cn(
   'flex',
   'gap-x-6',
   'mb-4',
   'dark:text-white',
-  'mobile:gap-x-4',
-  'mobile:text-sm/[21px]'
+  'min-365-max-640:gap-x-4',
+  'min-365-max-640:text-sm/[21px]'
 );
 const demoData = cn(
   'bg-primary-gray',
@@ -70,16 +73,16 @@ const demoLoginDataItem = cn(
   'items-center',
   'justify-between',
   'px-[155px]',
-	'gap-x-4',
-	'mobile:px-3'
+  'gap-x-4',
+  'min-365-max-640:px-3'
 );
 const enterAccTitle = cn(
   'text-center',
   'text-xl',
   'mb-4',
   'dark:text-white',
-  'mobile:text-lg',
-  'mobile:mb-2'
+  'min-365-max-640:text-lg',
+  'min-365-max-640:mb-2'
 );
 
 const infoList = [
@@ -265,7 +268,7 @@ export function Main() {
           <div>
             <img
               src="/images/eyes.png"
-              className="mb-4 mobile:w-6"
+              className="mb-4 min-365-max-640:w-6"
               alt="eyes"
             />
             <h2 className={greeting}>
@@ -273,9 +276,9 @@ export function Main() {
               маркетплейса для портфолио.
             </h2>
           </div>
-          <div className="mobile:mb-4">
+          <div className="min-365-max-640:mb-4">
             <p className="font-semibold mb-6 dark:text-white">Что вас ждет:</p>
-            <ul className="mb-16 mobile:mb-8">
+            <ul className="mb-16 min-365-max-640:mb-8 min-641-max-904:mb-6">
               {infoList.map((listItem) => (
                 <li className={infoListItem} key={listItem.path}>
                   <img src={listItem.path} width={18} alt="" />
@@ -283,7 +286,7 @@ export function Main() {
                 </li>
               ))}
             </ul>
-            <p className="dark:text-white mobile:text-sm/[21px] mobile:mb-5">
+            <p className="dark:text-white min-365-max-640:text-sm/[21px] min-365-max-640:mb-5">
               При регистрации в качестве Администратора, вы получите возможность
               создавать как категории товаров, так и сами товары.
             </p>

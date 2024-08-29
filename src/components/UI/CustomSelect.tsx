@@ -21,7 +21,11 @@ export function CustomSelect({ name, options, value, selectHandler }: IProps) {
       styles={{
         control: (baseStyles) => ({
           ...baseStyles,
-          width: name === 'filters' ? '240px' : 'auto',
+          width: name.startsWith('filters')
+            ? name === 'filtersMobile'
+              ? 'auto'
+              : '240px'
+            : 'auto',
           height: '42px',
           borderRadius: '6px',
           borderColor: theme === 'light' ? '#EEEEEE' : '#373737',
@@ -51,7 +55,7 @@ export function CustomSelect({ name, options, value, selectHandler }: IProps) {
             : isFocused
             ? 'rgba(163, 179, 217, 0.6)'
             : '',
-          color: theme === 'light' ? '#1D1D1D' : '#fff',
+          color: theme === 'light' ? (isSelected ? '#fff' : '#1D1D1D') : '#fff',
         }),
       }}
     />
