@@ -21,7 +21,7 @@ export function UpBtn() {
     'transition-all',
     'hidden',
     {
-      '!inline-block': isVisible,
+      '!inline-block max-904:!hidden': isVisible,
     }
   );
 

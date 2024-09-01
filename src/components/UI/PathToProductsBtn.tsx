@@ -10,7 +10,8 @@ const back = cn(
   'bg-primary-blue',
   'transition-all',
   'hover:bg-hover-blue',
-  'active:bg-active-blue'
+  'active:bg-active-blue',
+  'min-365-max-640:text-lg'
 );
 
 interface IProps {

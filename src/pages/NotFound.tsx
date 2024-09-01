@@ -15,7 +15,9 @@ const mainBlock = cn(
 export function NotFound() {
   return (
     <main className={mainBlock}>
-      <h1 className="text-7xl">Страница не найдена :(</h1>
+      <h1 className="text-7xl min-365-max-640:text-3xl min-641-max-904:text-5xl">
+        Страница не найдена :(
+      </h1>
       <PathToProductsBtn>Вернуться к каталогу товаров</PathToProductsBtn>
     </main>
   );

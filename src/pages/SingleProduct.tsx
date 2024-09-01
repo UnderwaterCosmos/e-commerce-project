@@ -70,7 +70,7 @@ export function SingleProduct() {
   const refreshedFlag = useLocalStorage('isEditProductRefreshed');
 
   const screenWidth = document.documentElement.clientWidth;
-  const isMobileScreen = screenWidth > 374 && screenWidth < 905;
+  const isMobileScreen = screenWidth > 345 && screenWidth < 905;
   const isScreenMedium = screenWidth > 499 && screenWidth < 641;
   const isScreenLarge = screenWidth > 640;
 

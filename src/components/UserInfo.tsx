@@ -10,7 +10,19 @@ const allInfo = cn(
   'justify-between',
   'items-center'
 );
-const descrTerm = cn('inline', 'font-semibold', 'text-xl', 'dark:text-white');
+const term = cn(
+  'inline',
+  'font-semibold',
+  'text-xl',
+  'dark:text-white',
+  'min-365-max-640:text-lg'
+);
+const descr = cn(
+  'inline',
+  'text-xl',
+  'dark:text-white',
+  'min-365-max-640:text-lg'
+);
 
 export function UserInfo() {
   const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
@@ -24,22 +36,14 @@ export function UserInfo() {
         alt={`${fullUserInfo?.login}'s portrait`}
       />
       <dl className="text-center">
-        <dt className={descrTerm}>Логин: </dt>
-        <dd className="inline text-xl dark:text-white">
-          {fullUserInfo?.login}
-        </dd>
+        <dt className={term}>Логин: </dt>
+        <dd className={descr}>{fullUserInfo?.login}</dd>
         <br />
-        <dt className={descrTerm}>
-          Почта:{' '}
-        </dt>
-        <dd className="inline text-xl dark:text-white">
-          {fullUserInfo?.email}
-        </dd>
+        <dt className={term}>Почта: </dt>
+        <dd className={descr}>{fullUserInfo?.email}</dd>
         <br />
-        <dt className={descrTerm}>
-          Тип профиля:{' '}
-        </dt>
-        <dd className="inline text-xl dark:text-white">{fullUserInfo?.type}</dd>
+        <dt className={term}>Тип профиля: </dt>
+        <dd className={descr}>{fullUserInfo?.type}</dd>
       </dl>
     </main>
   );

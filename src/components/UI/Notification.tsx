@@ -13,7 +13,10 @@ import { useTheme } from '../../hooks/useTheme';
 export function Notification() {
   const { type, message } = useAppSelector(selectNotificationData);
   const dispatch = useAppDispatch();
-	const {theme} = useTheme()
+  const { theme } = useTheme();
+
+  const screenWidth = document.documentElement.clientWidth;
+	const isMobileScreen = screenWidth > 345 && screenWidth < 905
 
   React.useEffect(() => {
     if (type === 'success') {
@@ -32,7 +35,7 @@ export function Notification() {
       theme={theme === 'light' ? 'light' : 'dark'}
       closeOnClick
       draggable
-      autoClose={2000}
+      autoClose={ isMobileScreen ? 1000 : 2000}
     />
   );
 }

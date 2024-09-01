@@ -19,8 +19,6 @@ const mainWrapper = cn(
   'min-365-max-640:flex-col',
   'min-365-max-640:gap-x-0',
   'min-365-max-640:mt-20',
-  'min-641:mb-8',
-  'min-762:mb-0',
   'min-641-max-904:mt-24'
 );
 const greeting = cn(
@@ -39,6 +37,26 @@ const infoListItem = cn(
   'dark:text-white',
   'min-365-max-640:gap-x-4',
   'min-365-max-640:text-sm/[21px]'
+);
+const techList = cn(
+  'list-disc',
+  'max-w-[400px]',
+  'mx-auto',
+  'flex',
+  'flex-wrap',
+  'gap-x-8',
+  'mb-8',
+  'justify-center',
+  'dark:text-[#fff]',
+  'dark:marker:text-[#fff]',
+  'min-641:text-lg'
+);
+const techTitle = cn(
+  'text-center',
+  'font-semibold',
+  'mb-3',
+  'dark:text-[#fff]',
+  'min-641:text-lg'
 );
 const demoData = cn(
   'bg-primary-gray',
@@ -87,17 +105,51 @@ const enterAccTitle = cn(
 
 const infoList = [
   {
+    path: '/images/main-accounts.svg',
+    text: 'Регистрация и авторизация: Создайте свой аккаунт или выберите ниже один из готовых, чтобы получить доступ ко всем функциям сайта.',
+  },
+  {
     path: '/images/main-user.svg',
-    text: 'Регистрация и авторизация: Создайте свой аккаунт, чтобы получить доступ ко всем функциям сайта.',
+    text: 'Два вида аккаунтов: При регистрации в качестве Администратора, вы получите возможность создавать как категории товаров, так и сами товары.',
+  },
+  {
+    path: '/images/user-circle.svg',
+    text: 'Личный кабинет: Просмотрите информацию о пользователе, а также историю его заказов.',
   },
   {
     path: '/images/search-blue.svg',
-    text: 'Поиск и фильтрация товаров: Удобный поиск помогут найти именно то, что вам нужно.',
+    text: 'Поиск и фильтрация товаров: Удобный поиск и фильтрация по категориям помогут найти именно то, что вам нужно.',
+  },
+  {
+    path: '/images/more-products.svg',
+    text: 'Автоматическая подгрузка товаров (скролл): Реализована пагинация посредством бесконечной ленты.',
   },
   {
     path: '/images/list-ul.svg',
     text: 'Корзина и оформление заказа: Добавляйте товары в корзину, оформляйте заказы и проверяйте их историю.',
   },
+  {
+    path: '/images/moon-blue.svg',
+    text: 'Темная и светлая темы: Меняйте тему на более подходящую вам.',
+  },
+  {
+    path: '/images/devices.svg',
+    text: 'Доступность на любом устройстве: Сайт полностью адаптирован под мобильные девайсы.',
+  },
+];
+const technologiesList = [
+  'TypeScript',
+  'React',
+  'Redux-Toolkit',
+  'Redux-Persist',
+  'React-Router-Dom',
+  'React-Toastify',
+  'React-Select',
+  'React-Hook-Form',
+  'Yup',
+  'Tailwind CSS',
+  'Classnames',
+  'JSON Server',
 ];
 const usersDemo = [
   {
@@ -272,12 +324,14 @@ export function Main() {
               alt="eyes"
             />
             <h2 className={greeting}>
-              Привет! Я рад приветствовать вас на моем небольшом проекте
-              маркетплейса для портфолио.
+              Привет! Я рад видеть Вас на моем проекте - аналоге известного
+              маркетплейса.
             </h2>
           </div>
           <div className="min-365-max-640:mb-4">
-            <p className="font-semibold mb-6 dark:text-white">Что вас ждет:</p>
+            <p className="font-semibold mb-6 dark:text-white">
+              Какой функционал здесь представлен?
+            </p>
             <ul className="mb-16 min-365-max-640:mb-8 min-641-max-904:mb-6">
               {infoList.map((listItem) => (
                 <li className={infoListItem} key={listItem.path}>
@@ -286,11 +340,15 @@ export function Main() {
                 </li>
               ))}
             </ul>
-            <p className="dark:text-white min-365-max-640:text-sm/[21px] min-365-max-640:mb-5">
-              При регистрации в качестве Администратора, вы получите возможность
-              создавать как категории товаров, так и сами товары.
-            </p>
           </div>
+        </section>
+        <section>
+          <h3 className={techTitle}>Список использованных технологий:</h3>
+          <ul className={techList}>
+            {technologiesList.map((tech) => (
+              <li key={tech}>{tech}</li>
+            ))}
+          </ul>
         </section>
         {!fullUserInfo && (
           <section>

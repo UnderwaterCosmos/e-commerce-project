@@ -5,7 +5,7 @@ import { PathToProductsBtn } from './UI/PathToProductsBtn';
 import OrdersHistoryInnerItem from './OrdersHistoryInnerItem';
 import { selectUsersData, useAppSelector } from '../redux/store';
 
-const noOrders = cn('text-4xl', 'mt-36', 'mb-6', 'dark:text-white');
+const noOrders = cn('text-4xl', 'mt-36', 'mb-6', 'dark:text-white', 'min-365-max-640:text-3xl');
 
 export function OrdersHistory() {
   const ordersHistory =

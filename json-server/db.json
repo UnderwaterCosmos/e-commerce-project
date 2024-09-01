@@ -444,7 +444,7 @@
     },
     {
       "id": 35,
-      "title": "Succulent gorgeous gorgeous gorgeous 3",
+      "title": "Succulent nice gorgeous 3",
       "price": 30954,
       "description": "Low-maintenance succulent that thrives in sunlight.",
       "quantity": 1,
@@ -2637,16 +2637,42 @@
       "type": "admin",
       "cart": [
         {
-          "id": 4,
-          "title": "Peace Lily jubilant iconic gorgeous 30",
-          "price": 21549,
+          "id": 6,
+          "title": "Peace Lily chocolate banana happy 20",
+          "price": 4835,
           "description": "Beautiful peace lily that blooms throughout the year.",
-          "quantity": 4,
+          "quantity": 2,
           "category": "houseplants",
           "images": [
-            "https://picsum.photos/id/10/280/220",
-            "https://picsum.photos/id/11/280/220",
-            "https://picsum.photos/id/12/280/220"
+            "https://picsum.photos/id/16/280/220",
+            "https://picsum.photos/id/17/280/220",
+            "https://picsum.photos/id/18/280/220"
+          ]
+        },
+        {
+          "id": 10,
+          "title": "Wedges elegant iconic 21",
+          "price": 36891,
+          "description": "Stylish wedges that offer both height and comfort.",
+          "quantity": 1,
+          "category": "shoes",
+          "images": [
+            "https://picsum.photos/id/28/280/220",
+            "https://picsum.photos/id/29/280/220",
+            "https://picsum.photos/id/30/280/220"
+          ]
+        },
+        {
+          "id": 35,
+          "title": "Succulent nice gorgeous 3",
+          "price": 30954,
+          "description": "Low-maintenance succulent that thrives in sunlight.",
+          "quantity": 1,
+          "category": "houseplants",
+          "images": [
+            "https://picsum.photos/id/103/280/220",
+            "https://picsum.photos/id/104/280/220",
+            "https://picsum.photos/id/641/280/220"
           ]
         }
       ],
@@ -2679,34 +2705,6 @@
             ]
           }
         ],
-        "Thu Aug 08 2024 13:45:57 GMT+0300 (Москва, стандартное время)": [
-          {
-            "id": 35,
-            "title": "Succulent gorgeous gorgeous gorgeous 3",
-            "price": 30954,
-            "description": "Low-maintenance succulent that thrives in sunlight.",
-            "quantity": 1,
-            "category": "houseplants",
-            "images": [
-              "https://picsum.photos/id/103/280/220",
-              "https://picsum.photos/id/104/280/220",
-              "https://picsum.photos/id/641/280/220"
-            ]
-          },
-          {
-            "id": 40,
-            "title": "Concealer happy apple 28",
-            "price": 52321,
-            "description": "High-coverage concealer that hides imperfections.",
-            "quantity": 1,
-            "category": "cosmetics",
-            "images": [
-              "https://picsum.photos/id/118/280/220",
-              "https://picsum.photos/id/119/280/220",
-              "https://picsum.photos/id/642/280/220"
-            ]
-          }
-        ],
         "Thu Aug 08 2024 14:39:26 GMT+0300 (Москва, стандартное время)": [
           {
             "id": 9,
@@ -2732,6 +2730,47 @@
               "https://picsum.photos/id/40/280/220",
               "https://picsum.photos/id/41/280/220",
               "https://picsum.photos/id/42/280/220"
+            ]
+          }
+        ],
+        "Sun Sep 01 2024 08:15:28 GMT+0300 (Москва, стандартное время)": [
+          {
+            "id": 35,
+            "title": "Succulent nice gorgeous 3",
+            "price": 30954,
+            "description": "Low-maintenance succulent that thrives in sunlight.",
+            "quantity": 1,
+            "category": "houseplants",
+            "images": [
+              "https://picsum.photos/id/103/280/220",
+              "https://picsum.photos/id/104/280/220",
+              "https://picsum.photos/id/641/280/220"
+            ]
+          },
+          {
+            "id": 19,
+            "title": "Running Shoes apple elegant 14",
+            "price": 5380,
+            "description": "Durable running shoes with excellent support.",
+            "quantity": 1,
+            "category": "shoes",
+            "images": [
+              "https://picsum.photos/id/55/280/220",
+              "https://picsum.photos/id/56/280/220",
+              "https://picsum.photos/id/57/280/220"
+            ]
+          },
+          {
+            "id": 24,
+            "title": "T-shirt apple 34",
+            "price": 53043,
+            "description": "Comfortable cotton t-shirt available in various colors.",
+            "quantity": 1,
+            "category": "clothes",
+            "images": [
+              "https://picsum.photos/id/70/280/220",
+              "https://picsum.photos/id/71/280/220",
+              "https://picsum.photos/id/72/280/220"
             ]
           }
         ]

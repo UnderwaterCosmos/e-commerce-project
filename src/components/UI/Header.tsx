@@ -47,7 +47,8 @@ const navList = cn(
   'bg-primary-gray',
   'p-1',
   'rounded-main',
-  'dark:bg-dark-background'
+  'dark:bg-dark-background',
+	'min-905-max-920:mr-3',
 );
 const navListLink = cn(
   'text-primary-black',
@@ -91,6 +92,7 @@ export default React.memo(function Header() {
     'gap-x-3',
     'mr-16',
     'max-904:ml-20',
+		'min-905-max-920:!mr-3',
     'min-905:mr-auto',
     { 'min-365-max-640:mr-10': fullUserInfo }
   );

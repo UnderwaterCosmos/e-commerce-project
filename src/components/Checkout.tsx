@@ -15,7 +15,14 @@ const titleWrapper = cn(
   'gap-x-4',
   'border-b',
   'pb-4',
-  'dark:border-b-hover-black'
+  'dark:border-b-hover-black',
+	'min-365-max-640:mb-8'
+);
+const checkoutTitle = cn(
+  'text-2xl',
+  'font-semibold',
+  'dark:text-white',
+  'min-365-max-640:text-sm'
 );
 const cancelBtn = cn(
   'px-4',
@@ -56,7 +63,7 @@ export function Checkout({ usersCart, totalSum, setModalActive }: IProps) {
   };
 
   return (
-    <div>
+    <>
       <div className={titleWrapper}>
         <button type="button" onClick={() => setModalActive(false)}>
           <svg
@@ -72,13 +79,11 @@ export function Checkout({ usersCart, totalSum, setModalActive }: IProps) {
             />
           </svg>
         </button>
-        <h3 className="text-2xl font-semibold dark:text-white">
-          Подтвердите информацию о заказе
-        </h3>
+        <h3 className={checkoutTitle}>Подтвердите информацию о заказе</h3>
       </div>
       <ul className="mb-[14px]">
         {usersCart.map((cartItem) => (
-          <UsersCartItem cartItem={cartItem} />
+          <UsersCartItem cartItem={cartItem} key={cartItem.id} />
         ))}
       </ul>
       <p className={totalPrice}>Итого: {totalSum}</p>
@@ -92,6 +97,6 @@ export function Checkout({ usersCart, totalSum, setModalActive }: IProps) {
         </button>
         <CheckoutBtn onClick={checkoutHandler} />
       </div>
-    </div>
+    </>
   );
 }

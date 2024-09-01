@@ -25,7 +25,6 @@ export function Modal({ modalActive, setModalActive, children }: IProps) {
   );
   const content = cn(
     'w-[601px]',
-    'modal-content',
     'p-4',
     'rounded-main',
     'bg-white',
@@ -33,7 +32,8 @@ export function Modal({ modalActive, setModalActive, children }: IProps) {
     'transition all',
     'dark:bg-dark-background',
     'dark:border',
-    'dark:border-hover-black'
+    'dark:border-hover-black',
+    'min-365-max-640:w-[343px]',
   );
 
   return (

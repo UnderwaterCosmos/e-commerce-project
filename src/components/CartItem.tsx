@@ -18,7 +18,8 @@ const listItem = cn(
   'p-3',
   'items-center',
   'mb-2',
-  'dark:bg-dark-background'
+  'dark:bg-dark-background',
+  'min-365-max-640:block'
 );
 const controlBtn = cn(
   'w-[42px]',
@@ -31,10 +32,10 @@ const controlBtn = cn(
   'transition-all',
   'hover:bg-hover-gray',
   'active:bg-active-gray',
-	'dark:text-white',
-	'dark:bg-hover-black',
-	'dark:hover:bg-active-black',
-	'dark:active:bg-dark-active-black',
+  'dark:text-white',
+  'dark:bg-hover-black',
+  'dark:hover:bg-active-black',
+  'dark:active:bg-dark-active-black'
 );
 const removeItemBtn = cn(
   'w-[42px]',
@@ -46,11 +47,13 @@ const removeItemBtn = cn(
   'transition-all',
   'hover:bg-hover-black',
   'active:bg-active-black',
-	'dark:bg-primary-gray',
+  'dark:bg-primary-gray',
   'transition-all',
   'dark:hover:bg-hover-gray',
-  'dark:active:bg-active-gray'
+  'dark:active:bg-active-gray',
+  'max-904:ml-auto'
 );
+const mobileWrapper = cn('flex', 'gap-x-3.5', 'items-center', 'mb-3.5');
 
 interface ICartItem {
   cartItem: ISingleProduct;
@@ -61,7 +64,10 @@ export function CartItem({ cartItem, index }: ICartItem) {
   const quantity =
     useAppSelector(selectUsersData).fullUserInfo?.cart[index].quantity ?? 0;
   const dispatch = useAppDispatch();
-	const {theme} = useTheme()
+  const { theme } = useTheme();
+
+  const screenWidth = document.documentElement.clientWidth;
+  const isMobileScreen = screenWidth > 345 && screenWidth < 641;
 
   const quantityHandler = (name: string) => {
     if (name === 'increment') {
@@ -85,18 +91,43 @@ export function CartItem({ cartItem, index }: ICartItem) {
 
   return (
     <li className={listItem}>
-      <Link to={`/products/${cartItem.id}`}>
-        <img
-          className="rounded-main"
-          src={cartItem.images[0]}
-          width={163}
-          alt={cartItem.title}
-        />
-      </Link>
-      <div className="mr-auto ml-10">
-        <h4 className="font-semibold mb-4 dark:text-white">{cartItem.title}</h4>
-        <p className="dark:text-white">{cartItem.price} ₽</p>
-      </div>
+      {isMobileScreen ? (
+        <div className={mobileWrapper}>
+          <Link to={`/products/${cartItem.id}`}>
+            <img
+              className="rounded-main"
+              src={cartItem.images[0]}
+              width={82}
+              alt={cartItem.title}
+            />
+          </Link>
+          <div className="mr-auto ml-10 min-365-max-640:ml-0">
+            <h4 className="font-semibold mb-4 dark:text-white">
+              {cartItem.title}
+            </h4>
+            <p className="dark:text-white min-365-max-640:text-xs">
+              {cartItem.price} ₽
+            </p>
+          </div>
+        </div>
+      ) : (
+        <>
+          <Link to={`/products/${cartItem.id}`}>
+            <img
+              className="rounded-main"
+              src={cartItem.images[0]}
+              width={163}
+              alt={cartItem.title}
+            />
+          </Link>
+          <div className="mr-auto ml-10">
+            <h4 className="font-semibold mb-4 dark:text-white">
+              {cartItem.title}
+            </h4>
+            <p className="dark:text-white">{cartItem.price} ₽</p>
+          </div>
+        </>
+      )}
       <div className="flex gap-x-3 items-center">
         <button
           type="button"

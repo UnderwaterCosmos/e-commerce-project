@@ -11,9 +11,10 @@ const welcome = cn(
   'text-[40px]/[60px]',
   'mb-7',
   'font-semibold',
-  'dark:text-white'
+  'dark:text-white',
+  'min-365-max-640:text-xl'
 );
-const btnList = cn('flex', ' gap-x-3', ' mb-8', ' justify-center');
+const btnList = cn('flex', ' gap-x-3', ' mb-8', ' justify-center', 'max-425:flex-col', 'max-425:gap-y-8');
 const btn = cn(
   'px-4',
   'py-2.5',
@@ -46,7 +47,7 @@ export function UserControls() {
   }, []);
 
   return (
-    <section>
+    <section className="max-904:mt-28">
       <Container>
         {isLoading ? (
           <Loader />

@@ -37,9 +37,16 @@ const editTitle = cn(
   'text-center',
   'mt-[-45px]',
   'mb-3',
-	'dark:text-white'
+  'dark:text-white',
+  'min-365-max-640:text-xl'
 );
-const nonEditableInfo = cn('text-center', 'text-lg', 'mb-3.5', 'dark:text-white');
+const nonEditableInfo = cn(
+  'text-center',
+  'text-lg',
+  'mb-3.5',
+  'dark:text-white',
+  'min-365-max-640:text-sm'
+);
 const editProductForm = cn(
   'text-center',
   'border',
@@ -52,8 +59,13 @@ const editProductForm = cn(
   'flex',
   'flex-col',
   'gap-y-4',
-	'dark:bg-dark-background',
-	'dark:border-hover-black'
+  'dark:bg-dark-background',
+  'dark:border-hover-black',
+  'min-365-max-640:bg-transparent',
+  'min-365-max-640:border-none',
+  'min-365-max-640:px-1.5',
+  'min-365-max-640:py-3',
+  'min-500-max-640:max-w-full'
 );
 
 export function AdminEditProduct() {
@@ -67,6 +79,9 @@ export function AdminEditProduct() {
   const { id } = useParams();
   const navigate = useNavigate();
   const refreshedFlag = useLocalStorage('isEditProductRefreshed');
+
+  const screenWidth = document.documentElement.clientWidth;
+  const isMobileScreen = screenWidth > 345 && screenWidth < 905;
 
   React.useEffect(() => {
     if (!singleProduct) {
@@ -125,13 +140,28 @@ export function AdminEditProduct() {
         {isLoading ? (
           <Loader />
         ) : (
-          <>
-            <BackBtn onClick={() => navigate(-1)} />
-            <h1 className={editTitle}>Редактировать товар</h1>
-            <p className={nonEditableInfo}>ID: {singleProduct?.id}</p>
-            <p className={nonEditableInfo}>
-              CATEGORY: {singleProduct?.category?.toUpperCase()}
-            </p>
+          <article className="max-904:mt-20">
+            {isMobileScreen ? (
+              <div className="flex flex-col gap-y-14">
+                <BackBtn onClick={() => navigate(-1)} />
+                <div>
+                  <h1 className={editTitle}>Редактировать товар</h1>
+                  <p className={nonEditableInfo}>ID: {singleProduct?.id}</p>
+                  <p className={nonEditableInfo}>
+                    CATEGORY: {singleProduct?.category?.toUpperCase()}
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <>
+                <BackBtn onClick={() => navigate(-1)} />
+                <h1 className={editTitle}>Редактировать товар</h1>
+                <p className={nonEditableInfo}>ID: {singleProduct?.id}</p>
+                <p className={nonEditableInfo}>
+                  CATEGORY: {singleProduct?.category?.toUpperCase()}
+                </p>
+              </>
+            )}
             <form
               className={editProductForm}
               onSubmit={handleSubmit(submitHandler)}
@@ -166,7 +196,7 @@ export function AdminEditProduct() {
               ))}
               <FormBtn>Готово</FormBtn>
             </form>
-          </>
+          </article>
         )}
       </Container>
     </main>

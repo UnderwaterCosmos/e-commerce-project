@@ -17,13 +17,35 @@ const ordersListItem = cn(
   'dark:bg-dark-background',
   'dark:border-hover-black'
 );
-const orderItem = cn('flex', 'gap-x-5', 'items-center', 'py-2', 'px-3.5');
+const orderItem = cn(
+  'flex',
+  'gap-x-5',
+  'items-center',
+  'py-2',
+  'px-3.5',
+  'min-365-max-640:gap-x-4.5',
+  'min-365-max-640:px-0',
+  'min-365-max-640:text-center'
+);
+const itemTitle = cn(
+  'font-semibold',
+  'dark:text-white',
+  'min-365-max-640:text-xs/[18px]',
+  'min-500-max-904:text-sm'
+);
 
-export default React.memo(function OrdersHistoryInnerItem({ orderName }: { orderName: string }) {
+export default React.memo(function OrdersHistoryInnerItem({
+  orderName,
+}: {
+  orderName: string;
+}) {
   const ordersHistory =
     useAppSelector(selectUsersData).fullUserInfo?.ordersHistory ?? {};
   const [isOrderOpened, setIsOrderOpened] = React.useState(false);
   const { theme } = useTheme();
+
+  const screenWidth = document.documentElement.clientWidth;
+	const isMobileScreen = screenWidth > 345 && screenWidth < 641
 
   const orderTimeStamp = cn(
     'flex',
@@ -36,6 +58,9 @@ export default React.memo(function OrdersHistoryInnerItem({ orderName }: { order
   );
   const orderList = cn({ 'cursor-default': isOrderOpened });
   const triangleIcon = cn({ 'transition-all rotate-90': isOrderOpened });
+  const orderImg = cn('rounded-main', 'max-w-[163px]', {
+    '!max-w-20': isMobileScreen,
+  });
 
   const toggleIsOrderOpened = () => {
     setIsOrderOpened((prev) => !prev);
@@ -58,7 +83,9 @@ export default React.memo(function OrdersHistoryInnerItem({ orderName }: { order
               fill={theme === 'light' ? '#1D1D1D' : '#fff'}
             />
           </svg>
-          <span className="dark:text-white">{orderName}</span>
+          <span className="dark:text-white min-365-max-640:text-xs/[18px] min-500-max-904:text-sm">
+            {orderName}
+          </span>
         </div>
         {isOrderOpened && (
           <ul
@@ -69,15 +96,14 @@ export default React.memo(function OrdersHistoryInnerItem({ orderName }: { order
               <li className={orderItem} key={order.id}>
                 <Link to={`/products/${order.id}`}>
                   <img
-                    className="rounded-main"
+                    className={orderImg}
                     src={order.images[0]}
-                    width={163}
                     alt={order.title}
                   />
                 </Link>
-                <p className="font-semibold dark:text-white">{order.title}</p>
-                <div className="ml-auto mr-10">
-                  <p className="dark:text-white">
+                <p className={itemTitle}>{order.title}</p>
+                <div className="ml-auto min-365-max-640:mr-0">
+                  <p className="dark:text-white min-365-max-640:text-xs/[18px] min-500-max-904:text-sm">
                     {order.price}₽ X {order.quantity} шт ={' '}
                     {order.quantity * order.price}₽
                   </p>
@@ -89,4 +115,4 @@ export default React.memo(function OrdersHistoryInnerItem({ orderName }: { order
       </div>
     </li>
   );
-})
+});

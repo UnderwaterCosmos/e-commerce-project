@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
-import { selectUsersData, useAppSelector } from '../../redux/store';
+import { selectUsersData, useAppDispatch, useAppSelector } from '../../redux/store';
+import { setMobileMenuActive } from '../../redux/slices/mobileMenuSlice';
 import { useTheme } from '../../hooks/useTheme';
 
 const mobileList = cn('min-905:hidden', 'flex', 'items-center', 'gap-x-5', 'min-641-max-904:gap-x-10');
 
 export function MobileControlsList() {
   const fullUserInfo = useAppSelector(selectUsersData).fullUserInfo;
+	const dispatch = useAppDispatch()
   const { theme } = useTheme();
 
 	const screenWidth = document.documentElement.clientWidth;
@@ -26,7 +28,7 @@ export function MobileControlsList() {
       ) : (
         <>
           <li>
-            <Link to={'/cart'}>
+            <Link to={'/cart'} onClick={() => dispatch(setMobileMenuActive(false))}>
               <svg
                 width={isMobileScreen ? 35 : 22}
                 height={isMobileScreen ? 35 : 22}
@@ -48,7 +50,7 @@ export function MobileControlsList() {
             </Link>
           </li>
           <li>
-            <Link to={'/user/info'}>
+            <Link to={'/user/info'} onClick={() => dispatch(setMobileMenuActive(false))}>
               <img
                 src={fullUserInfo?.avatarUrl}
                 className="rounded-full"
