@@ -1,21 +1,21 @@
 import React from 'react';
 import cn from 'classnames';
 
-import { Container } from './UI/Container';
-import { CustomSelect } from './UI/CustomSelect';
+import { Container } from '../../components/UI/Container';
+import { CustomSelect } from '../../components/UI/CustomSelect';
 import {
   useAppSelector,
   useAppDispatch,
   selectFiltersData,
   selectSingleProductsData,
-} from '../redux/store';
+} from '../../redux/store';
 import {
   setSearchValue,
   setSelectValue,
   fetchCategories,
-} from '../redux/slices/filtersSlice';
-import { useTheme } from '../hooks/useTheme';
-import { ISelect } from '../types/filters';
+} from '../../redux/slices/filtersSlice';
+import { useTheme } from '../../hooks/useTheme';
+import { ISelect } from '../../types/filters';
 
 const catalogTitle = cn(
   'text-[40px]/[60px]',

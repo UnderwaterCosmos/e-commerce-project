@@ -2,10 +2,10 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 
-import { Container } from './UI/Container';
-import { Loader } from './UI/Loader';
-import { useAppSelector, selectUsersData } from '../redux/store';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import { Container } from '../../components/UI/Container';
+import { Loader } from '../../components/UI/Loader';
+import { useAppSelector, selectUsersData } from '../../redux/store';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const welcome = cn(
   'text-[40px]/[60px]',

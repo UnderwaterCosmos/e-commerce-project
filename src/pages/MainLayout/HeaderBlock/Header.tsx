@@ -2,8 +2,8 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
-import { Container } from './Container';
-import { BurgerBtn } from './BurgerBtn';
+import { Container } from '../../../components/UI/Container';
+import { BurgerBtn } from '../../../components/UI/BurgerBtn';
 import { MobileMenu } from './MobileMenu';
 import { MobileControlsList } from './MobileControlsList';
 import { DescTopControlsList } from './DescTopControlsList';
@@ -11,9 +11,9 @@ import {
   useAppSelector,
   selectUsersData,
   useAppDispatch,
-} from '../../redux/store';
-import { setMobileMenuActive } from '../../redux/slices/mobileMenuSlice';
-import { useTheme } from '../../hooks/useTheme';
+} from '../../../redux/store';
+import { setMobileMenuActive } from '../../../redux/slices/mobileMenuSlice';
+import { useTheme } from '../../../hooks/useTheme';
 
 const parentHeader = cn(
   'mb-8',
@@ -48,7 +48,7 @@ const navList = cn(
   'p-1',
   'rounded-main',
   'dark:bg-dark-background',
-	'min-905-max-920:mr-3',
+  'min-905-max-920:mr-3'
 );
 const navListLink = cn(
   'text-primary-black',
@@ -92,7 +92,7 @@ export default React.memo(function Header() {
     'gap-x-3',
     'mr-16',
     'max-904:ml-20',
-		'min-905-max-920:!mr-3',
+    'min-905-max-920:!mr-3',
     'min-905:mr-auto',
     { 'min-365-max-640:mr-10': fullUserInfo }
   );

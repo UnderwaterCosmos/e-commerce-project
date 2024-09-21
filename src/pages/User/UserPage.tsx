@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import { UserControls } from '../components/UserControls';
+import { UserControls } from './UserControls';
 
 export function UserPage() {
   return (

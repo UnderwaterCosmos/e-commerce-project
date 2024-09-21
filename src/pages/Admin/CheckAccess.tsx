@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { selectUsersData, useAppSelector } from '../redux/store';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import { selectUsersData, useAppSelector } from '../../redux/store';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 interface IProps {
   children: React.ReactNode;

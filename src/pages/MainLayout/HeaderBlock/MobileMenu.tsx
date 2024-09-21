@@ -7,11 +7,11 @@ import {
   selectUsersData,
   useAppDispatch,
   useAppSelector,
-} from '../../redux/store';
-import { setMobileMenuActive } from '../../redux/slices/mobileMenuSlice';
-import { ThemeSwitcher } from './ThemeSwitcher';
-import { LogOutBtn } from './LogOutBtn';
-import { LogInBtn } from './LogInBtn';
+} from '../../../redux/store';
+import { setMobileMenuActive } from '../../../redux/slices/mobileMenuSlice';
+import { ThemeSwitcher } from '../../../components/UI/ThemeSwitcher';
+import { LogOutBtn } from '../../../components/UI/LogOutBtn';
+import { LogInBtn } from '../../../components/UI/LogInBtn';
 
 const menuContent = cn(
   'w-full',
@@ -70,15 +70,16 @@ export function MobileMenu({ links }: IProps) {
     }
   }, [mobileIsActive]);
 
+  const mobileActiveHandler = () => {
+    dispatch(setMobileMenuActive(false));
+  };
+
   return (
     <div className={menu}>
       <div className={menuContent}>
         <ul className="flex flex-col gap-y-8">
           {links.map((link) => (
-            <li
-              key={link.path}
-              onClick={() => dispatch(setMobileMenuActive(false))}
-            >
+            <li key={link.path} onClick={mobileActiveHandler}>
               <NavLink to={link.path} className={menuLink}>
                 {link.name}
               </NavLink>

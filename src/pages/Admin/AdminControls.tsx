@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
-import { Container } from './UI/Container';
-import { Loader } from './UI/Loader';
-import { useAppSelector, selectUsersData } from '../redux/store';
-import { useTheme } from '../hooks/useTheme';
+import { Container } from '../../components/UI/Container';
+import { Loader } from '../../components/UI/Loader';
+import { useAppSelector, selectUsersData } from '../../redux/store';
+import { useTheme } from '../../hooks/useTheme';
 
 const list = cn(
   'flex',
@@ -13,7 +13,7 @@ const list = cn(
   'justify-center',
   'mt-2',
   'max-904:mt-20',
-  'max-904:mb-5',
+  'max-904:mb-5'
 );
 const btn = cn(
   'text-primary-black',
@@ -31,7 +31,7 @@ const btn = cn(
   'dark:text-white',
   'min-365-max-640:p-1.5',
   'min-365-max-640:px-1',
-	'min-641-max-904:mt-10',
+  'min-641-max-904:mt-10'
 );
 
 const links = [

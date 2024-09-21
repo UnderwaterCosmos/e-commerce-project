@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
-import { CheckAccess } from '../components/CheckAccess';
-import { AdminControls } from '../components/AdminControls';
+import { CheckAccess } from './CheckAccess';
+import { AdminControls } from './AdminControls';
 
 export function AdminPage() {
   return (

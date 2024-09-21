@@ -2,14 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 
-import { Container } from '../components/UI/Container';
-import { CartItem } from '../components/CartItem';
-import { Modal } from '../components/UI/Modal';
-import { BackBtn } from '../components/UI/BackBtn';
-import { Checkout } from '../components/Checkout';
-import { CheckoutBtn } from '../components/UI/CheckoutBtn';
-import { PathToProductsBtn } from '../components/UI/PathToProductsBtn';
-import { selectUsersData, useAppSelector } from '../redux/store';
+import { Container } from '../../components/UI/Container';
+import { CartItem } from './CartItem';
+import { Modal } from '../../components/UI/Modal';
+import { BackBtn } from '../../components/UI/BackBtn';
+import { Checkout } from '../../components/Checkout';
+import { CheckoutBtn } from '../../components/UI/CheckoutBtn';
+import { PathToProductsBtn } from '../../components/UI/PathToProductsBtn';
+import { selectUsersData, useAppSelector } from '../../redux/store';
 
 const emptyCartTitle = cn(
   'mb-8',
@@ -28,9 +28,15 @@ const cartTitle = cn(
   'min-365-max-640:mb-6',
   'min-365-max-640:text-primary-h1'
 );
-const checkoutWrapper = cn('flex', 'justify-center', 'items-center', 'gap-x-6', 'min-365-max-640:justify-between');
+const checkoutWrapper = cn(
+  'flex',
+  'justify-center',
+  'items-center',
+  'gap-x-6',
+  'min-365-max-640:justify-between'
+);
 
-export function Cart() {
+export function CartPage() {
   const usersCart = useAppSelector(selectUsersData).fullUserInfo?.cart ?? [];
   const [modalActive, setModalActive] = React.useState(false);
   const navigate = useNavigate();

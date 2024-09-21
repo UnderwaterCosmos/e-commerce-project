@@ -2,20 +2,20 @@ import React from 'react';
 import cn from 'classnames';
 import { useSearchParams } from 'react-router-dom';
 
-import { Container } from './UI/Container';
-import Card from './Card';
-import { Loader } from './UI/Loader';
-import { UpBtn } from './UI/UpBtn';
+import { Container } from '../../components/UI/Container';
+import Card from '../../components/Card';
+import { Loader } from '../../components/UI/Loader';
+import { UpBtn } from '../../components/UI/UpBtn';
 import {
   useAppDispatch,
   useAppSelector,
   selectProductsData,
   selectSingleProductsData,
   selectFiltersData,
-} from '../redux/store';
-import { fetchProducts } from '../redux/slices/productsSlice';
-import { useDebounce } from '../hooks/useDebounce';
-import { useInfiniteScroll } from '../hooks/useInfiniteScroll';
+} from '../../redux/store';
+import { fetchProducts } from '../../redux/slices/productsSlice';
+import { useDebounce } from '../../hooks/useDebounce';
+import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
 
 const nothingFound = cn(
   'mt-60',

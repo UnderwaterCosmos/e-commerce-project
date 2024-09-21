@@ -1,21 +1,21 @@
 import { createBrowserRouter, redirect, Navigate } from 'react-router-dom';
 
-import { MainLayout } from './pages/MainLayout';
+import { Layout } from './pages/MainLayout/Layout';
 import { Main } from './pages/Main';
-import { Products } from './pages/Products';
+import { ProductsPage } from './pages/Products/ProductsPage';
 import { SingleProduct } from './pages/SingleProduct';
 import { LoginForm } from './pages/LoginForm';
 import { RegistrationForm } from './pages/RegistrationForm';
-import { UserPage } from './pages/UserPage';
+import { UserPage } from './pages/User/UserPage';
 import { UserInfo } from './components/UserInfo';
 import { OrdersHistory } from './components/OrdersHistory';
-import { AdminPage } from './pages/AdminPage';
+import { AdminPage } from './pages/Admin/AdminPage';
 import { AdminNewProduct } from './components/AdminNewProduct';
 import { AdminNewCategory } from './components/AdminNewCategory';
 import { AdminEditProduct } from './components/AdminEditProduct';
-import { Cart } from './pages/Cart';
+import { CartPage } from './pages/Cart/CartPage';
 import { NotFound } from './pages/NotFound';
-import { CheckAccess } from './components/CheckAccess';
+import { CheckAccess } from './pages/Admin/CheckAccess';
 import { useLocalStorage } from './hooks/useLocalStorage';
 
 const token = useLocalStorage('token');
@@ -23,7 +23,7 @@ const token = useLocalStorage('token');
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <MainLayout />,
+    element: <Layout />,
     errorElement: <NotFound />,
     children: [
       {
@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'products',
-        element: <Products />,
+        element: <ProductsPage />,
       },
       {
         path: 'products/:id',
@@ -92,7 +92,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'cart',
-        element: <Cart />,
+        element: <CartPage />,
         loader: () => {
           if (!token.getItem()) {
             return redirect('/main');

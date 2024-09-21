@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
-import { manageProductInCart } from '../redux/slices/usersSlice';
+import { manageProductInCart } from '../../redux/slices/usersSlice';
 import {
   selectUsersData,
   useAppDispatch,
   useAppSelector,
-} from '../redux/store';
-import { useTheme } from '../hooks/useTheme';
-import { ISingleProduct } from '../types/products';
+} from '../../redux/store';
+import { useTheme } from '../../hooks/useTheme';
+import { ISingleProduct } from '../../types/products';
 
 const listItem = cn(
   'rounded-main',
