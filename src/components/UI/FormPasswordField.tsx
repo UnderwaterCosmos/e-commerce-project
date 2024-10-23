@@ -8,26 +8,17 @@ import {
   RegistrationBasis,
   LoginBasis,
   IRegistrationInputField,
-  // RegistrationFieldsNames,
-  // LoginFieldsNames,
   ILoginInputField,
 } from '../../types/forms';
 
 interface IProps {
   state: RegistrationBasis | LoginBasis;
   register: UseFormRegister<any>;
-  // register:
-  // | UseFormRegister<Omit<RegistrationBasis, 'type'>>
-  // | UseFormRegister<LoginBasis>;
   errors:
     | FieldErrors<Omit<RegistrationBasis, 'type'>>
     | FieldErrors<LoginBasis>;
   fieldObj: IRegistrationInputField | ILoginInputField;
-  fieldsHandler: (
-    event: React.ChangeEvent<HTMLInputElement>,
-    key: any
-    // key: LoginFieldsNames | RegistrationFieldsNames
-  ) => void;
+  fieldsHandler: (event: React.ChangeEvent<HTMLInputElement>, key: any) => void;
 }
 
 export function FormPasswordField({
